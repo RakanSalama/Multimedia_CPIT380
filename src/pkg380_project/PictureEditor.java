@@ -1329,7 +1329,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        Picture sourcePicture = picObj;
+        Picture sourcePicture = picObj;//Fahad
         Picture TargetPicture = new Picture(sourcePicture.getWidth(), sourcePicture.getHeight());
         Pixel sourcePixel;
         Pixel targetPixel;
