@@ -1277,6 +1277,7 @@ public class PictureEditor extends javax.swing.JFrame {
             avg = (int) ((redCol + greenCol + blueCol) / 3);
             Color grayColor = new Color(avg, avg, avg);
             pixel.setColor(grayColor);
+            System.out.println("gg");
         }
         Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
