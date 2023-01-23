@@ -224,7 +224,7 @@ public class PictureEditor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -373,7 +373,7 @@ public class PictureEditor extends javax.swing.JFrame {
                                 .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -499,6 +499,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel15.setText("Reflection");
 
         jButton41.setText("Vertical Reflection");
+        jButton41.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton41ActionPerformed(evt);
+            }
+        });
 
         jButton42.setText("Diagonal Reflection D1");
 
@@ -583,6 +588,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel10.setText("Filters");
 
         jButton34.setText("Gaussian Filter");
+        jButton34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton34ActionPerformed(evt);
+            }
+        });
 
         jButton35.setText("Laplacian Filter");
 
@@ -674,7 +684,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton36)
                 .addGap(18, 18, 18)
                 .addComponent(jButton37)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel7, "card5");
@@ -719,7 +729,7 @@ public class PictureEditor extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -776,7 +786,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel9, "card7");
@@ -795,6 +805,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jSlider5.setValue(0);
 
         jButton39.setText("Apply");
+        jButton39.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton39ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -820,7 +835,7 @@ public class PictureEditor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel16)
-                .addGap(177, 177, 177)
+                .addGap(99, 99, 99)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel14)
@@ -828,7 +843,7 @@ public class PictureEditor extends javax.swing.JFrame {
                     .addComponent(jSlider5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel10, "card8");
@@ -909,7 +924,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton53)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton54)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel11, "card9");
@@ -1067,6 +1082,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        //Right Rotation
         Picture sourcePicture = picObj;
         Picture TargetPicture = new Picture(sourcePicture.getHeight(), sourcePicture.getWidth());
         Pixel sourcePixel;
@@ -1083,7 +1099,7 @@ public class PictureEditor extends javax.swing.JFrame {
         }
         Image img = (TargetPicture.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon); 
+        jLabel2.setIcon(icon);
         picObj = TargetPicture;
     }//GEN-LAST:event_jButton26ActionPerformed
 
@@ -1100,7 +1116,35 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton43ActionPerformed
-        // TODO add your handling code here:
+        // Horizontal Reflection
+        int height = picObj.getHeight();
+        int mirrorPoint = height / 2;
+
+        Pixel topPixel = null;
+        Pixel bottomPixel = null;
+        //Up to down
+        if (jComboBox7.getSelectedIndex() == 0) {
+            for (int x = 0; x < picObj.getWidth(); x++) {
+                for (int y = 0; y < mirrorPoint; y++) { // becareful you must start with x loop then y
+                    topPixel = picObj.getPixel(x, y);
+                    bottomPixel = picObj.getPixel(x, height - 1 - y);
+                    bottomPixel.setColor(topPixel.getColor());
+
+                }
+            }
+        //Down to up
+        } else if (jComboBox7.getSelectedIndex() == 1) {
+            for (int x = 0; x < picObj.getWidth(); x++) {
+                for (int y = 0; y < mirrorPoint; y++) { // becareful you must start with x loop then y
+                    topPixel = picObj.getPixel(x, y);
+                    bottomPixel = picObj.getPixel(x, height - 1 - y);
+                    topPixel.setColor(bottomPixel.getColor());
+                }
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton43ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1266,7 +1310,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-                Pixel[] pixelArray = picObj.getPixels();
+        Pixel[] pixelArray = picObj.getPixels();
         for (Pixel pixelObj : pixelArray) {
             pixelObj.setGreen(0);
         }
@@ -1276,7 +1320,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-                Pixel[] pixelArray = picObj.getPixels();
+        Pixel[] pixelArray = picObj.getPixels();
         for (Pixel pixelObj : pixelArray) {
             pixelObj.setRed(0);
         }
@@ -1286,7 +1330,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-
+        //Convert To Gray Scale
         Pixel[] pixels = picObj.getPixels();
         Pixel pixel;
         int redCol, blueCol, greenCol;
@@ -1303,11 +1347,12 @@ public class PictureEditor extends javax.swing.JFrame {
         }
         Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon);  
-        
+        jLabel2.setIcon(icon);
+
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        //Left Rotation
         Picture sourcePicture = picObj;
         Picture TargetPicture = new Picture(sourcePicture.getHeight(), sourcePicture.getWidth());
         Pixel sourcePixel;
@@ -1324,11 +1369,12 @@ public class PictureEditor extends javax.swing.JFrame {
         }
         Image img = (TargetPicture.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon); 
+        jLabel2.setIcon(icon);
         picObj = TargetPicture;
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        // Rotation 180
         Picture sourcePicture = picObj;
         Picture TargetPicture = new Picture(sourcePicture.getWidth(), sourcePicture.getHeight());
         Pixel sourcePixel;
@@ -1345,9 +1391,68 @@ public class PictureEditor extends javax.swing.JFrame {
         }
         Image img = (TargetPicture.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon);  
+        jLabel2.setIcon(icon);
         picObj = TargetPicture;
     }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
+        //Vertical reflection
+        int width = picObj.getWidth();
+        int mirrorPoint = width / 2;
+        Pixel leftPixel = null;
+        Pixel rightPixel = null;
+        //left to right
+        if (jComboBox6.getSelectedIndex() == 0) {
+            for (int y = 0; y < picObj.getHeight(); y++) {
+                for (int x = 0; x < mirrorPoint; x++) {
+                    leftPixel = picObj.getPixel(x, y);
+                    rightPixel = picObj.getPixel(width - 1 - x, y);
+                    rightPixel.setColor(leftPixel.getColor());
+                }
+            }
+        // right to left
+        } else if (jComboBox6.getSelectedIndex() == 1) {
+            for (int y = 0; y < picObj.getHeight(); y++) {
+                for (int x = 0; x < mirrorPoint; x++) {
+                    leftPixel = picObj.getPixel(x, y);
+                    rightPixel = picObj.getPixel(width - 1 - x, y);
+                    leftPixel.setColor(rightPixel.getColor());
+                }
+            }
+        }
+
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+
+    }//GEN-LAST:event_jButton41ActionPerformed
+
+    private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
+
+
+    }//GEN-LAST:event_jButton34ActionPerformed
+
+    private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton39ActionPerformed
+
+        Picture targetPicture = new Picture(picObj.getWidth() * numTimes, this.getHeight() * numTimes);
+        Pixel sourcePixel = null;
+        Pixel targetPixel = null;
+        int targetX = 0;
+        int targetY = 0;
+        for (int sourceX = 0; sourceX < picObj.getWidth(); sourceX++) {
+            for (int sourceY = 0; sourceY < picObj.getHeight(); sourceY++) {
+                sourcePixel = picObj.getPixel(sourceX, sourceY);
+                for (int indexY = 0; indexY < numTimes; indexY++) {
+                    for (int indexX = 0; indexX < numTimes; indexX++) {
+                        targetX = sourceX * numTimes + indexX;
+                        targetY = sourceY * numTimes + indexY;
+                        targetPixel = targetPicture.getPixel(targetX, targetY);
+                        targetPixel.setColor(sourcePixel.getColor());
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton39ActionPerformed
 
     /**
      * @param args the command line arguments
