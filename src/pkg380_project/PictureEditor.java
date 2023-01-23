@@ -955,58 +955,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*
-        this method 
-        
-        
-        
-        */
-        
-        int x[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24};
-        int f[] = new int[6];
-        int r[] = new int[6];
-        int o[] = new int[6];
-        int a[] = new int[5];
-
-        int ca = 0;
-        int co = 0;
-        int cr = 0;
-        int cf = 0;
-
-        boolean check = true;
-        while (check) {
-            for (int i = 0; i < x.length; i++) {
-                int ran = (int) Math.floor(Math.random() * (22 - 0 + 1) + 0);
-                int c = x[ran];
-                if (c == 0) {
-
-                } else {
-                    if (ca <= 4) {
-                        a[ca] = c;
-                        ca++;
-                    } else if (co <= 5) {
-                        o[co] = c;
-                        co++;
-                    } else if (cr <= 5) {
-                        r[cr] = c;
-                        cr++;
-                    } else if (cf <= 5) {
-                        f[cf] = c;
-                        cf++;
-                    }
-                    x[ran] = 0;
-
-                }
-                if (ca == 5 && co == 6 && cr == 6 && cf == 6) {
-                    check = false;
-                }
-            }
-        }
-        System.out.println("A" + Arrays.toString(a));
-        System.out.println("o" + Arrays.toString(o));
-        System.out.println("r" + Arrays.toString(r));
-        System.out.println("f" + Arrays.toString(f));
-
+ 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
