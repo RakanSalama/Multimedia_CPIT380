@@ -7,6 +7,9 @@ package pkg380_project;
 
 import cpit380practice.*;
 import java.awt.Image;
+import static java.lang.Integer.min;
+import java.lang.*;
+import java.util.Arrays;
 import javax.swing.ImageIcon;
 
 /**
@@ -15,10 +18,10 @@ import javax.swing.ImageIcon;
  */
 public class PictureEditor extends javax.swing.JFrame {
 
-     String pathName;
+    String pathName;
     static ImageIcon icon;
     Picture picObj;
-   
+
     public PictureEditor() {
         initComponents();
     }
@@ -196,7 +199,7 @@ public class PictureEditor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,7 +318,7 @@ public class PictureEditor extends javax.swing.JFrame {
                                 .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,6 +337,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jButton22.setText("Convert to binary using thresholding");
 
         jButton23.setText("Convert to HSV");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
 
         jCheckBox4.setText("Make thresholding number from median of histogram");
 
@@ -596,7 +604,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton36)
                 .addGap(18, 18, 18)
                 .addComponent(jButton37)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel7, "card0");
@@ -641,7 +649,7 @@ public class PictureEditor extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -698,7 +706,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel9, "card3");
@@ -750,7 +758,7 @@ public class PictureEditor extends javax.swing.JFrame {
                     .addComponent(jSlider5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel10, "card0");
@@ -831,7 +839,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton53)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton54)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel11, "card0");
@@ -947,7 +955,58 @@ public class PictureEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        /*
+        this method 
+        
+        
+        
+        */
+        
+        int x[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24};
+        int f[] = new int[6];
+        int r[] = new int[6];
+        int o[] = new int[6];
+        int a[] = new int[5];
+
+        int ca = 0;
+        int co = 0;
+        int cr = 0;
+        int cf = 0;
+
+        boolean check = true;
+        while (check) {
+            for (int i = 0; i < x.length; i++) {
+                int ran = (int) Math.floor(Math.random() * (22 - 0 + 1) + 0);
+                int c = x[ran];
+                if (c == 0) {
+
+                } else {
+                    if (ca <= 4) {
+                        a[ca] = c;
+                        ca++;
+                    } else if (co <= 5) {
+                        o[co] = c;
+                        co++;
+                    } else if (cr <= 5) {
+                        r[cr] = c;
+                        cr++;
+                    } else if (cf <= 5) {
+                        f[cf] = c;
+                        cf++;
+                    }
+                    x[ran] = 0;
+
+                }
+                if (ca == 5 && co == 6 && cr == 6 && cf == 6) {
+                    check = false;
+                }
+            }
+        }
+        System.out.println("A" + Arrays.toString(a));
+        System.out.println("o" + Arrays.toString(o));
+        System.out.println("r" + Arrays.toString(r));
+        System.out.println("f" + Arrays.toString(f));
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -989,6 +1048,10 @@ public class PictureEditor extends javax.swing.JFrame {
     private void jButton50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton50ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton50ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton23ActionPerformed
 
     /**
      * @param args the command line arguments
