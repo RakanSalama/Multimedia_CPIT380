@@ -83,7 +83,7 @@ public class PictureEditor extends javax.swing.JFrame {
         jButton26 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jButton41 = new javax.swing.JButton();
+        jButton101 = new javax.swing.JButton();
         jButton42 = new javax.swing.JButton();
         jButton43 = new javax.swing.JButton();
         jComboBox6 = new javax.swing.JComboBox<>();
@@ -92,7 +92,7 @@ public class PictureEditor extends javax.swing.JFrame {
         jButton44 = new javax.swing.JButton();
         jComboBox9 = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
-        jButton31 = new javax.swing.JButton();
+        jButton100 = new javax.swing.JButton();
         jButton32 = new javax.swing.JButton();
         jButton33 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
@@ -100,7 +100,7 @@ public class PictureEditor extends javax.swing.JFrame {
         jButton35 = new javax.swing.JButton();
         jButton36 = new javax.swing.JButton();
         jButton37 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        jTextField100 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -498,10 +498,10 @@ public class PictureEditor extends javax.swing.JFrame {
 
         jLabel15.setText("Reflection");
 
-        jButton41.setText("Vertical Reflection");
-        jButton41.addActionListener(new java.awt.event.ActionListener() {
+        jButton101.setText("Vertical Reflection");
+        jButton101.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton41ActionPerformed(evt);
+                jButton101ActionPerformed(evt);
             }
         });
 
@@ -540,7 +540,7 @@ public class PictureEditor extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
                             .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton101, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -560,7 +560,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton101, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -579,10 +579,10 @@ public class PictureEditor extends javax.swing.JFrame {
 
         jPanel1.add(jPanel6, "card4");
 
-        jButton31.setText("Box Filter");
-        jButton31.addActionListener(new java.awt.event.ActionListener() {
+        jButton100.setText("Box Filter");
+        jButton100.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton31ActionPerformed(evt);
+                jButton100ActionPerformed(evt);
             }
         });
 
@@ -615,9 +615,9 @@ public class PictureEditor extends javax.swing.JFrame {
 
         jButton37.setText("Weighted Median Filter");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jTextField100.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jTextField100ActionPerformed(evt);
             }
         });
 
@@ -657,7 +657,7 @@ public class PictureEditor extends javax.swing.JFrame {
                             .addComponent(jLabel10)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton100, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton32, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                     .addComponent(jButton33, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -676,7 +676,7 @@ public class PictureEditor extends javax.swing.JFrame {
                                         .addComponent(jLabel12)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField2)
+                                    .addComponent(jTextField100)
                                     .addComponent(jTextField3)
                                     .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -692,10 +692,10 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton100, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox5)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField100, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton32)
@@ -1459,12 +1459,12 @@ public class PictureEditor extends javax.swing.JFrame {
         picObj = TargetPicture;
     }//GEN-LAST:event_jButton25ActionPerformed
 
-    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {                                          
 
         int sof = 3;
         if (jCheckBox5.isSelected()) {
 
-            sof = Integer.valueOf(jTextField2.getText());
+            sof = Integer.valueOf(jTextField100.getText());
         }
 
         int x = picObj.getWidth();
@@ -1498,15 +1498,15 @@ public class PictureEditor extends javax.swing.JFrame {
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton31ActionPerformed
+    }                                         
 
     private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox5ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }                                           
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
@@ -1548,7 +1548,7 @@ public class PictureEditor extends javax.swing.JFrame {
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton32ActionPerformed
-    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
+    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         //Vertical reflection
         int width = picObj.getWidth();
         int mirrorPoint = width / 2;
@@ -1578,7 +1578,7 @@ public class PictureEditor extends javax.swing.JFrame {
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
 
-    }//GEN-LAST:event_jButton41ActionPerformed
+    }                                         
 
     private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
 
@@ -1648,14 +1648,14 @@ public class PictureEditor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton39ActionPerformed
 
-    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+    private void jButton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton100ActionPerformed
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton31ActionPerformed
+    }//GEN-LAST:event_jButton100ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jTextField100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField100ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jTextField100ActionPerformed
 
     private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
         if (jComboBox8.getSelectedIndex() == 0) {
@@ -1685,9 +1685,9 @@ public class PictureEditor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton42ActionPerformed
 
-    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
+    private void jButton101ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton101ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton41ActionPerformed
+    }//GEN-LAST:event_jButton101ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1736,6 +1736,8 @@ public class PictureEditor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton100;
+    private javax.swing.JButton jButton101;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
@@ -1758,7 +1760,6 @@ public class PictureEditor extends javax.swing.JFrame {
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton30;
-    private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton32;
     private javax.swing.JButton jButton33;
     private javax.swing.JButton jButton34;
@@ -1769,7 +1770,6 @@ public class PictureEditor extends javax.swing.JFrame {
     private javax.swing.JButton jButton39;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton40;
-    private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton42;
     private javax.swing.JButton jButton43;
     private javax.swing.JButton jButton44;
@@ -1836,7 +1836,7 @@ public class PictureEditor extends javax.swing.JFrame {
     private javax.swing.JSlider jSlider4;
     private javax.swing.JSlider jSlider5;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField100;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
