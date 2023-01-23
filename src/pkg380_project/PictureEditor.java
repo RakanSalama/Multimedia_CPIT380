@@ -452,6 +452,11 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton25.setText("Rotation by 180");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
 
         jButton26.setText("Right Rotations");
         jButton26.addActionListener(new java.awt.event.ActionListener() {
@@ -1062,7 +1067,24 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
-        // TODO add your handling code here:
+        Picture sourcePicture = picObj;
+        Picture TargetPicture = new Picture(sourcePicture.getHeight(), sourcePicture.getWidth());
+        Pixel sourcePixel;
+        Pixel targetPixel;
+        int targetX, targetY = 0;
+        for (int sourceX = 0; sourceX < sourcePicture.getWidth(); sourceX++) {
+            for (int sourceY = 0; sourceY < sourcePicture.getHeight(); sourceY++) {
+                sourcePixel = sourcePicture.getPixel(sourceX, sourceY);
+                targetX = sourcePicture.getHeight() - 1 - sourceY;
+                targetY = sourceX;
+                targetPixel = TargetPicture.getPixel(targetX, targetY);
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        Image img = (TargetPicture.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon); 
+        picObj = TargetPicture;
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
@@ -1264,8 +1286,8 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+
         Pixel[] pixels = picObj.getPixels();
-        System.out.println("Hello");
         Pixel pixel;
         int redCol, blueCol, greenCol;
         int avg;
@@ -1278,16 +1300,54 @@ public class PictureEditor extends javax.swing.JFrame {
             avg = (int) ((redCol + greenCol + blueCol) / 3);
             Color grayColor = new Color(avg, avg, avg);
             pixel.setColor(grayColor);
-            System.out.println("gg");
         }
         Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon);    
+        jLabel2.setIcon(icon);  
+        
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        
+        Picture sourcePicture = picObj;
+        Picture TargetPicture = new Picture(sourcePicture.getHeight(), sourcePicture.getWidth());
+        Pixel sourcePixel;
+        Pixel targetPixel;
+        int targetX, targetY = 0;
+        for (int sourceX = 0; sourceX < sourcePicture.getWidth(); sourceX++) {
+            for (int sourceY = 0; sourceY < sourcePicture.getHeight(); sourceY++) {
+                sourcePixel = sourcePicture.getPixel(sourceX, sourceY);
+                targetX = sourceY;
+                targetY = sourcePicture.getWidth() - 1 - sourceX;
+                targetPixel = TargetPicture.getPixel(targetX, targetY);
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        Image img = (TargetPicture.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon); 
+        picObj = TargetPicture;
     }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        Picture sourcePicture = picObj;
+        Picture TargetPicture = new Picture(sourcePicture.getWidth(), sourcePicture.getHeight());
+        Pixel sourcePixel;
+        Pixel targetPixel;
+        int targetX, targetY = 0;
+        for (int sourceX = 0; sourceX < sourcePicture.getWidth(); sourceX++) {
+            for (int sourceY = 0; sourceY < sourcePicture.getHeight(); sourceY++) {
+                sourcePixel = sourcePicture.getPixel(sourceX, sourceY);
+                targetX = sourcePicture.getWidth() - 1 - sourceX;
+                targetY = sourcePicture.getHeight() - 1 - sourceY;
+                targetPixel = TargetPicture.getPixel(targetX, targetY);
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        Image img = (TargetPicture.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);  
+        picObj = TargetPicture;
+    }//GEN-LAST:event_jButton25ActionPerformed
 
     /**
      * @param args the command line arguments
