@@ -6,19 +6,26 @@
 package pkg380_project;
 
 import cpit380practice.*;
-import java.awt.CardLayout;
-import java.awt.Image;
-import static java.lang.Integer.min;
+
+
+import java.awt.*;
+import java.awt.image.*;
+import java.io.File;
+import java.io.IOException;
+
 import java.lang.*;
-import java.util.Arrays;
-import javax.swing.ImageIcon;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.*;
+import javax.swing.*;
 
 /**
  *
  * @author Nero
  */
 public class PictureEditor extends javax.swing.JFrame {
-
+    BufferedImage bi;
     String pathName;
     static ImageIcon icon;
     Picture picObj;
@@ -159,10 +166,25 @@ public class PictureEditor extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.CardLayout());
 
         jButton12.setText("Browse");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         jButton13.setText("Reset ");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton14.setText("Save");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1058,6 +1080,37 @@ public class PictureEditor extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         cardLayout.show(jPanel1, "card8");
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        try {
+            jLabel2.setIcon(null);
+            pathName = FileChooser.pickAFile();
+            picObj = new Picture(pathName);
+            Image img = (picObj.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+            icon = new ImageIcon(img);
+            jLabel1.setIcon(icon);
+            jTextField1.setText(pathName);
+        } catch (Exception e) {
+            System.out.println("er");
+        }
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        picObj = new Picture(pathName);
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);       
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        /*   try {
+        bi=set
+        File outputfile = new File("saved.png");
+        ImageIO.write(bi, "png", outputfile);
+        } catch (IOException ex) {
+        Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+    }//GEN-LAST:event_jButton14ActionPerformed
 
     /**
      * @param args the command line arguments
