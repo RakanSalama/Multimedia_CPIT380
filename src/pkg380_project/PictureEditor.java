@@ -239,18 +239,48 @@ public class PictureEditor extends javax.swing.JFrame {
         jPanel1.add(jPanel2, "card0");
 
         jButton15.setText("Clear red");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         jButton16.setText("Clear green");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         jButton17.setText("Clear blue");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
 
         jButton18.setText("Darker");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
 
         jButton19.setText("brighter");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "increase", "decrease" }));
 
         jButton20.setText("Apply");
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
 
         jSlider1.setMajorTickSpacing(10);
         jSlider1.setMinimum(1);
@@ -358,6 +388,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel6.setText("Converion");
 
         jButton21.setText("Convert to gray scale");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
 
         jButton22.setText("Convert to binary using thresholding");
 
@@ -1115,6 +1150,118 @@ public class PictureEditor extends javax.swing.JFrame {
             Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        double red = -1;
+        double green = -1;
+        double blue = -1;
+        if (jCheckBox1.isSelected()) {
+            red = jSlider1.getValue();
+            if (jComboBox1.getSelectedIndex() == 0) {
+                red = 1 + (red / 100);
+            } else if (jComboBox1.getSelectedIndex() == 1) {
+                red = 1 - (red / 100);
+            }
+        }
+        if (jCheckBox2.isSelected()) {
+            green = jSlider2.getValue();
+            if (jComboBox1.getSelectedIndex() == 0) {
+                green = 1 + (green / 100);
+            } else if (jComboBox1.getSelectedIndex() == 1) {
+                green = 1 - (green / 100);
+            }
+        }
+        if (jCheckBox3.isSelected()) {
+            blue = jSlider3.getValue();
+            if (jComboBox1.getSelectedIndex() == 0) {
+                blue = 1 + (blue / 100);
+            } else if (jComboBox1.getSelectedIndex() == 1) {
+                blue = 1 - (blue / 100);
+            }
+        }
+
+        //picObj.changeColorsLab5_023(red, green, blue);
+        Pixel[] pixelArray = picObj.getPixels();
+        double value = 0;
+        for (Pixel pixelObj : pixelArray) {
+            if (red != -1.0) {
+                value = pixelObj.getRed();
+                pixelObj.setRed((int) (value * red));
+            }
+            if (green != -1.0) {
+                value = pixelObj.getGreen();
+                pixelObj.setGreen((int) (value * green));
+            }
+            if (blue != -1.0) {
+                value = pixelObj.getBlue();
+                pixelObj.setBlue((int) (value * blue));
+            }
+
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        Pixel[] pixelArray = picObj.getPixels();
+        Color color = null;
+        for (Pixel pixelArray1 : pixelArray) {
+            color = pixelArray1.getColor();
+            color = color.darker();
+            pixelArray1.setColor(color);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        Pixel[] pixelArray = picObj.getPixels();
+        Color color = null;
+        for (Pixel pixelArray1 : pixelArray) {
+            color = pixelArray1.getColor();
+            color = color.brighter();
+            pixelArray1.setColor(color);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        Pixel[] pixelArray = picObj.getPixels();
+        for (Pixel pixelObj : pixelArray) {
+            pixelObj.setBlue(0);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+                Pixel[] pixelArray = picObj.getPixels();
+        for (Pixel pixelObj : pixelArray) {
+            pixelObj.setGreen(0);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+                Pixel[] pixelArray = picObj.getPixels();
+        for (Pixel pixelObj : pixelArray) {
+            pixelObj.setRed(0);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton21ActionPerformed
 
     /**
      * @param args the command line arguments
