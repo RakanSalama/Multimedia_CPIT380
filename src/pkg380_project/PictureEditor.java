@@ -570,8 +570,18 @@ public class PictureEditor extends javax.swing.JFrame {
         jPanel1.add(jPanel6, "card4");
 
         jButton31.setText("Box Filter");
+        jButton31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton31ActionPerformed(evt);
+            }
+        });
 
         jButton32.setText("Min Filter");
+        jButton32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton32ActionPerformed(evt);
+            }
+        });
 
         jButton33.setText("Max Filter");
         jButton33.addActionListener(new java.awt.event.ActionListener() {
@@ -590,6 +600,18 @@ public class PictureEditor extends javax.swing.JFrame {
 
         jButton37.setText("Weighted Median Filter");
 
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
         jLabel9.setText("Only enter odd number 3,5,7,9,..");
 
         jLabel11.setText("Only enter odd number 3,5,7,9,..");
@@ -597,6 +619,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel12.setText("Only enter odd number 3,5,7,9,..");
 
         jCheckBox5.setText("Change value ");
+        jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox5ActionPerformed(evt);
+            }
+        });
 
         jCheckBox6.setText("Change value ");
 
@@ -1092,7 +1119,39 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton29ActionPerformed
 
     private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
-        // TODO add your handling code here:
+        int sof = 3;
+        if (jCheckBox7.isSelected()){
+        
+            sof = Integer.valueOf(jTextField4.getText());
+        }
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        int q = sof / 2;
+        Picture copy = new Picture(x, y);
+        copy.copy(picObj, 0, 0, x, y, 0, 0);
+        int Red[] = new int[sof * sof];
+        int Green[] = new int[sof * sof];
+        int Blue[] = new int[sof * sof];
+        for (int v = q; v <= y - (q + 1); v++) {
+            for (int u = q; u <= x - (q + 1); u++) {
+                int k = 0;
+                for (int j = -q; j <= q; j++) {
+                    for (int i = -q; i <= q; i++) {
+                        Red[k] = copy.getPixel(u + i, v + j).getRed();
+                        Green[k] = copy.getPixel(u + i, v + j).getGreen();
+                        Blue[k] = copy.getPixel(u + i, v + j).getBlue();
+                        k++;
+                    }
+                }
+                Arrays.sort(Red);
+                Arrays.sort(Green);
+                Arrays.sort(Blue);
+                picObj.getPixel(u, v).setColor(new Color(Red[sof * sof-1], Green[sof * sof-1], Blue[sof * sof-1]));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);  
     }//GEN-LAST:event_jButton33ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -1348,6 +1407,97 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel2.setIcon(icon);  
         picObj = TargetPicture;
     }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+
+    
+        int sof = 3;
+        if (jCheckBox5.isSelected()){
+        
+            sof = Integer.valueOf(jTextField2.getText());
+        }
+            
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        int q = sof / 2;
+
+        Picture Image = new Picture(x, y);
+        Image.copy(picObj, 0, 0, x, y, 0, 0);
+        for (int v = q; v <= y - (q + 1); v++) {
+            for (int u = q; u <= x - (q + 1); u++) {
+
+                int sumRed = 0, sumGreen = 0, sumBlue = 0;
+                for (int j = -q; j <= q; j++) {
+                    for (int i = -q; i <= q; i++) {
+
+                        int red = Image.getPixel(u + i, v + j).getRed();
+                        sumRed += red;
+                        int green = Image.getPixel(u + i, v + j).getGreen();
+                        sumGreen += green;
+                        int blue = Image.getPixel(u + i, v + j).getBlue();
+                        sumBlue += blue;
+                    }
+                }
+                int Red = (int) Math.round(sumRed / (sof * sof));
+                int Green = (int) Math.round(sumGreen / (sof * sof));
+                int Blue = (int) Math.round(sumBlue / (sof * sof));
+                picObj.getPixel(u, v).setColor(new Color(Red, Green, Blue));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);  
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton31ActionPerformed
+
+    private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox5ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
+        
+        int sof = 3;
+        if (jCheckBox6.isSelected()){
+        
+            sof = Integer.valueOf(jTextField3.getText());
+        }
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        int q = sof / 2;
+        Picture copy = new Picture(x, y);
+        copy.copy(picObj, 0, 0, x, y, 0, 0);
+        int Red[] = new int[sof * sof];
+        int Green[] = new int[sof * sof];
+        int Blue[] = new int[sof * sof];
+        for (int v = q; v <= y - (q + 1); v++) {
+            for (int u = q; u <= x - (q + 1); u++) {
+                int k = 0;
+                for (int j = -q; j <= q; j++) {
+                    for (int i = -q; i <= q; i++) {
+                        Red[k] = copy.getPixel(u + i, v + j).getRed();
+                        Green[k] = copy.getPixel(u + i, v + j).getGreen();
+                        Blue[k] = copy.getPixel(u + i, v + j).getBlue();
+                        k++;
+                    }
+                }
+                Arrays.sort(Red);
+                Arrays.sort(Green);
+                Arrays.sort(Blue);
+                picObj.getPixel(u, v).setColor(new Color(Red[0], Green[0], Blue[0]));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);  
+    }//GEN-LAST:event_jButton32ActionPerformed
 
     /**
      * @param args the command line arguments

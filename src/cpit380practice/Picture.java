@@ -18,6 +18,8 @@ import java.util.Scanner;
  * @author Barbara Ericson ericson@cc.gatech.edu
  */
 public class Picture extends SimplePicture {
+
+    public int SCALE_SMOOTH;
     ///////////////////// constructors /////////////////////////////////
 
     /**
