@@ -6,6 +6,7 @@
 package pkg380_project;
 
 import cpit380practice.*;
+import java.awt.CardLayout;
 import java.awt.Image;
 import static java.lang.Integer.min;
 import java.lang.*;
@@ -21,9 +22,11 @@ public class PictureEditor extends javax.swing.JFrame {
     String pathName;
     static ImageIcon icon;
     Picture picObj;
+    CardLayout cardLayout;
 
     public PictureEditor() {
         initComponents();
+        cardLayout = (CardLayout) (jPanel1.getLayout());
     }
 
     /**
@@ -380,7 +383,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        jPanel1.add(jPanel4, "card3");
+        jPanel1.add(jPanel4, "card2");
 
         jLabel7.setText("Rotation");
 
@@ -497,7 +500,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel6, "card3");
+        jPanel1.add(jPanel6, "card4");
 
         jButton31.setText("Box Filter");
 
@@ -607,7 +610,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel7, "card0");
+        jPanel1.add(jPanel7, "card5");
 
         jLabel8.setText("Computing Histograms");
 
@@ -662,7 +665,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addGap(28, 28, 28))
         );
 
-        jPanel1.add(jPanel8, "card3");
+        jPanel1.add(jPanel8, "card6");
 
         jLabel13.setText("Computing Contrast");
 
@@ -709,7 +712,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addContainerGap(99, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel9, "card3");
+        jPanel1.add(jPanel9, "card7");
 
         jLabel16.setText("Scale");
 
@@ -761,7 +764,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addContainerGap(99, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel10, "card0");
+        jPanel1.add(jPanel10, "card8");
 
         jLabel18.setText("Other functions");
 
@@ -842,7 +845,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel11, "card0");
+        jPanel1.add(jPanel11, "card9");
 
         jButton1.setText("Files");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -852,14 +855,39 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton2.setText("Colors");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Converion");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Rotation");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Reflection");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Filters");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Computing Histograms");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -876,6 +904,11 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton9.setText("Scale");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jButton10.setText("Other functions");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -955,12 +988,11 @@ public class PictureEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println("z8");
-        System.out.println("ez");
+        cardLayout.show(jPanel1, "card0");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        System.out.println("gg");
+        cardLayout.show(jPanel1, "card9");
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -980,7 +1012,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton33ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        cardLayout.show(jPanel1, "card6");
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton43ActionPerformed
@@ -988,7 +1020,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton43ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        cardLayout.show(jPanel1, "card7");
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
@@ -1002,6 +1034,30 @@ public class PictureEditor extends javax.swing.JFrame {
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        cardLayout.show(jPanel1, "card1");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        cardLayout.show(jPanel1, "card2");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        cardLayout.show(jPanel1, "card3");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        cardLayout.show(jPanel1, "card4");
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        cardLayout.show(jPanel1, "card5");
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        cardLayout.show(jPanel1, "card8");
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
