@@ -1136,8 +1136,8 @@ public class PictureEditor extends javax.swing.JFrame {
 
     private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
         int sof = 3;
-        if (jCheckBox7.isSelected()){
-        
+        if (jCheckBox7.isSelected()) {
+
             sof = Integer.valueOf(jTextField4.getText());
         }
         int x = picObj.getWidth();
@@ -1162,12 +1162,12 @@ public class PictureEditor extends javax.swing.JFrame {
                 Arrays.sort(Red);
                 Arrays.sort(Green);
                 Arrays.sort(Blue);
-                picObj.getPixel(u, v).setColor(new Color(Red[sof * sof-1], Green[sof * sof-1], Blue[sof * sof-1]));
+                picObj.getPixel(u, v).setColor(new Color(Red[sof * sof - 1], Green[sof * sof - 1], Blue[sof * sof - 1]));
             }
         }
         Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon);  
+        jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton33ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -1191,7 +1191,7 @@ public class PictureEditor extends javax.swing.JFrame {
 
                 }
             }
-        //Down to up
+            //Down to up
         } else if (jComboBox7.getSelectedIndex() == 1) {
             for (int x = 0; x < picObj.getWidth(); x++) {
                 for (int y = 0; y < mirrorPoint; y++) { // becareful you must start with x loop then y
@@ -1456,13 +1456,12 @@ public class PictureEditor extends javax.swing.JFrame {
 
     private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
 
-    
         int sof = 3;
-        if (jCheckBox5.isSelected()){
-        
+        if (jCheckBox5.isSelected()) {
+
             sof = Integer.valueOf(jTextField2.getText());
         }
-            
+
         int x = picObj.getWidth();
         int y = picObj.getHeight();
         int q = sof / 2;
@@ -1492,7 +1491,7 @@ public class PictureEditor extends javax.swing.JFrame {
         }
         Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon);  
+        jLabel2.setIcon(icon);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton31ActionPerformed
 
@@ -1509,10 +1508,10 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
-        
+
         int sof = 3;
-        if (jCheckBox6.isSelected()){
-        
+        if (jCheckBox6.isSelected()) {
+
             sof = Integer.valueOf(jTextField3.getText());
         }
         int x = picObj.getWidth();
@@ -1542,7 +1541,7 @@ public class PictureEditor extends javax.swing.JFrame {
         }
         Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon);  
+        jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton32ActionPerformed
     private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
         //Vertical reflection
@@ -1559,7 +1558,7 @@ public class PictureEditor extends javax.swing.JFrame {
                     rightPixel.setColor(leftPixel.getColor());
                 }
             }
-        // right to left
+            // right to left
         } else if (jComboBox6.getSelectedIndex() == 1) {
             for (int y = 0; y < picObj.getHeight(); y++) {
                 for (int x = 0; x < mirrorPoint; x++) {
@@ -1582,7 +1581,65 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton34ActionPerformed
 
     private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton39ActionPerformed
+        //Scalling
+        int value = jSlider5.getValue();
+        int scaleValue = 0;
+        if (value == -4) {
+            scaleValue = 5;
+        } else if (value == -3) {
+            scaleValue = 4;
+        } else if (value == -2) {
+            scaleValue = 3;
+        } else if (value == -1) {
+            scaleValue = 2;
+        } else if (value == 1) {
+            scaleValue = 2;
+        } else if (value == 2) {
+            scaleValue = 3;
+        } else if (value == 3) {
+            scaleValue = 4;
+        } else if (value == 4) {
+            scaleValue = 5;
+        }
+        else{
+            scaleValue = 1;
+        }
+        if (value < 0) {
+            Picture targetPicture = new Picture((picObj.getWidth() / scaleValue + 1), (picObj.getHeight() / scaleValue + 1));
+            Pixel sourcePixel = null;
+            Pixel targetPixel = null;
+            for (int sourceX = 0, targetX = 0; sourceX < picObj.getWidth(); sourceX += scaleValue, targetX++) {
+                for (int sourceY = 0, targetY = 0; sourceY < picObj.getHeight(); sourceY += scaleValue, targetY++) {
+                    sourcePixel = picObj.getPixel(sourceX, sourceY);
+                    targetPixel = targetPicture.getPixel(targetX, targetY);
+                    targetPixel.setColor(sourcePixel.getColor());
+                }
+            }
+            targetPicture.show();
+            picObj = targetPicture;
+        } else {
 
+            Picture targetPicture = new Picture((picObj.getWidth() * scaleValue), (picObj.getHeight() * scaleValue));
+            Pixel sourcePixel;
+            Pixel targetPixel;
+            int targetX = 0;
+            int targetY = 0;
+            for (int sourceX = 0; sourceX < picObj.getWidth(); sourceX++) {
+                for (int sourceY = 0; sourceY < picObj.getHeight(); sourceY++) {
+                    sourcePixel = picObj.getPixel(sourceX, sourceY);
+                    for (int indexY = 0; indexY < scaleValue; indexY++) {
+                        for (int indexX = 0; indexX < scaleValue; indexX++) {
+                            targetX = (sourceX * scaleValue + indexX);
+                            targetY = (sourceY * scaleValue + indexY);
+                            targetPixel = targetPicture.getPixel(targetX, targetY);
+                            targetPixel.setColor(sourcePixel.getColor());
+                        }
+                    }
+                }
+            }
+            targetPicture.show();
+            picObj = targetPicture;
+        }
 
     }//GEN-LAST:event_jButton39ActionPerformed
 
@@ -1600,16 +1657,24 @@ public class PictureEditor extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PictureEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PictureEditor.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PictureEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PictureEditor.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PictureEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PictureEditor.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PictureEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PictureEditor.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1620,6 +1685,7 @@ public class PictureEditor extends javax.swing.JFrame {
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
