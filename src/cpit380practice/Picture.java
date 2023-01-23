@@ -722,14 +722,12 @@ public class Picture extends SimplePicture {
     }
 
     public Picture scaleDown(int numTimes) {
-        System.out.println("ok1");
         Picture targetPicture
                 = new Picture(this.getWidth(),
                         this.getHeight());
         Pixel sourcePixel = null;
         Pixel targetPixel = null;
 
-        System.out.println("ok2");
         // loop through the source picture columns
         for (int sourceX = 0, targetX = 0; sourceX < targetPicture.getWidth(); sourceX += numTimes, targetX++) {
 
@@ -1712,5 +1710,41 @@ public class Picture extends SimplePicture {
         picture.repaint();
     }
 
+    public Picture ourScaleDown(int w, int h, int numTimes) {
+        Picture targetPicture = new Picture((w / numTimes + 1), (h / numTimes + 1));
+        Pixel sourcePixel = null;
+        Pixel targetPixel = null;
+        for (int sourceX = 0, targetX = 0; sourceX < w; sourceX += numTimes, targetX++) {
+            for (int sourceY = 0, targetY = 0; sourceY < h; sourceY += numTimes, targetY++) {
+                sourcePixel = this.getPixel(sourceX, sourceY);
+                targetPixel = targetPicture.getPixel(targetX, targetY);
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        return targetPicture;
+
+    }
+
+    public Picture ourScaleUp(int w, int h, int numTimes) {
+        Picture targetPicture = new Picture((w * numTimes), (h * numTimes));
+        Pixel sourcePixel;
+        Pixel targetPixel;
+        int targetX = 0;
+        int targetY = 0;
+        for (int sourceX = 0; sourceX < w; sourceX++) {
+            for (int sourceY = 0; sourceY < h; sourceY++) {
+                sourcePixel = this.getPixel(sourceX, sourceY);
+                for (int indexY = 0; indexY < numTimes; indexY++) {
+                    for (int indexX = 0; indexX < numTimes; indexX++) {
+                        targetX = (sourceX * numTimes + indexX);
+                        targetY = (sourceY * numTimes + indexY);
+                        targetPixel = targetPicture.getPixel(targetX, targetY);
+                        targetPixel.setColor(sourcePixel.getColor());
+                    }
+                }
+            }
+        }
+        return targetPicture;
+    }
 } // end of class Picture, put all new methods before this
 

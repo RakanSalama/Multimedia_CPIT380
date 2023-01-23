@@ -224,7 +224,7 @@ public class PictureEditor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -373,7 +373,7 @@ public class PictureEditor extends javax.swing.JFrame {
                                 .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -587,6 +587,11 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton32.setText("Min Filter");
+        jButton32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton32ActionPerformed(evt);
+            }
+        });
 
         jButton33.setText("Max Filter");
         jButton33.addActionListener(new java.awt.event.ActionListener() {
@@ -598,6 +603,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel10.setText("Filters");
 
         jButton34.setText("Gaussian Filter");
+        jButton34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton34ActionPerformed(evt);
+            }
+        });
 
         jButton35.setText("Laplacian Filter");
 
@@ -611,6 +621,12 @@ public class PictureEditor extends javax.swing.JFrame {
             }
         });
 
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
         jLabel9.setText("Only enter odd number 3,5,7,9,..");
 
         jLabel11.setText("Only enter odd number 3,5,7,9,..");
@@ -618,6 +634,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel12.setText("Only enter odd number 3,5,7,9,..");
 
         jCheckBox5.setText("Change value ");
+        jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox5ActionPerformed(evt);
+            }
+        });
 
         jCheckBox6.setText("Change value ");
 
@@ -695,7 +716,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton36)
                 .addGap(18, 18, 18)
                 .addComponent(jButton37)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel7, "card5");
@@ -740,7 +761,7 @@ public class PictureEditor extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -797,7 +818,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel9, "card7");
@@ -816,6 +837,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jSlider5.setValue(0);
 
         jButton39.setText("Apply");
+        jButton39.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton39ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -841,7 +867,7 @@ public class PictureEditor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel16)
-                .addGap(177, 177, 177)
+                .addGap(99, 99, 99)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel14)
@@ -849,7 +875,7 @@ public class PictureEditor extends javax.swing.JFrame {
                     .addComponent(jSlider5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel10, "card8");
@@ -930,7 +956,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton53)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton54)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel11, "card9");
@@ -1088,6 +1114,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        //Right Rotation
         Picture sourcePicture = picObj;
         Picture TargetPicture = new Picture(sourcePicture.getHeight(), sourcePicture.getWidth());
         Pixel sourcePixel;
@@ -1113,7 +1140,39 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton29ActionPerformed
 
     private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
-        // TODO add your handling code here:
+        int sof = 3;
+        if (jCheckBox7.isSelected()) {
+
+            sof = Integer.valueOf(jTextField4.getText());
+        }
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        int q = sof / 2;
+        Picture copy = new Picture(x, y);
+        copy.copy(picObj, 0, 0, x, y, 0, 0);
+        int Red[] = new int[sof * sof];
+        int Green[] = new int[sof * sof];
+        int Blue[] = new int[sof * sof];
+        for (int v = q; v <= y - (q + 1); v++) {
+            for (int u = q; u <= x - (q + 1); u++) {
+                int k = 0;
+                for (int j = -q; j <= q; j++) {
+                    for (int i = -q; i <= q; i++) {
+                        Red[k] = copy.getPixel(u + i, v + j).getRed();
+                        Green[k] = copy.getPixel(u + i, v + j).getGreen();
+                        Blue[k] = copy.getPixel(u + i, v + j).getBlue();
+                        k++;
+                    }
+                }
+                Arrays.sort(Red);
+                Arrays.sort(Green);
+                Arrays.sort(Blue);
+                picObj.getPixel(u, v).setColor(new Color(Red[sof * sof - 1], Green[sof * sof - 1], Blue[sof * sof - 1]));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton33ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -1121,7 +1180,35 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton43ActionPerformed
-        // TODO add your handling code here:
+        // Horizontal Reflection
+        int height = picObj.getHeight();
+        int mirrorPoint = height / 2;
+
+        Pixel topPixel = null;
+        Pixel bottomPixel = null;
+        //Up to down
+        if (jComboBox7.getSelectedIndex() == 0) {
+            for (int x = 0; x < picObj.getWidth(); x++) {
+                for (int y = 0; y < mirrorPoint; y++) { // becareful you must start with x loop then y
+                    topPixel = picObj.getPixel(x, y);
+                    bottomPixel = picObj.getPixel(x, height - 1 - y);
+                    bottomPixel.setColor(topPixel.getColor());
+
+                }
+            }
+            //Down to up
+        } else if (jComboBox7.getSelectedIndex() == 1) {
+            for (int x = 0; x < picObj.getWidth(); x++) {
+                for (int y = 0; y < mirrorPoint; y++) { // becareful you must start with x loop then y
+                    topPixel = picObj.getPixel(x, y);
+                    bottomPixel = picObj.getPixel(x, height - 1 - y);
+                    topPixel.setColor(bottomPixel.getColor());
+                }
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton43ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1307,7 +1394,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-
+        //Convert To Gray Scale
         Pixel[] pixels = picObj.getPixels();
         Pixel pixel;
         int redCol, blueCol, greenCol;
@@ -1329,6 +1416,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        //Left Rotation
         Picture sourcePicture = picObj;
         Picture TargetPicture = new Picture(sourcePicture.getHeight(), sourcePicture.getWidth());
         Pixel sourcePixel;
@@ -1350,6 +1438,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        // Rotation 180
         Picture sourcePicture = picObj;
         Picture TargetPicture = new Picture(sourcePicture.getWidth(), sourcePicture.getHeight());
         Pixel sourcePixel;
@@ -1369,6 +1458,195 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel2.setIcon(icon);
         picObj = TargetPicture;
     }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+
+        int sof = 3;
+        if (jCheckBox5.isSelected()) {
+
+            sof = Integer.valueOf(jTextField2.getText());
+        }
+
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        int q = sof / 2;
+
+        Picture Image = new Picture(x, y);
+        Image.copy(picObj, 0, 0, x, y, 0, 0);
+        for (int v = q; v <= y - (q + 1); v++) {
+            for (int u = q; u <= x - (q + 1); u++) {
+
+                int sumRed = 0, sumGreen = 0, sumBlue = 0;
+                for (int j = -q; j <= q; j++) {
+                    for (int i = -q; i <= q; i++) {
+
+                        int red = Image.getPixel(u + i, v + j).getRed();
+                        sumRed += red;
+                        int green = Image.getPixel(u + i, v + j).getGreen();
+                        sumGreen += green;
+                        int blue = Image.getPixel(u + i, v + j).getBlue();
+                        sumBlue += blue;
+                    }
+                }
+                int Red = (int) Math.round(sumRed / (sof * sof));
+                int Green = (int) Math.round(sumGreen / (sof * sof));
+                int Blue = (int) Math.round(sumBlue / (sof * sof));
+                picObj.getPixel(u, v).setColor(new Color(Red, Green, Blue));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton31ActionPerformed
+
+    private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox5ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
+
+        int sof = 3;
+        if (jCheckBox6.isSelected()) {
+
+            sof = Integer.valueOf(jTextField3.getText());
+        }
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        int q = sof / 2;
+        Picture copy = new Picture(x, y);
+        copy.copy(picObj, 0, 0, x, y, 0, 0);
+        int Red[] = new int[sof * sof];
+        int Green[] = new int[sof * sof];
+        int Blue[] = new int[sof * sof];
+        for (int v = q; v <= y - (q + 1); v++) {
+            for (int u = q; u <= x - (q + 1); u++) {
+                int k = 0;
+                for (int j = -q; j <= q; j++) {
+                    for (int i = -q; i <= q; i++) {
+                        Red[k] = copy.getPixel(u + i, v + j).getRed();
+                        Green[k] = copy.getPixel(u + i, v + j).getGreen();
+                        Blue[k] = copy.getPixel(u + i, v + j).getBlue();
+                        k++;
+                    }
+                }
+                Arrays.sort(Red);
+                Arrays.sort(Green);
+                Arrays.sort(Blue);
+                picObj.getPixel(u, v).setColor(new Color(Red[0], Green[0], Blue[0]));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton32ActionPerformed
+    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
+        //Vertical reflection
+        int width = picObj.getWidth();
+        int mirrorPoint = width / 2;
+        Pixel leftPixel = null;
+        Pixel rightPixel = null;
+        //left to right
+        if (jComboBox6.getSelectedIndex() == 0) {
+            for (int y = 0; y < picObj.getHeight(); y++) {
+                for (int x = 0; x < mirrorPoint; x++) {
+                    leftPixel = picObj.getPixel(x, y);
+                    rightPixel = picObj.getPixel(width - 1 - x, y);
+                    rightPixel.setColor(leftPixel.getColor());
+                }
+            }
+            // right to left
+        } else if (jComboBox6.getSelectedIndex() == 1) {
+            for (int y = 0; y < picObj.getHeight(); y++) {
+                for (int x = 0; x < mirrorPoint; x++) {
+                    leftPixel = picObj.getPixel(x, y);
+                    rightPixel = picObj.getPixel(width - 1 - x, y);
+                    leftPixel.setColor(rightPixel.getColor());
+                }
+            }
+        }
+
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+
+    }//GEN-LAST:event_jButton41ActionPerformed
+
+    private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
+
+
+    }//GEN-LAST:event_jButton34ActionPerformed
+
+    private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton39ActionPerformed
+        //Scalling
+        int value = jSlider5.getValue();
+        int scaleValue = 0;
+        if (value == -4) {
+            scaleValue = 5;
+        } else if (value == -3) {
+            scaleValue = 4;
+        } else if (value == -2) {
+            scaleValue = 3;
+        } else if (value == -1) {
+            scaleValue = 2;
+        } else if (value == 1) {
+            scaleValue = 2;
+        } else if (value == 2) {
+            scaleValue = 3;
+        } else if (value == 3) {
+            scaleValue = 4;
+        } else if (value == 4) {
+            scaleValue = 5;
+        }
+        else{
+            scaleValue = 1;
+        }
+        if (value < 0) {
+            Picture targetPicture = new Picture((picObj.getWidth() / scaleValue + 1), (picObj.getHeight() / scaleValue + 1));
+            Pixel sourcePixel = null;
+            Pixel targetPixel = null;
+            for (int sourceX = 0, targetX = 0; sourceX < picObj.getWidth(); sourceX += scaleValue, targetX++) {
+                for (int sourceY = 0, targetY = 0; sourceY < picObj.getHeight(); sourceY += scaleValue, targetY++) {
+                    sourcePixel = picObj.getPixel(sourceX, sourceY);
+                    targetPixel = targetPicture.getPixel(targetX, targetY);
+                    targetPixel.setColor(sourcePixel.getColor());
+                }
+            }
+            targetPicture.show();
+            picObj = targetPicture;
+        } else {
+
+            Picture targetPicture = new Picture((picObj.getWidth() * scaleValue), (picObj.getHeight() * scaleValue));
+            Pixel sourcePixel;
+            Pixel targetPixel;
+            int targetX = 0;
+            int targetY = 0;
+            for (int sourceX = 0; sourceX < picObj.getWidth(); sourceX++) {
+                for (int sourceY = 0; sourceY < picObj.getHeight(); sourceY++) {
+                    sourcePixel = picObj.getPixel(sourceX, sourceY);
+                    for (int indexY = 0; indexY < scaleValue; indexY++) {
+                        for (int indexX = 0; indexX < scaleValue; indexX++) {
+                            targetX = (sourceX * scaleValue + indexX);
+                            targetY = (sourceY * scaleValue + indexY);
+                            targetPixel = targetPicture.getPixel(targetX, targetY);
+                            targetPixel.setColor(sourcePixel.getColor());
+                        }
+                    }
+                }
+            }
+            targetPicture.show();
+            picObj = targetPicture;
+        }
+
+    }//GEN-LAST:event_jButton39ActionPerformed
 
     private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
 
@@ -1425,16 +1703,24 @@ public class PictureEditor extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PictureEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PictureEditor.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PictureEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PictureEditor.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PictureEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PictureEditor.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PictureEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PictureEditor.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1445,6 +1731,7 @@ public class PictureEditor extends javax.swing.JFrame {
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
