@@ -1180,7 +1180,6 @@ public class PictureEditor extends javax.swing.JFrame {
             }
         }
 
-        //picObj.changeColorsLab5_023(red, green, blue);
         Pixel[] pixelArray = picObj.getPixels();
         double value = 0;
         for (Pixel pixelObj : pixelArray) {
