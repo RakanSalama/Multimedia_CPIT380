@@ -445,6 +445,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel7.setText("Rotation");
 
         jButton24.setText("Left Rotations");
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
 
         jButton25.setText("Rotation by 180");
 
@@ -1259,8 +1264,31 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        // TODO add your handling code here:
+        Pixel[] pixels = picObj.getPixels();
+        Pixel pixel;
+        int redCol, blueCol, greenCol;
+        int avg;
+        Pixel[] pixelArr = picObj.getPixels();
+        for (int i = 0; i < pixels.length; i++) {
+            pixel = pixels[i];
+
+            redCol = pixel.getRed();
+            greenCol = pixel.getGreen();
+            blueCol = pixel.getBlue();
+
+            avg = (int) ((redCol + greenCol + blueCol) / 3);
+            Color grayColor = new Color(avg, avg, avg);
+            // Set the current pixel with the average
+            pixel.setColor(grayColor);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);    
     }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        
+    }//GEN-LAST:event_jButton24ActionPerformed
 
     /**
      * @param args the command line arguments
