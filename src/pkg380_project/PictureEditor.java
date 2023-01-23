@@ -499,8 +499,18 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel15.setText("Reflection");
 
         jButton41.setText("Vertical Reflection");
+        jButton41.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton41ActionPerformed(evt);
+            }
+        });
 
         jButton42.setText("Diagonal Reflection D1");
+        jButton42.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton42ActionPerformed(evt);
+            }
+        });
 
         jButton43.setText("Horizontal Reflection");
         jButton43.addActionListener(new java.awt.event.ActionListener() {
@@ -513,11 +523,11 @@ public class PictureEditor extends javax.swing.JFrame {
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Up to Down", "Down to Up" }));
 
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Up to Down" }));
+        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Up to Down", "Down to Up" }));
 
         jButton44.setText("Diagonal Reflection D2");
 
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Down to Upper" }));
+        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Up to Down", "Down to Up" }));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -570,6 +580,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jPanel1.add(jPanel6, "card4");
 
         jButton31.setText("Box Filter");
+        jButton31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton31ActionPerformed(evt);
+            }
+        });
 
         jButton32.setText("Min Filter");
 
@@ -589,6 +604,12 @@ public class PictureEditor extends javax.swing.JFrame {
         jButton36.setText("Median Filter");
 
         jButton37.setText("Weighted Median Filter");
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Only enter odd number 3,5,7,9,..");
 
@@ -1083,7 +1104,7 @@ public class PictureEditor extends javax.swing.JFrame {
         }
         Image img = (TargetPicture.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon); 
+        jLabel2.setIcon(icon);
         picObj = TargetPicture;
     }//GEN-LAST:event_jButton26ActionPerformed
 
@@ -1266,7 +1287,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-                Pixel[] pixelArray = picObj.getPixels();
+        Pixel[] pixelArray = picObj.getPixels();
         for (Pixel pixelObj : pixelArray) {
             pixelObj.setGreen(0);
         }
@@ -1276,7 +1297,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-                Pixel[] pixelArray = picObj.getPixels();
+        Pixel[] pixelArray = picObj.getPixels();
         for (Pixel pixelObj : pixelArray) {
             pixelObj.setRed(0);
         }
@@ -1303,8 +1324,8 @@ public class PictureEditor extends javax.swing.JFrame {
         }
         Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon);  
-        
+        jLabel2.setIcon(icon);
+
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
@@ -1324,7 +1345,7 @@ public class PictureEditor extends javax.swing.JFrame {
         }
         Image img = (TargetPicture.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon); 
+        jLabel2.setIcon(icon);
         picObj = TargetPicture;
     }//GEN-LAST:event_jButton24ActionPerformed
 
@@ -1345,9 +1366,50 @@ public class PictureEditor extends javax.swing.JFrame {
         }
         Image img = (TargetPicture.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon);  
+        jLabel2.setIcon(icon);
         picObj = TargetPicture;
     }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton31ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
+        if (jComboBox8.getSelectedIndex() == 0) {
+            Pixel leftPixel = null;
+            Pixel rightPixel = null;
+            for (int y = 1; y < jLabel2.getHeight(); y++) {
+                for (int x = 0; x < y; x++) {
+                    rightPixel = picObj.getPixel(x, y);
+                    leftPixel = picObj.getPixel(y, x);
+                    rightPixel.setColor(leftPixel.getColor());
+                }
+            }
+        } else if (jComboBox8.getSelectedIndex() == 1) {
+            Pixel leftPixel = null;
+            Pixel rightPixel = null;
+            for (int y = 1; y < jLabel2.getHeight(); y++) {
+                for (int x = 0; x < y; x++) {
+                    leftPixel = picObj.getPixel(x, y);
+                    rightPixel = picObj.getPixel(y, x);
+                    rightPixel.setColor(leftPixel.getColor());
+                }
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+
+    }//GEN-LAST:event_jButton42ActionPerformed
+
+    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton41ActionPerformed
 
     /**
      * @param args the command line arguments
