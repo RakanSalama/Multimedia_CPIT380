@@ -7,7 +7,6 @@ package pkg380_project;
 
 import cpit380practice.*;
 
-
 import java.awt.*;
 import java.awt.image.*;
 import java.io.File;
@@ -25,6 +24,7 @@ import javax.swing.*;
  * @author Nero
  */
 public class PictureEditor extends javax.swing.JFrame {
+
     BufferedImage bi;
     String pathName;
     static ImageIcon icon;
@@ -1099,17 +1099,21 @@ public class PictureEditor extends javax.swing.JFrame {
         picObj = new Picture(pathName);
         Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
-        jLabel2.setIcon(icon);       
+        jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        /*   try {
-        bi=set
-        File outputfile = new File("saved.png");
-        ImageIO.write(bi, "png", outputfile);
+        try {
+            Image img = (picObj.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+            BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D bGr = bimage.createGraphics();
+            bGr.drawImage(img, 0, 0, null);
+            bGr.dispose();
+            File outputfile = new File("saved.png");
+            ImageIO.write(bimage, "png", outputfile);
         } catch (IOException ex) {
-        Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+            Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton14ActionPerformed
 
     /**
