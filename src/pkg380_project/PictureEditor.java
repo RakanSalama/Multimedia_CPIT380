@@ -1265,6 +1265,7 @@ public class PictureEditor extends javax.swing.JFrame {
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         Pixel[] pixels = picObj.getPixels();
+        System.out.println("Hello");
         Pixel pixel;
         int redCol, blueCol, greenCol;
         int avg;
