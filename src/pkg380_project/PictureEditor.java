@@ -1271,14 +1271,11 @@ public class PictureEditor extends javax.swing.JFrame {
         Pixel[] pixelArr = picObj.getPixels();
         for (int i = 0; i < pixels.length; i++) {
             pixel = pixels[i];
-
             redCol = pixel.getRed();
             greenCol = pixel.getGreen();
             blueCol = pixel.getBlue();
-
             avg = (int) ((redCol + greenCol + blueCol) / 3);
             Color grayColor = new Color(avg, avg, avg);
-            // Set the current pixel with the average
             pixel.setColor(grayColor);
         }
         Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
