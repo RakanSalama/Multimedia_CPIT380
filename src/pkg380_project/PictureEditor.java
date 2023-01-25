@@ -110,6 +110,7 @@ public class PictureEditor extends javax.swing.JFrame {
         jCheckBox5 = new javax.swing.JCheckBox();
         jCheckBox6 = new javax.swing.JCheckBox();
         jCheckBox7 = new javax.swing.JCheckBox();
+        jComboBox3 = new javax.swing.JComboBox<>();
         jPanel8 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jButton27 = new javax.swing.JButton();
@@ -654,6 +655,8 @@ public class PictureEditor extends javax.swing.JFrame {
 
         jCheckBox7.setText("Change value ");
 
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laplacian", "P X", "P Y", "S X", "S Y" }));
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -662,6 +665,12 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
@@ -689,10 +698,7 @@ public class PictureEditor extends javax.swing.JFrame {
                                     .addComponent(jTextField2)
                                     .addComponent(jTextField3)
                                     .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -721,7 +727,9 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton34)
                 .addGap(18, 18, 18)
-                .addComponent(jButton35)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton35)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton36)
                 .addGap(18, 18, 18)
@@ -2297,15 +2305,67 @@ public class PictureEditor extends javax.swing.JFrame {
         int y = picObj.getHeight();
         Picture Image = new Picture(x, y);
         Image.copy(picObj, 0, 0, x, y, 0, 0);
-        double filter[][] = {{-0.075, -0.125, -0.075},
-        {-0.125, 2.0, -0.125},
-        {-0.075, -0.125, -0.075}};
+        int filter[][] = {{0, 1, 0}, {1, -4, 1}, {0, 1, 0}};
+        if (jComboBox3.getSelectedIndex() == 0) {
+            filter[0][0] = 0;
+            filter[0][1] = 1;
+            filter[0][2] = 0;
+            filter[1][0] = 1;
+            filter[1][1] = -4;
+            filter[1][2] = 1;
+            filter[2][0] = 0;
+            filter[2][1] = 1;
+            filter[2][2] = 0;
+
+        } else if (jComboBox3.getSelectedIndex() == 1) {
+            filter[0][0] = -1;
+            filter[0][1] = 0;
+            filter[0][2] = 1;
+            filter[1][0] = -1;
+            filter[1][1] = 0;
+            filter[1][2] = 1;
+            filter[2][0] = -1;
+            filter[2][1] = 0;
+            filter[2][2] = 1;
+
+        } else if (jComboBox3.getSelectedIndex() == 2) {
+            filter[0][0] = -1;
+            filter[0][1] = -1;
+            filter[0][2] = -1;
+            filter[1][0] = 0;
+            filter[1][1] = 0;
+            filter[1][2] = 0;
+            filter[2][0] = 1;
+            filter[2][1] = 1;
+            filter[2][2] = 1;
+        } else if (jComboBox3.getSelectedIndex() == 3) {
+            filter[0][0] = -1;
+            filter[0][1] = 0;
+            filter[0][2] = 1;
+            filter[1][0] = -2;
+            filter[1][1] = 0;
+            filter[1][2] = 2;
+            filter[2][0] = -1;
+            filter[2][1] = 0;
+            filter[2][2] = 1;
+
+        } else if (jComboBox3.getSelectedIndex() == 4) {
+            filter[0][0] = -1;
+            filter[0][1] = -2;
+            filter[0][2] = -1;
+            filter[1][0] = 0;
+            filter[1][1] = 0;
+            filter[1][2] = 0;
+            filter[2][0] = 1;
+            filter[2][1] = 2;
+            filter[2][2] = 1;
+        }
         for (int v = 1; v <= y - 2; v++) {
             for (int u = 1; u <= x - 2; u++) {
                 double sumRed = 0, sumGreen = 0, sumBlue = 0;
                 for (int j = -1; j <= 1; j++) {
                     for (int i = -1; i <= 1; i++) {
-                        double c = filter[j + 1][i + 1];
+                        int c = filter[j + 1][i + 1];
                         int red = Image.getPixel(u + i, v + j).getRed();
                         sumRed += red * c;
                         int green = Image.getPixel(u + i, v + j).getGreen();
@@ -2520,6 +2580,7 @@ public class PictureEditor extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JComboBox<String> jComboBox7;
     private javax.swing.JComboBox<String> jComboBox8;
