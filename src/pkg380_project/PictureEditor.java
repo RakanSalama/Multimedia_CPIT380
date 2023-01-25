@@ -52,8 +52,6 @@ public class PictureEditor extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton15 = new javax.swing.JButton();
@@ -83,7 +81,7 @@ public class PictureEditor extends javax.swing.JFrame {
         jButton26 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jButton101 = new javax.swing.JButton();
+        jButton41 = new javax.swing.JButton();
         jButton42 = new javax.swing.JButton();
         jButton43 = new javax.swing.JButton();
         jComboBox6 = new javax.swing.JComboBox<>();
@@ -92,7 +90,7 @@ public class PictureEditor extends javax.swing.JFrame {
         jButton44 = new javax.swing.JButton();
         jComboBox9 = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
-        jButton100 = new javax.swing.JButton();
+        jButton31 = new javax.swing.JButton();
         jButton32 = new javax.swing.JButton();
         jButton33 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
@@ -100,7 +98,7 @@ public class PictureEditor extends javax.swing.JFrame {
         jButton35 = new javax.swing.JButton();
         jButton36 = new javax.swing.JButton();
         jButton37 = new javax.swing.JButton();
-        jTextField100 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -173,6 +171,7 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton13.setText("Reset ");
+        jButton13.setEnabled(false);
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton13ActionPerformed(evt);
@@ -180,19 +179,12 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton14.setText("Save");
+        jButton14.setEnabled(false);
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton14ActionPerformed(evt);
             }
         });
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Imge path");
 
         jLabel4.setText("Files");
 
@@ -200,40 +192,30 @@ public class PictureEditor extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(519, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                .addGap(113, 113, 113)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(99, 99, 99))
+                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, "card0");
@@ -283,18 +265,21 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jSlider1.setMajorTickSpacing(10);
+        jSlider1.setMaximum(99);
         jSlider1.setMinimum(1);
         jSlider1.setMinorTickSpacing(1);
         jSlider1.setPaintLabels(true);
         jSlider1.setPaintTicks(true);
 
         jSlider2.setMajorTickSpacing(10);
+        jSlider2.setMaximum(99);
         jSlider2.setMinimum(1);
         jSlider2.setMinorTickSpacing(1);
         jSlider2.setPaintLabels(true);
         jSlider2.setPaintTicks(true);
 
         jSlider3.setMajorTickSpacing(10);
+        jSlider3.setMaximum(99);
         jSlider3.setMinimum(1);
         jSlider3.setMinorTickSpacing(1);
         jSlider3.setPaintLabels(true);
@@ -373,7 +358,7 @@ public class PictureEditor extends javax.swing.JFrame {
                                 .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -498,10 +483,10 @@ public class PictureEditor extends javax.swing.JFrame {
 
         jLabel15.setText("Reflection");
 
-        jButton101.setText("Vertical Reflection");
-        jButton101.addActionListener(new java.awt.event.ActionListener() {
+        jButton41.setText("Vertical Reflection");
+        jButton41.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton101ActionPerformed(evt);
+                jButton41ActionPerformed(evt);
             }
         });
 
@@ -526,6 +511,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Up to Down", "Down to Up" }));
 
         jButton44.setText("Diagonal Reflection D2");
+        jButton44.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton44ActionPerformed(evt);
+            }
+        });
 
         jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Up to Down", "Down to Up" }));
 
@@ -540,7 +530,7 @@ public class PictureEditor extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
                             .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton101, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -560,7 +550,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton101, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -579,10 +569,10 @@ public class PictureEditor extends javax.swing.JFrame {
 
         jPanel1.add(jPanel6, "card4");
 
-        jButton100.setText("Box Filter");
-        jButton100.addActionListener(new java.awt.event.ActionListener() {
+        jButton31.setText("Box Filter");
+        jButton31.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton100ActionPerformed(evt);
+                jButton31ActionPerformed(evt);
             }
         });
 
@@ -615,9 +605,9 @@ public class PictureEditor extends javax.swing.JFrame {
 
         jButton37.setText("Weighted Median Filter");
 
-        jTextField100.addActionListener(new java.awt.event.ActionListener() {
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField100ActionPerformed(evt);
+                jTextField2ActionPerformed(evt);
             }
         });
 
@@ -657,7 +647,7 @@ public class PictureEditor extends javax.swing.JFrame {
                             .addComponent(jLabel10)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton100, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton32, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                     .addComponent(jButton33, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -676,7 +666,7 @@ public class PictureEditor extends javax.swing.JFrame {
                                         .addComponent(jLabel12)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField100)
+                                    .addComponent(jTextField2)
                                     .addComponent(jTextField3)
                                     .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -692,10 +682,10 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton100, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox5)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField100, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton32)
@@ -716,7 +706,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton36)
                 .addGap(18, 18, 18)
                 .addComponent(jButton37)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel7, "card5");
@@ -761,7 +751,7 @@ public class PictureEditor extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -818,7 +808,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel9, "card7");
@@ -883,10 +873,20 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel18.setText("Other functions");
 
         jButton46.setText("crop");
+        jButton46.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton46ActionPerformed(evt);
+            }
+        });
 
         jButton47.setText("Blending");
 
         jButton48.setText("create collage");
+        jButton48.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton48ActionPerformed(evt);
+            }
+        });
 
         jButton49.setText("red eye reduction");
 
@@ -956,7 +956,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton53)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton54)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel11, "card9");
@@ -969,6 +969,7 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton2.setText("Colors");
+        jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -976,6 +977,7 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton3.setText("Converion");
+        jButton3.setEnabled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -983,6 +985,7 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton4.setText("Rotation");
+        jButton4.setEnabled(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -990,6 +993,7 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton5.setText("Reflection");
+        jButton5.setEnabled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -997,6 +1001,7 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton6.setText("Filters");
+        jButton6.setEnabled(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -1004,6 +1009,7 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton7.setText("Computing Histograms");
+        jButton7.setEnabled(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -1011,6 +1017,7 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton8.setText("Computing Contrast");
+        jButton8.setEnabled(false);
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -1018,6 +1025,7 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton9.setText("Scale");
+        jButton9.setEnabled(false);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -1025,6 +1033,7 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton10.setText("Other functions");
+        jButton10.setEnabled(false);
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -1069,7 +1078,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
@@ -1108,10 +1117,6 @@ public class PictureEditor extends javax.swing.JFrame {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         cardLayout.show(jPanel1, "card9");
     }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
         //Right Rotation
@@ -1257,9 +1262,27 @@ public class PictureEditor extends javax.swing.JFrame {
             pathName = FileChooser.pickAFile();
             picObj = new Picture(pathName);
             Image img = (picObj.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+            BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D bGr = bimage.createGraphics();
+            bGr.drawImage(img, 0, 0, null);
+            bGr.dispose();
+            File outputfile = new File("Tmp\\saved.png");
+            ImageIO.write(bimage, "png", outputfile);
+            pathName = "Tmp\\saved.png";
+            picObj = new Picture(pathName);
             icon = new ImageIcon(img);
             jLabel1.setIcon(icon);
-            jTextField1.setText(pathName);
+            jButton2.setEnabled(true);
+            jButton3.setEnabled(true);
+            jButton4.setEnabled(true);
+            jButton5.setEnabled(true);
+            jButton6.setEnabled(true);
+            jButton7.setEnabled(true);
+            jButton8.setEnabled(true);
+            jButton9.setEnabled(true);
+            jButton10.setEnabled(true);
+            jButton13.setEnabled(true);
+            jButton14.setEnabled(true);
         } catch (Exception e) {
             System.out.println("er");
         }
@@ -1459,12 +1482,12 @@ public class PictureEditor extends javax.swing.JFrame {
         picObj = TargetPicture;
     }//GEN-LAST:event_jButton25ActionPerformed
 
-    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {
 
         int sof = 3;
         if (jCheckBox5.isSelected()) {
 
-            sof = Integer.valueOf(jTextField100.getText());
+            sof = Integer.valueOf(jTextField2.getText());
         }
 
         int x = picObj.getWidth();
@@ -1498,15 +1521,15 @@ public class PictureEditor extends javax.swing.JFrame {
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
         // TODO add your handling code here:
-    }                                         
+    }
 
     private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox5ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                           
+    }
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
@@ -1548,7 +1571,7 @@ public class PictureEditor extends javax.swing.JFrame {
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton32ActionPerformed
-    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {
         //Vertical reflection
         int width = picObj.getWidth();
         int mirrorPoint = width / 2;
@@ -1578,7 +1601,7 @@ public class PictureEditor extends javax.swing.JFrame {
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
 
-    }                                         
+    }
 
     private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
 
@@ -1605,8 +1628,7 @@ public class PictureEditor extends javax.swing.JFrame {
             scaleValue = 4;
         } else if (value == 4) {
             scaleValue = 5;
-        }
-        else{
+        } else {
             scaleValue = 1;
         }
         if (value < 0) {
@@ -1648,16 +1670,9 @@ public class PictureEditor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton39ActionPerformed
 
-    private void jButton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton100ActionPerformed
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton100ActionPerformed
-
-    private void jTextField100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField100ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField100ActionPerformed
 
     private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
+        //diagnoul d1 
         if (jComboBox8.getSelectedIndex() == 0) {
             Pixel leftPixel = null;
             Pixel rightPixel = null;
@@ -1685,9 +1700,43 @@ public class PictureEditor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton42ActionPerformed
 
-    private void jButton101ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton101ActionPerformed
+    private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton44ActionPerformed
+        //diagnoul d2 
+        if (jComboBox9.getSelectedIndex() == 0) {
+            Pixel leftPixel = null;
+            Pixel rightPixel = null;
+            int height = picObj.getHeight();
+            for (int y = height - 2; y >= 0; y--) {
+                for (int x = 0; x < height - 1 - y; x++) {
+                    leftPixel = picObj.getPixel(x, y);
+                    rightPixel = picObj.getPixel(height - 1 - y, height - 1 - x);
+                    rightPixel.setColor(leftPixel.getColor());
+                }
+            }
+        } else if (jComboBox9.getSelectedIndex() == 1) {
+            Pixel leftPixel = null;
+            Pixel rightPixel = null;
+            int height = picObj.getHeight();
+            for (int y = height - 2; y >= 0; y--) {
+                for (int x = 0; x < height - 1 - y; x++) {
+                    rightPixel = picObj.getPixel(x, y);
+                    leftPixel = picObj.getPixel(height - 1 - y, height - 1 - x);
+                    rightPixel.setColor(leftPixel.getColor());
+                }
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton44ActionPerformed
+
+    private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton101ActionPerformed
+    }//GEN-LAST:event_jButton46ActionPerformed
+
+    private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton48ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton48ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1736,8 +1785,6 @@ public class PictureEditor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton100;
-    private javax.swing.JButton jButton101;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
@@ -1760,6 +1807,7 @@ public class PictureEditor extends javax.swing.JFrame {
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton30;
+    private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton32;
     private javax.swing.JButton jButton33;
     private javax.swing.JButton jButton34;
@@ -1770,6 +1818,7 @@ public class PictureEditor extends javax.swing.JFrame {
     private javax.swing.JButton jButton39;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton40;
+    private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton42;
     private javax.swing.JButton jButton43;
     private javax.swing.JButton jButton44;
@@ -1812,7 +1861,6 @@ public class PictureEditor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1835,8 +1883,7 @@ public class PictureEditor extends javax.swing.JFrame {
     private javax.swing.JSlider jSlider3;
     private javax.swing.JSlider jSlider4;
     private javax.swing.JSlider jSlider5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField100;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
