@@ -1231,19 +1231,19 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton50ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        //hsv
         Image img = (picObj.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
         BufferedImage rgbImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
         BufferedImage hsvImage = new BufferedImage(rgbImage.getWidth(), rgbImage.getHeight(), BufferedImage.TYPE_INT_RGB);
         for (int x = 0; x < rgbImage.getWidth(); x++) {
             for (int y = 0; y < rgbImage.getHeight(); y++) {
-                int rgb = rgbImage.getRGB(x, y);
-                int r = (rgb >> 16) & 0xFF;
-                int g = (rgb >> 8) & 0xFF;
-                int b = rgb & 0xFF;
+                Color rgb = new Color(rgbImage.getRGB(x, y));
+                int r = rgb.getRed();
+                int g = rgb.getGreen();
+                int b = rgb.getBlue();
                 int max = Math.max(r, Math.max(g, b));
                 int min = Math.min(r, Math.min(g, b));
                 float h = 0, s = 0, v = max / 255f;
-
                 int delta = max - min;
                 if (max != 0) {
                     s = delta / (float) max;
@@ -1261,7 +1261,7 @@ public class PictureEditor extends javax.swing.JFrame {
                         h++;
                     }
                 }
-                int hsv = ((int) (h * 255) << 16) | ((int) (s * 255) << 8) | (int) (v * 255);
+                int hsv = ((int) (h * 255)) | ((int) (s * 255)) | (int) (v * 255);
                 hsvImage.setRGB(x, y, hsv);
             }
         }
