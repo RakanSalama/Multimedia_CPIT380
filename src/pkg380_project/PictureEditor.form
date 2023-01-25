@@ -1204,10 +1204,7 @@
                           <Component id="jButton47" max="32767" attributes="0"/>
                           <Component id="jButton48" max="32767" attributes="0"/>
                           <Component id="jButton49" max="32767" attributes="0"/>
-                          <Component id="jButton50" max="32767" attributes="0"/>
                           <Component id="jButton51" max="32767" attributes="0"/>
-                          <Component id="jButton53" max="32767" attributes="0"/>
-                          <Component id="jButton54" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -1236,19 +1233,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton49" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton50" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton51" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButton52" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton53" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton54" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="57" max="32767" attributes="0"/>
+                      <EmptySpace pref="171" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1271,6 +1262,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Blending"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton47ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton48">
               <Properties>
@@ -1284,13 +1278,8 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="red eye reduction"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="jButton50">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Automatic detection of red eye and fix it"/>
-              </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton50ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton49ActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton51">
@@ -1302,16 +1291,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="edge detction"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="jButton53">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Compare two Images"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="jButton54">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Object Detection"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton52ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox2">
               <Properties>
@@ -1323,6 +1305,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox2ActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
