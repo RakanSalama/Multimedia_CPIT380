@@ -382,6 +382,11 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton22.setText("Convert to binary using thresholding");
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
 
         jButton23.setText("Convert to HSV");
         jButton23.addActionListener(new java.awt.event.ActionListener() {
@@ -1464,23 +1469,15 @@ public class PictureEditor extends javax.swing.JFrame {
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         //Convert To Gray Scale
         Pixel[] pixels = picObj.getPixels();
-        Pixel pixel;
-        int redCol, blueCol, greenCol;
         int avg;
-        Pixel[] pixelArr = picObj.getPixels();
-        for (int i = 0; i < pixels.length; i++) {
-            pixel = pixels[i];
-            redCol = pixel.getRed();
-            greenCol = pixel.getGreen();
-            blueCol = pixel.getBlue();
-            avg = (int) ((redCol + greenCol + blueCol) / 3);
+        for (Pixel pixel1 : pixels) {
+            avg = (int) ((pixel1.getRed() + pixel1.getGreen() + pixel1.getBlue()) / 3);
             Color grayColor = new Color(avg, avg, avg);
-            pixel.setColor(grayColor);
+            pixel1.setColor(grayColor);
         }
         Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
-
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
@@ -1833,6 +1830,29 @@ public class PictureEditor extends javax.swing.JFrame {
     private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton48ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton48ActionPerformed
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        String threshold = JOptionPane.showInputDialog(null, "Please Enter the size: ");
+        Pixel[] pixels = picObj.getPixels();
+        int avg;
+        for (Pixel pixel1 : pixels) {
+            avg = (int) ((pixel1.getRed() + pixel1.getGreen() + pixel1.getBlue()) / 3);
+            Color grayColor = new Color(avg, avg, avg);
+            pixel1.setColor(grayColor);
+        }
+        int avar;
+        for (int x = 0; x < picObj.getWidth(); x++) {
+            for (int y = 0; y < picObj.getHeight(); y++) {
+                avar = (int) Math.abs(picObj.getPixel(x, y).getAverage());
+                if (avar < Integer.valueOf(threshold)) {
+                    picObj.getPixel(x, y).setColor(Color.BLACK);
+                }
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton22ActionPerformed
 
     /**
      * @param args the command line arguments

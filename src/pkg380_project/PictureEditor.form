@@ -488,6 +488,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Convert to binary using thresholding"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton22ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton23">
               <Properties>
