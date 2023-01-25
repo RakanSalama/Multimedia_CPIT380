@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 
 import java.lang.*;
+import static java.lang.Math.round;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -607,10 +608,25 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton35.setText("Laplacian Filter");
+        jButton35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton35ActionPerformed(evt);
+            }
+        });
 
         jButton36.setText("Median Filter");
+        jButton36.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton36ActionPerformed(evt);
+            }
+        });
 
         jButton37.setText("Weighted Median Filter");
+        jButton37.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton37ActionPerformed(evt);
+            }
+        });
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1646,8 +1662,37 @@ public class PictureEditor extends javax.swing.JFrame {
     }
 
     private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton34ActionPerformed
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        Picture Image = new Picture(x, y);
+        Image.copy(picObj, 0, 0, x, y, 0, 0);
+        double filter[][] = {{0.075, 0.125, 0.075},
+        {0.125, 0.200, 0.125},
+        {0.075, 0.125, 0.075}};
+        for (int v = 1; v <= y - 2; v++) {
+            for (int u = 1; u <= x - 2; u++) {
+                double sumRed = 0, sumGreen = 0, sumBlue = 0;
+                for (int j = -1; j <= 1; j++) {
+                    for (int i = -1; i <= 1; i++) {
+                        double c = filter[j + 1][i + 1];
+                        int red = Image.getPixel(u + i, v + j).getRed();
+                        sumRed += red * c;
+                        int green = Image.getPixel(u + i, v + j).getGreen();
+                        sumGreen += green * c;
+                        int blue = Image.getPixel(u + i, v + j).getBlue();
+                        sumBlue += blue * c;
 
-
+                    }
+                }
+                int Red = (int) Math.round(sumRed);
+                int Green = (int) Math.round(sumGreen);
+                int Blue = (int) Math.round(sumBlue);
+                picObj.getPixel(u, v).setColor(new Color(Red, Green, Blue));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton34ActionPerformed
 
     private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton39ActionPerformed
@@ -1819,8 +1864,8 @@ public class PictureEditor extends javax.swing.JFrame {
                     numOfClicks = 0;
                     jLabel1.removeMouseListener(this);
                     Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
-                    jLabel2.setText("");
-                    jLabel2.setIcon(new ImageIcon(img));
+                    icon = new ImageIcon(img);
+                    jLabel2.setIcon(icon);
                 }
             }
         });
@@ -1829,7 +1874,141 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton46ActionPerformed
 
     private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton48ActionPerformed
-        // TODO add your handling code here:
+        Picture sourcePicture = picObj;
+        // ask for 4 picture
+        Picture second = null;
+        Picture third = null;
+        Picture forth = null;
+        Picture fifth = null;
+        JFileChooser FileChooser = new JFileChooser("");
+        int conf = JOptionPane.showConfirmDialog(null, "Choose the Left Top image", "Choose image", JOptionPane.OK_CANCEL_OPTION);
+        if (conf == 0) {
+            int val = FileChooser.showOpenDialog(null);
+            if (val == JFileChooser.APPROVE_OPTION) {
+                second = new Picture(FileChooser.getSelectedFile().getAbsolutePath());
+                Image img = (second.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+                BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D bGr = bimage.createGraphics();
+                bGr.drawImage(img, 0, 0, null);
+                bGr.dispose();
+                File outputfile = new File("Tmp\\2.png");
+
+                try {
+                    ImageIO.write(bimage, "png", outputfile);
+                } catch (IOException ex) {
+                    Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                second = new Picture("Tmp\\2.png");
+            }
+        }
+        conf = JOptionPane.showConfirmDialog(null, "Choose the Right Top image", "Choose image", JOptionPane.OK_CANCEL_OPTION);
+        if (conf == 0) {
+            int val = FileChooser.showOpenDialog(null);
+            if (val == JFileChooser.APPROVE_OPTION) {
+                third = new Picture(FileChooser.getSelectedFile().getAbsolutePath());
+                Image img = (third.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+                BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D bGr = bimage.createGraphics();
+                bGr.drawImage(img, 0, 0, null);
+                bGr.dispose();
+                File outputfile = new File("Tmp\\3.png");
+                try {
+                    ImageIO.write(bimage, "png", outputfile);
+                } catch (IOException ex) {
+                    Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                third = new Picture("Tmp\\3.png");
+            }
+        }
+        conf = JOptionPane.showConfirmDialog(null, "Choose the Left Down image", "Choose image", JOptionPane.OK_CANCEL_OPTION);
+        if (conf == 0) {
+            int val = FileChooser.showOpenDialog(null);
+            if (val == JFileChooser.APPROVE_OPTION) {
+                forth = new Picture(FileChooser.getSelectedFile().getAbsolutePath());
+                Image img = (forth.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+                BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D bGr = bimage.createGraphics();
+                bGr.drawImage(img, 0, 0, null);
+                bGr.dispose();
+                File outputfile = new File("Tmp\\4.png");
+                try {
+                    ImageIO.write(bimage, "png", outputfile);
+                } catch (IOException ex) {
+                    Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                forth = new Picture("Tmp\\4.png");
+            }
+        }
+        conf = JOptionPane.showConfirmDialog(null, "Choose the Right Down image", "Choose image", JOptionPane.OK_CANCEL_OPTION);
+        if (conf == 0) {
+            int val = FileChooser.showOpenDialog(null);
+            if (val == JFileChooser.APPROVE_OPTION) {
+                fifth = new Picture(FileChooser.getSelectedFile().getAbsolutePath());
+                Image img = (fifth.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+                BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D bGr = bimage.createGraphics();
+                bGr.drawImage(img, 0, 0, null);
+                bGr.dispose();
+                File outputfile = new File("Tmp\\5.png");
+                try {
+                    ImageIO.write(bimage, "png", outputfile);
+                } catch (IOException ex) {
+                    Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                fifth = new Picture("Tmp\\5.png");
+            }
+        }
+
+        int width = picObj.getWidth() + second.getWidth() + third.getWidth();
+        int height = picObj.getHeight() + second.getHeight() + forth.getHeight();
+        picObj = new Picture(width, height);
+
+        Pixel sourcePixel;
+        Pixel targetPixel;
+
+        // top left
+        for (int i = 0; i < second.getWidth(); i++) {
+            for (int j = 0; j < second.getHeight(); j++) {
+                sourcePixel = second.getPixel(i, j);
+                targetPixel = picObj.getPixel(i, j);
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        // top right
+        for (int j = 0; j < third.getWidth(); j++) {
+            for (int k = 0; k < third.getHeight(); k++) {
+                sourcePixel = third.getPixel(j, k);
+                targetPixel = picObj.getPixel((sourcePicture.getWidth() + j + second.getWidth()), (k));
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        // original picture in the middle
+        for (int j = 0; j < sourcePicture.getWidth(); j++) {
+            for (int k = 0; k < sourcePicture.getHeight(); k++) {
+                sourcePixel = sourcePicture.getPixel(j, k);
+                targetPixel = picObj.getPixel((j + second.getWidth()), (k + second.getHeight()));
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        // bottom left
+        for (int j = 0; j < forth.getWidth(); j++) {
+            for (int k = 0; k < forth.getHeight(); k++) {
+                sourcePixel = forth.getPixel(j, k);
+                targetPixel = picObj.getPixel((j), (k + second.getHeight() + sourcePicture.getHeight()));
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        // bottom right
+        for (int j = 0; j < fifth.getWidth(); j++) {
+            for (int k = 0; k < fifth.getHeight(); k++) {
+                sourcePixel = fifth.getPixel(j, k);
+                targetPixel = picObj.getPixel((j + second.getWidth() + sourcePicture.getWidth()), (k + third.getHeight() + sourcePicture.getHeight()));
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton48ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
@@ -1854,6 +2033,129 @@ public class PictureEditor extends javax.swing.JFrame {
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton35ActionPerformed
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        Picture Image = new Picture(x, y);
+        Image.copy(picObj, 0, 0, x, y, 0, 0);
+        double filter[][] = {{-0.075, -0.125, -0.075},
+        {-0.125, 2.0, -0.125},
+        {-0.075, -0.125, -0.075}};
+        for (int v = 1; v <= y - 2; v++) {
+            for (int u = 1; u <= x - 2; u++) {
+                double sumRed = 0, sumGreen = 0, sumBlue = 0;
+                for (int j = -1; j <= 1; j++) {
+                    for (int i = -1; i <= 1; i++) {
+                        double c = filter[j + 1][i + 1];
+                        int red = Image.getPixel(u + i, v + j).getRed();
+                        sumRed += red * c;
+                        int green = Image.getPixel(u + i, v + j).getGreen();
+                        sumGreen += green * c;
+                        int blue = Image.getPixel(u + i, v + j).getBlue();
+                        sumBlue += blue * c;
+
+                    }
+                }
+                int Red = (int) Math.min(255, Math.max(0, sumRed));
+                int Green = (int) Math.min(255, Math.max(0, sumGreen));
+                int Blue = (int) Math.min(255, Math.max(0, sumBlue));
+                picObj.getPixel(u, v).setColor(new Color(Red, Green, Blue));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton35ActionPerformed
+
+    private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        Picture copy = new Picture(x, y);
+        copy.copy(picObj, 0, 0, x, y, 0, 0);
+        int Red[] = new int[9];
+        int Green[] = new int[9];
+        int Blue[] = new int[9];
+        for (int v = 1; v <= y - 2; v++) {
+            for (int u = 1; u <= x - 2; u++) {
+                int k = 0;
+                for (int j = -1; j <= 1; j++) {
+                    for (int i = -1; i <= 1; i++) {
+                        Red[k] = copy.getPixel(u + i, v + j).getRed();
+                        Green[k] = copy.getPixel(u + i, v + j).getGreen();
+                        Blue[k] = copy.getPixel(u + i, v + j).getBlue();
+                        k++;
+                    }
+                }
+
+                Arrays.sort(Red);
+                Arrays.sort(Green);
+                Arrays.sort(Blue);
+                picObj.getPixel(u, v).setColor(new Color(Red[4], Green[4], Blue[4]));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton36ActionPerformed
+
+    private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        Picture copy = new Picture(x, y);
+        copy.copy(picObj, 0, 0, x, y, 0, 0);
+        int Weight[] = {1, 2, 1, 2, 3, 2, 1, 2, 1};
+        int sumW = 0;
+        for (int i = 0; i < Weight.length; i++) {
+            sumW += Weight[i];
+        }
+        int Red[] = new int[9];
+        int Green[] = new int[9];
+        int Blue[] = new int[9];
+        int Redw[] = new int[sumW];
+        int Greenw[] = new int[sumW];
+        int Bluew[] = new int[sumW];
+
+        for (int v = 1; v <= y - 2; v++) {
+            for (int u = 1; u <= x - 2; u++) {
+                int k = 0;
+                for (int j = -1; j <= 1; j++) {
+                    for (int i = -1; i <= 1; i++) {
+                        Red[k] = copy.getPixel(u + i, v + j).getRed();
+                        Green[k] = copy.getPixel(u + i, v + j).getGreen();
+                        Blue[k] = copy.getPixel(u + i, v + j).getBlue();
+                        k++;
+                    }
+                }
+                int time;
+                int red;
+                int green;
+                int blue;
+                int counter = 0;
+                for (int i = 0; i < Weight.length; i++) {
+                    time = Weight[i];
+                    red = Red[i];
+                    green = Green[i];
+                    blue = Blue[i];
+                    for (int j = 0; j < time; j++) {
+                        Redw[counter] = red;
+                        Greenw[counter] = green;
+                        Bluew[counter] = blue;
+                        counter++;
+                    }
+
+                }
+
+                Arrays.sort(Redw);
+                Arrays.sort(Greenw);
+                Arrays.sort(Bluew);
+                picObj.getPixel(u, v).setColor(new Color(Redw[Redw.length / 2], Greenw[Greenw.length / 2], Bluew[Bluew.length / 2]));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton37ActionPerformed
 
     /**
      * @param args the command line arguments
