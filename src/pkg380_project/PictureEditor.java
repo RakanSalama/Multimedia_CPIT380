@@ -8,6 +8,8 @@ package pkg380_project;
 import cpit380practice.*;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
@@ -1229,7 +1231,42 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton50ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        // TODO add your handling code here:
+        Image img = (picObj.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+        BufferedImage rgbImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+        BufferedImage hsvImage = new BufferedImage(rgbImage.getWidth(), rgbImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+
+        for (int x = 0; x < rgbImage.getWidth(); x++) {
+            for (int y = 0; y < rgbImage.getHeight(); y++) {
+                int rgb = rgbImage.getRGB(x, y);
+                int r = (rgb >> 16) & 0xFF;
+                int g = (rgb >> 8) & 0xFF;
+                int b = rgb & 0xFF;
+                int max = Math.max(r, Math.max(g, b));
+                int min = Math.min(r, Math.min(g, b));
+                float h = 0, s = 0, v = max / 255f;
+
+                int delta = max - min;
+                if (max != 0) {
+                    s = delta / (float) max;
+                }
+                if (delta != 0) {
+                    if (r == max) {
+                        h = (g - b) / (float) delta;
+                    } else if (g == max) {
+                        h = 2 + (b - r) / (float) delta;
+                    } else {
+                        h = 4 + (r - g) / (float) delta;
+                    }
+                    h /= 6;
+                    if (h < 0) {
+                        h++;
+                    }
+                }
+                int hsv = ((int) (h * 255) << 16) | ((int) (s * 255) << 8) | (int) (v * 255);
+                hsvImage.setRGB(x, y, hsv);
+            }
+        }
+
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1731,7 +1768,58 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton44ActionPerformed
 
     private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
-        // TODO add your handling code here:
+        JFrame parent = new JFrame();
+        JOptionPane.showMessageDialog(parent, "Please click on two points in the image");
+        jLabel1.addMouseListener(new MouseAdapter() {
+            int numOfClicks = 0;
+            int x1;
+            int x2;
+            int y1;
+            int y2;
+
+            public void mouseClicked(MouseEvent e) {
+                numOfClicks++;
+                if (numOfClicks == 1) {
+                    x1 = e.getX();
+                    y1 = e.getY();
+
+                } else if (numOfClicks == 2) {
+                    x2 = e.getX();
+                    y2 = e.getY();
+                    // call the crop method with both cordinates.
+
+                    double W = (picObj.getWidth() * 1.00 / jLabel1.getWidth());
+                    double H = (picObj.getHeight() * 1.00 / jLabel1.getHeight());
+
+                    x1 = (int) (W * x1);
+                    x2 = (int) (W * x2);
+                    y1 = (int) (H * y1);
+                    y2 = (int) (H * y2);
+
+                    Picture newPic = new Picture(picObj.getWidth(), picObj.getHeight());
+
+                    Pixel sourcePixel;
+                    Pixel targetPixel;
+
+                    for (int i = x1; i < x2; i++) {
+                        for (int j = y1; j < y2; j++) {
+                            sourcePixel = picObj.getPixel(i, j);
+                            targetPixel = newPic.getPixel(i, j);
+                            targetPixel.setColor(sourcePixel.getColor());
+                        }
+
+                    }
+                    picObj = newPic;
+                    numOfClicks = 0;
+                    jLabel1.removeMouseListener(this);
+                    Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+                    jLabel2.setText("");
+                    jLabel2.setIcon(new ImageIcon(img));
+                }
+            }
+        });
+
+
     }//GEN-LAST:event_jButton46ActionPerformed
 
     private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton48ActionPerformed
