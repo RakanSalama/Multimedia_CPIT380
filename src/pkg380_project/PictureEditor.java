@@ -1234,7 +1234,6 @@ public class PictureEditor extends javax.swing.JFrame {
         Image img = (picObj.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
         BufferedImage rgbImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
         BufferedImage hsvImage = new BufferedImage(rgbImage.getWidth(), rgbImage.getHeight(), BufferedImage.TYPE_INT_RGB);
-
         for (int x = 0; x < rgbImage.getWidth(); x++) {
             for (int y = 0; y < rgbImage.getHeight(); y++) {
                 int rgb = rgbImage.getRGB(x, y);
@@ -1265,6 +1264,15 @@ public class PictureEditor extends javax.swing.JFrame {
                 int hsv = ((int) (h * 255) << 16) | ((int) (s * 255) << 8) | (int) (v * 255);
                 hsvImage.setRGB(x, y, hsv);
             }
+        }
+        Graphics2D bGr = hsvImage.createGraphics();
+        bGr.drawImage(img, 0, 0, null);
+        bGr.dispose();
+        File outputfile = new File("Tmp\\HSV.png");
+        try {
+            ImageIO.write(hsvImage, "png", outputfile);
+        } catch (IOException ex) {
+            Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton23ActionPerformed
