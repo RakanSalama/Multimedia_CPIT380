@@ -133,11 +133,8 @@ public class PictureEditor extends javax.swing.JFrame {
         jButton47 = new javax.swing.JButton();
         jButton48 = new javax.swing.JButton();
         jButton49 = new javax.swing.JButton();
-        jButton50 = new javax.swing.JButton();
         jButton51 = new javax.swing.JButton();
         jButton52 = new javax.swing.JButton();
-        jButton53 = new javax.swing.JButton();
-        jButton54 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -907,13 +904,6 @@ public class PictureEditor extends javax.swing.JFrame {
             }
         });
 
-        jButton50.setText("Automatic detection of red eye and fix it");
-        jButton50.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton50ActionPerformed(evt);
-            }
-        });
-
         jButton51.setText("Background subtraction");
 
         jButton52.setText("edge detction");
@@ -922,10 +912,6 @@ public class PictureEditor extends javax.swing.JFrame {
                 jButton52ActionPerformed(evt);
             }
         });
-
-        jButton53.setText("Compare two Images");
-
-        jButton54.setText("Object Detection");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Top To Bottom", "Left to Right", "Marge" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -945,10 +931,7 @@ public class PictureEditor extends javax.swing.JFrame {
                     .addComponent(jButton47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton48, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton49, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton51, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton53, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -972,18 +955,12 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton49)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton50)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton51)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton52)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton53)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton54)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel11, "card9");
@@ -1250,10 +1227,6 @@ public class PictureEditor extends javax.swing.JFrame {
     private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton40ActionPerformed
-
-    private void jButton50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton50ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton50ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         //hsv
@@ -1850,7 +1823,7 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton46ActionPerformed
 
     private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton48ActionPerformed
- 
+
     }//GEN-LAST:event_jButton48ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
@@ -1939,7 +1912,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 targetPixel1.setColor(tmpc.getColor());
             }
         }
-        picObj= TargetPicture1;
+        picObj = TargetPicture1;
         Image img1 = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img1);
         jLabel2.setIcon(icon);
@@ -2012,10 +1985,63 @@ public class PictureEditor extends javax.swing.JFrame {
         try {
             // Top to bottom
             if (jComboBox2.getSelectedIndex() == 0) {
+                Pixel topPixel = null;
+                Pixel bottomPixel = null;
+                double topAverage = 0.0;
+                double bottomAverage = 0.0;
+                int endY = picObj.getHeight() - 1;
 
+                for (int y = 0; y < endY; y++) {
+
+                    // loop through the x values from 0 to width
+                    for (int x = 0; x < picObj.getWidth(); x++) {
+
+                        // get the top and bottom pixels
+                        topPixel = picObj.getPixel(x, y);
+                        bottomPixel = picObj.getPixel(x, y + 1);
+
+                        // get the color averages for the two pixels
+                        topAverage = topPixel.getAverage();
+                        bottomAverage = bottomPixel.getAverage();
+
+                        if (Math.abs(topAverage - bottomAverage) < Integer.valueOf(size)) {
+                            topPixel.setColor(Color.WHITE);
+                            // else set the color to black
+                        } else {
+                            topPixel.setColor(Color.BLACK);
+                        }
+                    }
+                }
             } // left to right
             else if (jComboBox2.getSelectedIndex() == 1) {
-                int amount = Integer.parseInt(size);
+                Pixel LeftPixel = null;
+                Pixel RightPixel = null;
+                double LeftAverage = 0.0;
+                double RightAverage = 0.0;
+
+                for (int y = 0; y < picObj.getHeight(); y++) {
+
+                    // loop through the x values from 0 to width
+                    for (int x = 0; x < picObj.getWidth() - 1; x++) {
+
+                        // get the top and bottom pixels
+                        LeftPixel = picObj.getPixel(x, y);
+                        RightPixel = picObj.getPixel(x + 1, y);
+
+                        // get the color averages for the two pixels
+                        LeftAverage = LeftPixel.getAverage();
+                        RightAverage = RightPixel.getAverage();
+
+                        if (Math.abs(LeftAverage - RightAverage) < Integer.valueOf(size)) {
+                            LeftPixel.setColor(Color.WHITE);
+                            // else set the color to black
+                        } else {
+                            LeftPixel.setColor(Color.BLACK);
+                        }
+                    }
+                }
+            } // Merge
+            else if (jComboBox2.getSelectedIndex() == 2) {
                 Pixel topPixel = null;
                 Pixel bottomPixel = null;
                 Pixel leftPixel = null;
@@ -2046,7 +2072,7 @@ public class PictureEditor extends javax.swing.JFrame {
 
                         /* check if the absolute value of the difference
                  * is less than the amount */
-                        if ((Math.abs(topAverage - bottomAverage) < amount) || (Math.abs(rightAverage - leftAverage) < amount)) {
+                        if ((Math.abs(topAverage - bottomAverage) < Integer.valueOf(size)) || (Math.abs(rightAverage - leftAverage) < Integer.valueOf(size))) {
                             topPixel.setColor(Color.WHITE);
                             // else set the color to black
                         } else { // edge is detected.
@@ -2054,17 +2080,16 @@ public class PictureEditor extends javax.swing.JFrame {
                         }
                     }
                 }
-                Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
-                jLabel2.setText("");
-                jLabel2.setIcon(new ImageIcon(img));
 
-            } // Merge
-            else if (jComboBox2.getSelectedIndex() == 2) {
             }
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Please put integer only", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        picObj.show();
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        jLabel2.setText("");
+        jLabel2.setIcon(new ImageIcon(img));
 
     }//GEN-LAST:event_jButton52ActionPerformed
 
@@ -2158,11 +2183,8 @@ public class PictureEditor extends javax.swing.JFrame {
     private javax.swing.JButton jButton48;
     private javax.swing.JButton jButton49;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton50;
     private javax.swing.JButton jButton51;
     private javax.swing.JButton jButton52;
-    private javax.swing.JButton jButton53;
-    private javax.swing.JButton jButton54;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
