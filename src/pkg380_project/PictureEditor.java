@@ -1782,6 +1782,7 @@ public class PictureEditor extends javax.swing.JFrame {
             int y1;
             int y2;
 
+            @Override
             public void mouseClicked(MouseEvent e) {
                 numOfClicks++;
                 if (numOfClicks == 1) {
