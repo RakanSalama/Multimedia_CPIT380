@@ -2696,14 +2696,14 @@ public class PictureEditor extends javax.swing.JFrame {
         Pixel newPixel = null;
         Picture first = new Picture("Tmp\\m.png");
         Picture secend = new Picture("Tmp\\wm.png");
-
+         String size = JOptionPane.showInputDialog(null, "Please Enter the threshold value: ");
         for (int x = 0; x < first.getWidth(); x++) {
             for (int y = 0; y < first.getHeight(); y++) {
 
                 currPixel = first.getPixel(x, y);
                 oldPixel = secend.getPixel(x, y);
 
-                if (currPixel.colorDistance(oldPixel.getColor()) < 100) {
+                if (currPixel.colorDistance(oldPixel.getColor()) < Integer.valueOf(size)) {
                     newPixel = picObj.getPixel(x, y);
                     currPixel.setColor(newPixel.getColor());
                 }
