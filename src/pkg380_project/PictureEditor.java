@@ -797,6 +797,11 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel13.setText("Computing Contrast");
 
         jButton38.setText("Computing Contrast");
+        jButton38.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton38ActionPerformed(evt);
+            }
+        });
 
         jButton40.setText("Automatic adjustment of contrast");
         jButton40.addActionListener(new java.awt.event.ActionListener() {
@@ -2474,6 +2479,25 @@ public class PictureEditor extends javax.swing.JFrame {
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton37ActionPerformed
+
+    private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
+        //constrant
+        int Contrast;
+        double max_val = 0;
+        double min_val = Integer.MAX_VALUE;
+        Pixel[] pixels = picObj.getPixels();
+        for (Pixel pixel : pixels) {
+            Contrast = (int) ((pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3);
+            if (Contrast > max_val) {
+                max_val = Contrast;
+            }
+            if (Contrast < min_val) {
+                min_val = Contrast;
+            }
+        }
+        double contrast = ((max_val - min_val) / (max_val + min_val));
+        JOptionPane.showMessageDialog(null, "The level of Contrast is = " + contrast);
+    }//GEN-LAST:event_jButton38ActionPerformed
 
     /**
      * @param args the command line arguments
