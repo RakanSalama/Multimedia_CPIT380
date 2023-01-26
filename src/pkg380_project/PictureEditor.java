@@ -76,7 +76,6 @@ public class PictureEditor extends javax.swing.JFrame {
         jButton21 = new javax.swing.JButton();
         jButton22 = new javax.swing.JButton();
         jButton23 = new javax.swing.JButton();
-        jCheckBox4 = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jButton24 = new javax.swing.JButton();
@@ -394,8 +393,6 @@ public class PictureEditor extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox4.setText("Make thresholding number from median of histogram");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -403,17 +400,13 @@ public class PictureEditor extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
                     .addComponent(jButton21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(116, Short.MAX_VALUE)
-                .addComponent(jCheckBox4)
-                .addGap(105, 105, 105))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,9 +419,7 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jCheckBox4)
-                .addGap(19, 19, 19))
+                .addGap(61, 61, 61))
         );
 
         jPanel1.add(jPanel4, "card2");
@@ -742,8 +733,18 @@ public class PictureEditor extends javax.swing.JFrame {
         jLabel8.setText("Computing Histograms");
 
         jButton27.setText("Histogram for Red");
+        jButton27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton27ActionPerformed(evt);
+            }
+        });
 
         jButton28.setText("Histogram for Blue");
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton28ActionPerformed(evt);
+            }
+        });
 
         jButton29.setText("Histogram for Green");
         jButton29.addActionListener(new java.awt.event.ActionListener() {
@@ -753,8 +754,18 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton30.setText("Histogram for Gary Scale");
+        jButton30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton30ActionPerformed(evt);
+            }
+        });
 
         jButton45.setText("Histogram for All above");
+        jButton45.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton45ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -934,6 +945,11 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton51.setText("Background subtraction");
+        jButton51.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton51ActionPerformed(evt);
+            }
+        });
 
         jButton52.setText("edge detction");
         jButton52.addActionListener(new java.awt.event.ActionListener() {
@@ -1174,7 +1190,44 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
-        // TODO add your handling code here:
+        Pixel_LL[][] Histograms = new Pixel_LL[1][256]; // [0] red, [1] green [2] blue
+
+        int maxG = 0;
+        int maxG_index = 0;
+
+        for (int i = 0; i < 256; i++) { // Inisilazing all the arrays
+            Histograms[0][i] = new Pixel_LL();
+
+        }
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int intensityG = picObj.getPixel(i, j).getGreen();
+
+                Histograms[0][intensityG].addPixel(new PixelLinkedList_node(i, j));
+
+                if (Histograms[0][intensityG].getTotal() > maxG) {
+                    maxG = Histograms[0][intensityG].getTotal();
+                    maxG_index = intensityG;
+                }
+
+            }
+        }
+
+        int maxHeight = 0;
+        for (int i = 0; i < Histograms[0].length; i++) {
+            if (Histograms[0][i].getTotal() > maxHeight) {
+                maxHeight = Histograms[0][i].getTotal();
+            }
+        }
+        Picture histogram = new Picture(256, 256, Color.white);
+        Color c = Color.GREEN;
+        for (int i = 0; i < 256; i++) {
+            int max = (int) (Histograms[0][i].getTotal() * 256 / maxHeight);
+            for (int j = 255; j >= (256 - max); j--) {
+                histogram.getPixel(i, j).setColor(c);
+            }
+        }
+        histogram.scaleUp(2).show();
     }//GEN-LAST:event_jButton29ActionPerformed
 
     private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
@@ -2499,6 +2552,169 @@ public class PictureEditor extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "The level of Contrast is = " + contrast);
     }//GEN-LAST:event_jButton38ActionPerformed
 
+
+    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
+        Pixel_LL[][] Histograms = new Pixel_LL[1][256];
+
+        int maxR = 0;
+
+        for (int i = 0; i < 256; i++) {
+            Histograms[0][i] = new Pixel_LL();
+
+        }
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int intensityR = picObj.getPixel(i, j).getRed();
+
+                Histograms[0][intensityR].addPixel(new PixelLinkedList_node(i, j));
+
+                if (Histograms[0][intensityR].getTotal() > maxR) {
+                    maxR = Histograms[0][intensityR].getTotal();
+
+                }
+
+            }
+        }
+
+        int maxHeight = 0;
+        for (int i = 0; i < Histograms[0].length; i++) {
+            if (Histograms[0][i].getTotal() > maxHeight) {
+                maxHeight = Histograms[0][i].getTotal();
+            }
+        }
+        Picture histogram = new Picture(256, 256, Color.white);
+        Color c = Color.RED;
+        for (int i = 0; i < 256; i++) {
+            int max = (int) (Histograms[0][i].getTotal() * 256 / maxHeight);
+            for (int j = 255; j >= (256 - max); j--) {
+                histogram.getPixel(i, j).setColor(c);
+            }
+        }
+        histogram.scaleUp(2).show();
+    }//GEN-LAST:event_jButton27ActionPerformed
+
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+        Pixel_LL[][] Histograms = new Pixel_LL[1][256];
+
+        int maxB = 0;
+
+        for (int i = 0; i < 256; i++) { // Inisilazing all the arrays
+            Histograms[0][i] = new Pixel_LL();
+
+        }
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int intensityB = picObj.getPixel(i, j).getBlue();
+
+                Histograms[0][intensityB].addPixel(new PixelLinkedList_node(i, j));
+
+                if (Histograms[0][intensityB].getTotal() > maxB) {
+                    maxB = Histograms[0][intensityB].getTotal();
+
+                }
+
+            }
+        }
+
+        int maxHeight = 0;
+        for (int i = 0; i < Histograms[0].length; i++) {
+            if (Histograms[0][i].getTotal() > maxHeight) {
+                maxHeight = Histograms[0][i].getTotal();
+            }
+        }
+        Picture histogram = new Picture(256, 256, Color.white);
+        Color c = Color.BLUE;
+        for (int i = 0; i < 256; i++) {
+            int max = (int) (Histograms[0][i].getTotal() * 256 / maxHeight);
+            for (int j = 255; j >= (256 - max); j--) {
+                histogram.getPixel(i, j).setColor(c);
+            }
+        }
+        histogram.scaleUp(2).show();
+    }//GEN-LAST:event_jButton28ActionPerformed
+
+    private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
+        Picture tmp = picObj;
+        Pixel[] pixels = picObj.getPixels();
+        int avg;
+        for (Pixel pixel1 : pixels) {
+            avg = (int) ((pixel1.getRed() + pixel1.getGreen() + pixel1.getBlue()) / 3);
+            Color grayColor = new Color(avg, avg, avg);
+            pixel1.setColor(grayColor);
+        }
+
+        Pixel_LL[][] Histograms = new Pixel_LL[1][256];
+
+        int maxGS = 0;
+
+        for (int i = 0; i < 256; i++) {
+            Histograms[0][i] = new Pixel_LL();
+
+        }
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int intensityGS = picObj.getPixel(i, j).getBlue();
+
+                Histograms[0][intensityGS].addPixel(new PixelLinkedList_node(i, j));
+
+                if (Histograms[0][intensityGS].getTotal() > maxGS) {
+                    maxGS = Histograms[0][intensityGS].getTotal();
+
+                }
+
+            }
+        }
+
+        int maxHeight = 0;
+        for (int i = 0; i < Histograms[0].length; i++) {
+            if (Histograms[0][i].getTotal() > maxHeight) {
+                maxHeight = Histograms[0][i].getTotal();
+            }
+        }
+        Picture histogram = new Picture(256, 256, Color.white);
+        Color c = Color.GRAY;
+        for (int i = 0; i < 256; i++) {
+            int max = (int) (Histograms[0][i].getTotal() * 256 / maxHeight);
+            for (int j = 255; j >= (256 - max); j--) {
+                histogram.getPixel(i, j).setColor(c);
+            }
+        }
+        histogram.scaleUp(2).show();
+        picObj = tmp;
+    }//GEN-LAST:event_jButton30ActionPerformed
+
+    private void jButton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton45ActionPerformed
+        jButton27ActionPerformed(evt);
+        jButton28ActionPerformed(evt);
+        jButton29ActionPerformed(evt);
+        jButton30ActionPerformed(evt);
+    }//GEN-LAST:event_jButton45ActionPerformed
+
+    private void jButton51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton51ActionPerformed
+        Pixel currPixel = null;
+        Pixel oldPixel = null;
+        Pixel newPixel = null;
+        Picture first = new Picture("Tmp\\m.png");
+        Picture secend = new Picture("Tmp\\wm.png");
+
+        for (int x = 0; x < first.getWidth(); x++) {
+            for (int y = 0; y < first.getHeight(); y++) {
+
+                currPixel = first.getPixel(x, y);
+                oldPixel = secend.getPixel(x, y);
+
+                if (currPixel.colorDistance(oldPixel.getColor()) < 100) {
+                    newPixel = picObj.getPixel(x, y);
+                    currPixel.setColor(newPixel.getColor());
+                }
+            }
+        }
+        picObj = first;
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }//GEN-LAST:event_jButton51ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2598,7 +2814,6 @@ public class PictureEditor extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;

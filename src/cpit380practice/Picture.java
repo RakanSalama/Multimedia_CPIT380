@@ -1374,8 +1374,7 @@ public class Picture extends SimplePicture {
         }
     }
 
-    public void swapBackground(Picture oldBackground,
-            Picture newBackground) {
+    public void swapBackground(Picture oldBackground,Picture newBackground) {
         Pixel currPixel = null;
         Pixel oldPixel = null;
         Pixel newPixel = null;
