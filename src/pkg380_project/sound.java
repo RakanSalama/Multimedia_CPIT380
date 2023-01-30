@@ -5,11 +5,18 @@
  */
 package pkg380_project;
 
+import cpit380practice.FileChooser;
+import cpit380practice.Sound;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Nero
  */
 public class sound extends javax.swing.JFrame {
+
+    Sound currentSound;
+    String pathName;
 
     /**
      * Creates new form sound
@@ -54,8 +61,18 @@ public class sound extends javax.swing.JFrame {
         jLabel1.setText("Files");
 
         jButton2.setText("Reset");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Browse");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Save");
 
@@ -92,6 +109,11 @@ public class sound extends javax.swing.JFrame {
         jButton3.setText("Splicing");
 
         jButton5.setText("Clip");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Reversing");
 
@@ -211,6 +233,43 @@ public class sound extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String first = JOptionPane.showInputDialog(null, "Enter the start Index: ");
+        String last = JOptionPane.showInputDialog(null, "Enter the end Index: ");
+        int start = Integer.parseInt(first);
+        int end = Integer.parseInt(last);
+        // calculate the number of samples in the clip
+        int lengthInSamples = end - start + 1;
+        Sound target = new Sound(lengthInSamples); // hold clip
+        int value = 0;        // holds the current sample value
+        int targetIndex = 0;  // index in target sound
+
+        // copy from start to end from source into target
+        for (int i = start; i <= end; i++, targetIndex++) {
+            value = currentSound.getSampleValueAt(i);
+            target.setSampleValueAt(targetIndex, value);
+        }
+        currentSound=target;
+        System.out.println(currentSound.getLength());
+
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        try {
+            pathName = FileChooser.pickAFile();
+            currentSound = new Sound(pathName);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Some error happend:" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        currentSound = new Sound(pathName);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
