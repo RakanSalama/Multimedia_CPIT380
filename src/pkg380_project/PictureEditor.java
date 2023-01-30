@@ -1090,6 +1090,11 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton11.setText("Back ");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2081,15 +2086,18 @@ public class PictureEditor extends javax.swing.JFrame {
             Color grayColor = new Color(avg, avg, avg);
             pixel1.setColor(grayColor);
         }
-        int avar;
+        int AVG;
+        Picture target = new Picture(picObj.getWidth(), picObj.getHeight());
         for (int x = 0; x < picObj.getWidth(); x++) {
             for (int y = 0; y < picObj.getHeight(); y++) {
-                avar = (int) Math.abs(picObj.getPixel(x, y).getAverage());
-                if (avar < Integer.valueOf(threshold)) {
-                    picObj.getPixel(x, y).setColor(Color.BLACK);
+                AVG = (int) Math.abs(picObj.getPixel(x, y).getAverage());
+                if (AVG < Integer.parseInt(threshold)) {
+                    target.getPixel(x, y).setColor(Color.BLACK);
                 }
             }
         }
+
+        picObj = target;
         Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
@@ -2696,7 +2704,7 @@ public class PictureEditor extends javax.swing.JFrame {
         Pixel newPixel = null;
         Picture first = new Picture("Tmp\\m.png");
         Picture secend = new Picture("Tmp\\wm.png");
-         String size = JOptionPane.showInputDialog(null, "Please Enter the threshold value: ");
+        String size = JOptionPane.showInputDialog(null, "Please Enter the threshold value: ");
         for (int x = 0; x < first.getWidth(); x++) {
             for (int y = 0; y < first.getHeight(); y++) {
 
@@ -2714,6 +2722,13 @@ public class PictureEditor extends javax.swing.JFrame {
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton51ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        this.toBack();
+        setVisible(false);
+        new menu().toFront();
+        new menu().setState(java.awt.Frame.NORMAL);
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
