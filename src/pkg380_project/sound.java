@@ -7,6 +7,10 @@ package pkg380_project;
 
 import cpit380practice.FileChooser;
 import cpit380practice.Sound;
+import cpit380practice.SoundException;
+import cpit380practice.SoundSample;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -48,6 +52,8 @@ public class sound extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jButton8 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
@@ -107,6 +113,11 @@ public class sound extends javax.swing.JFrame {
         jLabel2.setText("Methods");
 
         jButton3.setText("Splicing");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Clip");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -116,33 +127,67 @@ public class sound extends javax.swing.JFrame {
         });
 
         jButton6.setText("Reversing");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton10.setText("Blending");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setText("Spread and Squeeze");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jButton12.setText("Applay Filter");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simple Average", "Weighted Average", "Max", "Min", "Median" }));
+
+        jButton8.setText("Mirror");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Front to Back", "Back to Front" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBox1, 0, 196, Short.MAX_VALUE)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,6 +208,10 @@ public class sound extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton12)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton8)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -171,6 +220,11 @@ public class sound extends javax.swing.JFrame {
         jLabel3.setText("Play ");
 
         jButton9.setText("Play");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jSlider1.setMajorTickSpacing(10);
         jSlider1.setMinorTickSpacing(1);
@@ -181,13 +235,13 @@ public class sound extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -235,23 +289,27 @@ public class sound extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        String first = JOptionPane.showInputDialog(null, "Enter the start Index: ");
-        String last = JOptionPane.showInputDialog(null, "Enter the end Index: ");
+
+        String first = JOptionPane.showInputDialog(null, "Enter the start Index the lowest index is 0: ");
+        String last = JOptionPane.showInputDialog(null, "Enter the end Index the max value is " + (currentSound.getLengthInFrames() - 1) + ": ");
         int start = Integer.parseInt(first);
         int end = Integer.parseInt(last);
-        // calculate the number of samples in the clip
+        if (start < 0 || end >= currentSound.getLengthInFrames()) {
+            JOptionPane.showMessageDialog(null, "wrong input the start must equal 0 or above and the end must be lower than " + currentSound.getLengthInFrames());
+            first = JOptionPane.showInputDialog(null, "Enter the start Index the lowest index is 0: ");
+            last = JOptionPane.showInputDialog(null, "Enter the end Index the max value is " + (currentSound.getLengthInFrames() - 1) + ": ");
+        }
+        start = Integer.parseInt(first);
+        end = Integer.parseInt(last);
         int lengthInSamples = end - start + 1;
-        Sound target = new Sound(lengthInSamples); // hold clip
-        int value = 0;        // holds the current sample value
-        int targetIndex = 0;  // index in target sound
-
-        // copy from start to end from source into target
+        Sound target = new Sound(lengthInSamples);
+        int value = 0;
+        int targetIndex = 0;
         for (int i = start; i <= end; i++, targetIndex++) {
             value = currentSound.getSampleValueAt(i);
             target.setSampleValueAt(targetIndex, value);
         }
-        currentSound=target;
-        System.out.println(currentSound.getLength());
+        currentSound = target;
 
 
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -261,7 +319,7 @@ public class sound extends javax.swing.JFrame {
         try {
             pathName = FileChooser.pickAFile();
             currentSound = new Sound(pathName);
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Some error happend:" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -270,6 +328,131 @@ public class sound extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         currentSound = new Sound(pathName);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        SoundSample[] sampleArray = currentSound.getSamples();
+        /*        int value = 0;
+        for (SoundSample sample : sampleArray) {
+        value = sample.getValue();     // get the value
+        sample.setValue(value /2);    // set the value
+        }*/
+        int jv=jSlider1.getValue();
+                for (int i = 0; i < sampleArray.length; i++) {
+        
+        currentSound.setSampleValueAt(i, (int)(currentSound.getSampleValueAt(i) * (jv / 100.00)));
+        
+        }
+        currentSound.play();
+        SoundSample[] sampleArray1 = currentSound.getSamples();
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String first = JOptionPane.showInputDialog(null, "Enter silence sec:");
+        while (true) {
+            int zone = Integer.parseInt(first);
+            Sound sound1 = new Sound(currentSound);
+            Sound sound2 = new Sound(FileChooser.pickAFile());
+            int targetIndex = 0;
+            Sound s = new Sound((currentSound.getLength() + sound2.getLength()) + (int) (currentSound.getSamplingRate() * (Math.ceil(zone))));
+            for (int i = 0; i < sound1.getLength(); i++, targetIndex++) {
+                s.setSampleValueAt(targetIndex, currentSound.getSampleValueAt(i));
+            }
+            for (int i = 0; i < (int) (currentSound.getSamplingRate() * zone); i++, targetIndex++) {
+                s.setSampleValueAt(targetIndex, 0);
+            }
+            for (int i = 0; i < sound2.getLength(); i++, targetIndex++) {
+                s.setSampleValueAt(targetIndex, sound2.getSampleValueAt(i));
+            }
+            currentSound = s;
+            int reply = JOptionPane.showConfirmDialog(null, "To splice another sound Press yes", null, JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                continue;
+            } else {
+                break;
+            }
+        }
+
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        Sound orig = new Sound(pathName);
+        int length = currentSound.getLength();
+        for (int targetIndex = 0, sourceIndex = length - 1;
+                targetIndex < length && sourceIndex > 0;
+                targetIndex++, sourceIndex--) {
+            currentSound.setSampleValueAt(targetIndex, orig.getSampleValueAt(sourceIndex));
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+
+        if (jComboBox2.getSelectedIndex() == 0) {
+            //FtoB
+            int length = currentSound.getLength(); // save the length
+            int mirrorPoint = length / 2; // mirror around this
+            int value = 0; // hold the current value
+
+            // loop from 0 to mirrorPoint
+            for (int i = 0; i < mirrorPoint; i++) {
+                value = currentSound.getSampleValueAt(i);
+                currentSound.setSampleValueAt(length - 1 - i, value);
+            }
+        } else if (jComboBox2.getSelectedIndex() == 1) {
+            //BtoF
+            int length = currentSound.getLength(); // save the length
+            int mirrorPoint = length / 2; // mirror around this
+            int value = 0; // hold the current value
+
+            // loop from 0 to mirrorPoint
+            for (int i = 0; i < mirrorPoint; i++) {
+                value = currentSound.getSampleValueAt(length - 1 - i);
+                currentSound.setSampleValueAt(i, value);
+            }
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        while (true) {
+            Sound sound1 = new Sound(FileChooser.pickAFile());
+            for (int i = 0; i < currentSound.getLength() - 1; i++) {
+                if (i >= sound1.getLengthInFrames()) {
+                    currentSound.setSampleValueAt(i, currentSound.getSampleValueAt(i));
+                } else {
+                    currentSound.setSampleValueAt(i, currentSound.getSampleValueAt(i) + sound1.getSampleValueAt(i));
+                }
+            }
+            int reply = JOptionPane.showConfirmDialog(null, "To blend another sound Press yes", null, JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                continue;
+            } else {
+                break;
+            }
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        SoundSample[] sample = currentSound.getSamples();
+
+        Sound spreaded = new Sound((int) sample.length * 4);
+        for (double sourceIndex = 0, targetIndex = 0; targetIndex < spreaded.getLength(); sourceIndex += 0.25, targetIndex++) {
+            spreaded.setSampleValueAt((int) targetIndex, sample[((int) sourceIndex)].getValue());
+        }
+
+        SoundSample[] sampleSpreaded = spreaded.getSamples();
+        Sound squeezed = new Sound((int) sampleSpreaded.length / 8);
+        for (double sourceIndex = 0, targetIndex = 0; targetIndex < squeezed.getLength(); sourceIndex += 8, targetIndex++) {
+            squeezed.setSampleValueAt((int) targetIndex, sampleSpreaded[((int) sourceIndex)].getValue());
+        }
+        currentSound = squeezed;
+
+
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+
+
+    }//GEN-LAST:event_jButton12ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,8 +500,10 @@ public class sound extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
