@@ -1374,7 +1374,7 @@ public class Picture extends SimplePicture {
         }
     }
 
-    public void swapBackground(Picture oldBackground,Picture newBackground) {
+    public void swapBackground(Picture oldBackground, Picture newBackground) {
         Pixel currPixel = null;
         Pixel oldPixel = null;
         Pixel newPixel = null;
@@ -1406,8 +1406,8 @@ public class Picture extends SimplePicture {
      * @return the new picture
      */
     public Picture rotateLeft() {
-        Picture target = new Picture(this.getHeight(),
-                this.getWidth());
+
+        Picture target = new Picture(this.getHeight(), this.getWidth());
         Pixel sourcePixel = null;
         Pixel targetPixel = null;
 
@@ -1690,6 +1690,40 @@ public class Picture extends SimplePicture {
         }
     }
 
+    public void gg() {
+        int y = 530;
+        int x = 1290;
+        Pixel pixelY;
+        int[][] twoD_arr = new int[1700][5];
+        for (int i = 0; i < twoD_arr.length; i++) {
+            twoD_arr[i][0] = x;
+            twoD_arr[i][1] = y;
+            pixelY = this.getPixel(x, y);
+            twoD_arr[i][2] = pixelY.getRed();
+            twoD_arr[i][3] = pixelY.getGreen();
+            twoD_arr[i][4] = pixelY.getBlue();
+            
+            if (x == 1299) {
+                y++;
+                x = 1290;
+            } else {
+                x++;
+            }
+        }
+        
+        Color colortmp = null;
+        int counter =0;
+        for (int i = 0; i < twoD_arr.length; i++) {
+            pixelY = this.getPixel(twoD_arr[i][0], twoD_arr[i][1]);
+            colortmp=pixelY.getColor();
+            if ((colortmp.getBlue() ==0 ) && ((colortmp.getGreen() == 255) && (colortmp.getRed() == 252))) {
+                counter++;
+            }
+        }
+        double pr =((1700-counter)/1700.00)*100;
+        System.out.println(pr);
+    }
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String fileName = FileChooser.pickAFile();
@@ -1697,7 +1731,7 @@ public class Picture extends SimplePicture {
         System.out.println("enter 1 for left , 2 to right ,3 to reflect, 4 to blend");
         int chose = input.nextInt();
         if (chose == 1) {
-            rotateleft_023(picture);
+            picture.gg();
         } else if (chose == 2) {
             rotateRight_023(picture);
         } else if (chose == 3) {

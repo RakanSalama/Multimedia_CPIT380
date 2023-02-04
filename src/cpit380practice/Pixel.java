@@ -309,9 +309,7 @@ public class Pixel
    double redDistance = this.getRed() - testColor.getRed();
    double greenDistance = this.getGreen() - testColor.getGreen();
    double blueDistance = this.getBlue() - testColor.getBlue();
-   double distance = Math.sqrt(redDistance * redDistance + 
-                               greenDistance * greenDistance +
-                               blueDistance * blueDistance);
+   double distance = Math.sqrt(redDistance * redDistance + greenDistance * greenDistance + blueDistance * blueDistance);
    return distance;
  }
  
