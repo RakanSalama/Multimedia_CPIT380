@@ -5,6 +5,16 @@
  */
 package pkg380_project;
 
+import cpit380practice.FileChooser;
+import cpit380practice.FrameSequencer;
+import cpit380practice.Picture;
+import cpit380practice.Pixel;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Nero
@@ -27,21 +37,448 @@ public class video extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton12 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jButton7 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(450, 525));
+
+        jButton12.setText("Back");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jButton7.setText("Background Subtraction");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setText("Detecting A Violation");
+
+        jButton11.setText("Shot Boundary Detection");
+
+        jButton4.setText("Ticker Tape");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Top Left To Bottom Rghit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setText("Sine wave");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Crop And Move");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Sunset");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Top Rghit To Bottom Left");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setText("Edge Detection");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Dropped Ball");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Movie");
+
+        jLabel2.setText("The Duration In Secends :");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton12)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //take the time form the user 
+        int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+
+        int FPS = 30;
+        Picture p;
+        Graphics g;
+
+        FrameSequencer frameSequencer = new FrameSequencer("Movie");
+
+        //for each 1 SEC 30 FPS
+        for (int i = 0; i < FPS * time; i++) {
+            p = new Picture(640, 480);
+            g = p.getGraphics();
+            g.setColor(Color.BLACK);
+            g.fillRect(Math.abs((i * 10) - 570), i * 7, 70, 70);
+
+            frameSequencer.addFrame(p);
+        }
+
+        frameSequencer.play(FPS);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        try {
+            int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+            String message = JOptionPane.showInputDialog("please enter your message");
+            int framesPerSec = 30;
+            Picture p = null;
+            Graphics g = null;
+            FrameSequencer frameSequencer = new FrameSequencer("Movie");
+            Font font = new Font("Arial", Font.BOLD, 24);
+            boolean right = true;
+            // loop for 2 seconds of animation
+            for (int j = 0, k = 0; j < framesPerSec * time; j++) {
+                // draw the string
+                p = new Picture(500, 400);
+                g = p.getGraphics();
+                g.setColor(Color.BLACK);
+                g.setFont(font);
+                if (right) {
+                    if (k * 10 > p.getWidth() - message.length() * 12) {
+                        right = false;
+                    }
+                } else {
+                    if (k < 1) {
+                        right = true;
+                    }
+                }
+                if (right) {
+                    g.drawString(message, k++ * 10, 200);
+                } else {
+                    g.drawString(message, k-- * 10, 200);
+                }
+                // add frame to sequencer
+                frameSequencer.addFrame(p);
+            }
+
+            // play the movie
+            frameSequencer.play(framesPerSec);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+
+        int FPS = 30;
+        Picture p;
+        Graphics g;
+
+        FrameSequencer frameSequencer = new FrameSequencer("Movie");
+
+        //for each 1 SEC 30 FPS
+        for (int i = 0; i < FPS * time; i++) {
+
+            p = new Picture(640, 480);
+            g = p.getGraphics();
+            g.setColor(Color.BLACK);
+            g.fillRect(i * 10, i * 7, 70, 70);
+
+            frameSequencer.addFrame(p);
+        }
+
+        frameSequencer.play(FPS);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+            int framesPerSec = 30;
+            Picture p = null;
+            Graphics g = null;
+            FrameSequencer frameSequencer = new FrameSequencer("Movie");
+
+            frameSequencer.setShown(true);
+            int distance = 150;
+            int height = 480;
+            int start = (height - 50) - distance;
+            for (int i = 0; i < framesPerSec * time; i++) {
+                p = new Picture(640, height);
+                g = p.getGraphics();
+                int y = (int) (Math.sin(30 + (i)) * distance) + start;
+                if (y > (height - 50 - 10)) {
+                    distance = distance / 2;
+                    start = (height - 50) - distance;
+                }
+                y = (int) (Math.sin(30 + (i)) * distance) + start;
+                g.setColor(Color.GRAY);
+                g.fillOval(i * 20, y, 50, 50);
+                // add frame to sequencer
+                frameSequencer.addFrame(p);
+            }
+            // play the movie
+            frameSequencer.play(framesPerSec);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try {
+            int duration = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+            String fName = FileChooser.pickAFile();
+            Picture pic = new Picture(fName);
+            // declare other variables
+            Picture target = null;   // targeted piece of pic
+            FrameSequencer frameSequencer
+                    = new FrameSequencer("Movie");
+            int framesPerSec = 30;
+            // loop creating the frames
+            for (int i = 0; i < framesPerSec * duration; i++) {
+                target = new Picture(640, 480);
+                target.copy(pic, 250, 170, 390, 300, i * 10, i * 5);
+                frameSequencer.addFrame(target);
+            }
+            // play the movie
+            frameSequencer.play(framesPerSec);
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try {
+            int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+            // load the pictures
+            JFileChooser fc = new JFileChooser("");
+            fc.showOpenDialog(null);
+            String foreground = fc.getSelectedFile().getAbsolutePath();
+            Picture foregroundPic = null;
+
+            fc.showOpenDialog(null);
+            String oldBG = fc.getSelectedFile().getAbsolutePath();
+            Picture oldBGPic = new Picture(oldBG);
+
+            fc.showOpenDialog(null);
+            String newBG = fc.getSelectedFile().getAbsolutePath();
+            Picture newBGPic = new Picture(newBG);
+
+            // declare other variables
+            FrameSequencer frameSequencer = new FrameSequencer("Movie_Edit");
+            int framesPerSec = 30;
+            frameSequencer.setShown(true);
+            // loop creating the frames
+            for (int i = 0; i < framesPerSec * time; i++) {
+                foregroundPic = new Picture(foreground);
+                foregroundPic.swapBackground(oldBGPic, newBGPic, i);
+                frameSequencer.addFrame(foregroundPic);
+            }
+
+            // play the movie
+            frameSequencer.play(framesPerSec);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        try {
+            int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+            JFileChooser fc = new JFileChooser("");
+            fc.showOpenDialog(null);
+            String fName = fc.getSelectedFile().getAbsolutePath();
+            Picture pic = new Picture(fName);
+
+            Picture copyPict = null;
+
+            FrameSequencer frameSequencer = new FrameSequencer("movie_Edit");
+            int framesPerSec = 30;
+
+            for (int i = 0; i < framesPerSec * time; i++) {
+                copyPict = new Picture(pic);
+                double topAverage = 0.0;
+                double bottomAverage = 0.0;
+
+                for (int x = 0; x < pic.getHeight() - 1; x++) {
+                    for (int y = 0; y < copyPict.getWidth(); y++) {
+                        Pixel topPixel = copyPict.getPixel(y, x);
+                        Pixel bottomPixel = copyPict.getPixel(y, x + 1);
+
+                        topAverage = (topPixel.getRed() + topPixel.getGreen() + topPixel.getBlue()) / 3.0;
+                        bottomAverage = (bottomPixel.getRed() + bottomPixel.getGreen() + bottomPixel.getBlue()) / 3.0;
+
+                        if (Math.abs(topAverage - bottomAverage) < (time * framesPerSec + 1) - i) {
+                            topPixel.setColor(Color.WHITE);
+                        } else {
+                            topPixel.setColor(Color.BLACK);
+                        }
+                    }
+                }
+
+                frameSequencer.addFrame(copyPict);
+            }
+
+            frameSequencer.play(framesPerSec);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+        int framesPerSec = 60;
+        Picture p = null;
+        Graphics g = null;
+        FrameSequencer frameSequencer = new FrameSequencer("C:\\intro-prog-java\\movies\\edge");
+        frameSequencer.setShown(true);
+        for (int i = 0; i < framesPerSec * time; i++) {
+            p = new Picture(640, 480);
+            g = p.getGraphics();
+            g.setColor(Color.RED);
+            g.drawLine(0, 160, 640, 160);
+            g.fillRect(i * 10, (215 + (int) (150 * -Math.abs(Math.sin(i * ((4 * 10) / 180.000))))), 50, 50);
+            frameSequencer.addFrame(p);
+        }
+        frameSequencer.play(framesPerSec);
+
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+        String fName = FileChooser.pickAFile();
+        Picture beachP = new Picture(fName);
+
+        FrameSequencer frameSequencer = new FrameSequencer("C:\\intro-prog-java\\movies\\edge");
+        int framesPerSec = 30;
+
+        frameSequencer.setShown(true);
+
+        // loop creating the frames
+        for (int i = 0; i < framesPerSec * time; i++) {
+            beachP.makeSunset(100 - i * time);
+            frameSequencer.addFrame(beachP);
+        }
+
+        // play the movie
+        frameSequencer.play(framesPerSec);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +516,21 @@ public class video extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
