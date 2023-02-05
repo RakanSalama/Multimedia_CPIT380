@@ -12,7 +12,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import java.lang.*;
 import static java.lang.Math.round;
@@ -137,6 +139,12 @@ public class PictureEditor extends javax.swing.JFrame {
         jButton51 = new javax.swing.JButton();
         jButton52 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jButton50 = new javax.swing.JButton();
+        jButton53 = new javax.swing.JButton();
+        jButton54 = new javax.swing.JButton();
+        jButton55 = new javax.swing.JButton();
+        jButton56 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -965,6 +973,28 @@ public class PictureEditor extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Bouns");
+
+        jButton50.setText("Export Histogram");
+        jButton50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton50ActionPerformed(evt);
+            }
+        });
+
+        jButton53.setText("Import Histogram");
+        jButton53.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton53ActionPerformed(evt);
+            }
+        });
+
+        jButton54.setText("Automatic detection of red eye(s)");
+
+        jButton55.setText("Compare two Images");
+
+        jButton56.setText("Object Detection");
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -972,18 +1002,29 @@ public class PictureEditor extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton48, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton49, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton51, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jButton52, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jButton50, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton53, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel3))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jButton55, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton56, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -1005,7 +1046,19 @@ public class PictureEditor extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton52)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton50)
+                    .addComponent(jButton53))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton55)
+                    .addComponent(jButton56))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel11, "card9");
@@ -1387,6 +1440,13 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        /*
+        Browse
+        this method make the user to browse for picture and enable all the buttons in the gui
+        the input will be the picture user chose 
+        the output picObj and pathName
+         */
+
         try {
             jLabel2.setIcon(null);
             pathName = FileChooser.pickAFile();
@@ -2688,7 +2748,7 @@ public class PictureEditor extends javax.swing.JFrame {
             }
         }
         histogram.scaleUp(2).show();
-        picObj = tmp;
+        picObj = new Picture(pathName);
     }//GEN-LAST:event_jButton30ActionPerformed
 
     private void jButton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton45ActionPerformed
@@ -2702,8 +2762,10 @@ public class PictureEditor extends javax.swing.JFrame {
         Pixel currPixel = null;
         Pixel oldPixel = null;
         Pixel newPixel = null;
-        Picture first = new Picture("Tmp\\m.png");
-        Picture secend = new Picture("Tmp\\wm.png");
+        JOptionPane.showMessageDialog(null, "Enter the background");
+        Picture first = new Picture(FileChooser.pickAFile());
+        JOptionPane.showMessageDialog(null, "Enter the forground");
+        Picture secend = new Picture(FileChooser.pickAFile());
         String size = JOptionPane.showInputDialog(null, "Please Enter the threshold value: ");
         for (int x = 0; x < first.getWidth(); x++) {
             for (int y = 0; y < first.getHeight(); y++) {
@@ -2729,6 +2791,156 @@ public class PictureEditor extends javax.swing.JFrame {
         new menu().toFront();
         new menu().setState(java.awt.Frame.NORMAL);
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton50ActionPerformed
+        // exporting the histogram to files
+        Pixel_LL[][] Histograms = ComputeHistograms();
+        // ask the user where to save it
+        JFileChooser f = new JFileChooser();
+        f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        f.showSaveDialog(null);
+        File export = new File(f.getSelectedFile() + "\\histograms.txt");
+
+        PrintWriter pen = null;
+        try {
+            pen = new PrintWriter(export);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pen.println(picObj.getWidth() + " " + picObj.getHeight());
+        pen.println("RED");
+        for (int i = 0; i < 256; i++) {
+            Histograms[0][i].exportHistogram(pen);
+        }
+        pen.println("GREEN");
+        for (int i = 0; i < 256; i++) {
+            Histograms[1][i].exportHistogram(pen);
+        }
+        pen.println("BLUE");
+        for (int i = 0; i < 256; i++) {
+            Histograms[2][i].exportHistogram(pen);
+        }
+        pen.close();
+        JOptionPane.showMessageDialog(null, "Finished\n Exported to " + export.getAbsolutePath(), "Done", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButton50ActionPerformed
+
+    private void jButton53ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton53ActionPerformed
+        try {
+            // TODO add your handling code here:
+
+            JOptionPane.showMessageDialog(null, "Please choose the histogram txt", "File", JOptionPane.OK_OPTION);
+
+            JFileChooser f = new JFileChooser();
+            f.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+            f.showSaveDialog(null);
+            File export = f.getSelectedFile();
+
+            Scanner input = new Scanner(export);
+            Picture replot = new Picture(input.nextInt(), input.nextInt());
+
+            Pixel_LL[] HistogramsRed = new Pixel_LL[256];
+            Pixel_LL[] HistogramsGreen = new Pixel_LL[256];
+            Pixel_LL[] HistogramsBlue = new Pixel_LL[256];
+            int total;
+            String color = input.next();
+            System.out.println("Importing the color " + color);
+            for (int i = 0; i < 256; i++) { // Reading all level 0 pixels from red
+                total = input.nextInt();
+                //System.out.println("Importing level " + i + " of " + color + " it has: " + total + " pixels");
+                HistogramsRed[i] = new Pixel_LL(input, total);
+            }
+            color = input.next();
+            System.out.println("Importing the color " + color);
+            for (int i = 0; i < 256; i++) { // Reading all level 0 pixels from green
+                total = input.nextInt();
+                //System.out.println("Importing level " + i + " of " + color + " it has: " + total + " pixels");
+                HistogramsGreen[i] = new Pixel_LL(input, total);
+            }
+            color = input.next();
+            System.out.println("Importing the color " + color);
+            for (int i = 0; i < 256; i++) { // Reading all level 0 pixels from blue
+                total = input.nextInt();
+                //System.out.println("Importing level " + i + " of " + color + " it has: " + total + " pixels");
+                HistogramsBlue[i] = new Pixel_LL(input, total);
+            }
+            PixelLinkedList_node helpPtr = null;
+
+            for (int i = 0; i < 256; i++) { // 0 - 256
+                if (HistogramsRed[i].getHead() != null) {
+                    helpPtr = HistogramsRed[i].getHead();
+                    while (helpPtr != null) {
+                        replot.getPixel(helpPtr.getX(), helpPtr.getY()).setRed(i);
+                        helpPtr = helpPtr.getNext();
+                    }
+                }
+
+                if (HistogramsGreen[i].getHead() != null) {
+                    helpPtr = HistogramsGreen[i].getHead();
+                    while (helpPtr != null) {
+                        replot.getPixel(helpPtr.getX(), helpPtr.getY()).setGreen(i);
+                        helpPtr = helpPtr.getNext();
+                    }
+                }
+
+                if (HistogramsBlue[i].getHead() != null) {
+                    helpPtr = HistogramsBlue[i].getHead();
+                    while (helpPtr != null) {
+                        replot.getPixel(helpPtr.getX(), helpPtr.getY()).setBlue(i);
+                        helpPtr = helpPtr.getNext();
+                    }
+                }
+            }
+            System.out.println("DONE");
+            replot.show();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR FILE IS NOT FOUND", "File", JOptionPane.OK_OPTION);
+        } catch (Exception x) {
+            JOptionPane.showMessageDialog(null, "ERROR", "EROR", JOptionPane.OK_OPTION);
+        }
+    }//GEN-LAST:event_jButton53ActionPerformed
+    //bouns
+    private Pixel_LL[][] ComputeHistograms() {
+
+        Pixel_LL[][] Histograms = new Pixel_LL[3][256]; // [0] red, [1] green [2] blue
+
+        int maxR = 0;
+        int maxR_index = 0;
+        int maxG = 0;
+        int maxG_index = 0;
+        int maxB = 0;
+        int maxB_index = 0;
+
+        for (int i = 0; i < 256; i++) { // Inisilazing all the arrays
+            Histograms[0][i] = new Pixel_LL();
+            Histograms[1][i] = new Pixel_LL();
+            Histograms[2][i] = new Pixel_LL();
+        }
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int intensityR = picObj.getPixel(i, j).getRed();
+                int intensityG = picObj.getPixel(i, j).getGreen();
+                int intensityB = picObj.getPixel(i, j).getBlue();
+                Histograms[0][intensityR].addPixel(new PixelLinkedList_node(i, j));
+                Histograms[1][intensityG].addPixel(new PixelLinkedList_node(i, j));
+                Histograms[2][intensityB].addPixel(new PixelLinkedList_node(i, j));
+
+                if (Histograms[0][intensityR].getTotal() > maxR) {
+                    maxR = Histograms[0][intensityR].getTotal();
+                    maxR_index = intensityR;
+                }
+                if (Histograms[1][intensityG].getTotal() > maxG) {
+                    maxG = Histograms[1][intensityG].getTotal();
+                    maxG_index = intensityG;
+                }
+                if (Histograms[2][intensityB].getTotal() > maxB) {
+                    maxB = Histograms[2][intensityB].getTotal();
+                    maxB_index = intensityB;
+                }
+            }
+        }
+
+        return Histograms;
+    }
 
     /**
      * @param args the command line arguments
@@ -2820,8 +3032,13 @@ public class PictureEditor extends javax.swing.JFrame {
     private javax.swing.JButton jButton48;
     private javax.swing.JButton jButton49;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton50;
     private javax.swing.JButton jButton51;
     private javax.swing.JButton jButton52;
+    private javax.swing.JButton jButton53;
+    private javax.swing.JButton jButton54;
+    private javax.swing.JButton jButton55;
+    private javax.swing.JButton jButton56;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -2850,6 +3067,7 @@ public class PictureEditor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
