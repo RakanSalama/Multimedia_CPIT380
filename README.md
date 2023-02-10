@@ -135,6 +135,7 @@ In the main menu, users can choose which section they want to edit by pressing t
     } 
 ## 2- Copy and Crop: 
 ![giphy](https://user-images.githubusercontent.com/98660298/218214144-4244addc-8db6-4fb4-b5ec-043ad199ecbb.gif)
+
 Users can crop any part of the picture by selecting the starting point and the ending point with two clicks. The first click will mark the beginning of the cropping area and the second click will mark the end of the cropping area.
  ###### Crop code:
     private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {                                          
