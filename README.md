@@ -24,7 +24,56 @@ In the main menu, users can choose which section they want to edit by pressing t
 - Users can remove blue from the picture by clicking on the 'Clear blue' button.
 - Users can adjust the darkness of the image by clicking the "Darken" button.
 - Users can adjust the brightness of the picture by clicking on the "Brighter" button.
-###code
-h
+######Change red,green,blue colors using sliders:
+   private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        double red = -1;
+        double green = -1;
+        double blue = -1;
+        if (jCheckBox1.isSelected()) {
+            red = jSlider1.getValue();
+            if (jComboBox1.getSelectedIndex() == 0) {
+                red = 1 + (red / 100);
+            } else if (jComboBox1.getSelectedIndex() == 1) {
+                red = 1 - (red / 100);
+            }
+        }
+        if (jCheckBox2.isSelected()) {
+            green = jSlider2.getValue();
+            if (jComboBox1.getSelectedIndex() == 0) {
+                green = 1 + (green / 100);
+            } else if (jComboBox1.getSelectedIndex() == 1) {
+                green = 1 - (green / 100);
+            }
+        }
+        if (jCheckBox3.isSelected()) {
+            blue = jSlider3.getValue();
+            if (jComboBox1.getSelectedIndex() == 0) {
+                blue = 1 + (blue / 100);
+            } else if (jComboBox1.getSelectedIndex() == 1) {
+                blue = 1 - (blue / 100);
+            }
+        }
+
+        Pixel[] pixelArray = picObj.getPixels();
+        double value = 0;
+        for (Pixel pixelObj : pixelArray) {
+            if (red != -1.0) {
+                value = pixelObj.getRed();
+                pixelObj.setRed((int) (value * red));
+            }
+            if (green != -1.0) {
+                value = pixelObj.getGreen();
+                pixelObj.setGreen((int) (value * green));
+            }
+            if (blue != -1.0) {
+                value = pixelObj.getBlue();
+                pixelObj.setBlue((int) (value * blue));
+            }
+
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }      
 
 
