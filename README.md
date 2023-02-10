@@ -216,7 +216,7 @@ By pressing the "Convert to Gray Scale" button, users can change the colors of t
 ## 4- Convert Gray scale to Binary Image using thresholding technique 
 ![giphy (2)](https://user-images.githubusercontent.com/98660298/218220105-c1059513-3ed7-404b-94cb-1d8c005bbed6.gif)
 
-Users will select a threshold value, which will be used to convert an image to grayscale and then to a binary format.
+Users will select a threshold value, which will be used to convert an image to grayscale and then to a binary Image.
 ######   Convert Gray scale to Binary Image using thresholding technique code:
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -245,3 +245,134 @@ Users will select a threshold value, which will be used to convert an image to g
         jLabel2.setIcon(icon);
     } 
 
+## 5- Convert and RGB image to HSV colored image
+When users press the button "convert to HSV" the values of the pixels will be converted from RGB into HSV . The output will be the same. 
+
+######   Convert and RGB image to HSV colored image code:
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        //hsv
+        Image img = (picObj.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+        BufferedImage rgbImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+        BufferedImage hsvImage = new BufferedImage(rgbImage.getWidth(), rgbImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+        for (int x = 0; x < rgbImage.getWidth(); x++) {
+            for (int y = 0; y < rgbImage.getHeight(); y++) {
+                Color rgb = new Color(rgbImage.getRGB(x, y));
+                int r = rgb.getRed();
+                int g = rgb.getGreen();
+                int b = rgb.getBlue();
+                int max = Math.max(r, Math.max(g, b));
+                int min = Math.min(r, Math.min(g, b));
+                float h = 0, s = 0, v = max / 255f;
+                int delta = max - min;
+                if (max != 0) {
+                    s = delta / (float) max;
+                }
+                if (delta != 0) {
+                    if (r == max) {
+                        h = (g - b) / (float) delta;
+                    } else if (g == max) {
+                        h = 2 + (b - r) / (float) delta;
+                    } else {
+                        h = 4 + (r - g) / (float) delta;
+                    }
+                    h /= 6;
+                    if (h < 0) {
+                        h++;
+                    }
+                }
+                int hsv = ((int) (h * 255)) | ((int) (s * 255)) | (int) (v * 255);
+                hsvImage.setRGB(x, y, hsv);
+            }
+        }
+        Graphics2D bGr = hsvImage.createGraphics();
+        bGr.drawImage(img, 0, 0, null);
+        bGr.dispose();
+        File outputfile = new File("Tmp\\HSV.png");
+        try {
+            ImageIO.write(hsvImage, "png", outputfile);
+        } catch (IOException ex) {
+            Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Picture s = new Picture("Tmp\\HSV.png");
+        img = (s.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+
+    } 
+    
+## 6- Blending Two or more images:
+![giphy (3)](https://user-images.githubusercontent.com/98660298/218222780-733e3af9-4ed6-4705-a83f-f11ead54f575.gif)
+
+Users can blend 2 or more picture into one picture by pressing the button "Blending".
+
+######   Blending Two or more images code:
+
+     private void jButton47ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // blending
+        String fileName2 = FileChooser.pickAFile();
+        Picture picture1 = new Picture(fileName2);
+        Image img = (picture1.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+        BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D bGr = bimage.createGraphics();
+        bGr.drawImage(img, 0, 0, null);
+        bGr.dispose();
+        File outputfile = new File("Tmp\\blend2.png");
+        try {
+            ImageIO.write(bimage, "png", outputfile);
+        } catch (IOException ex) {
+            Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Picture picture2 = new Picture("Tmp\\blend2.png");
+        Picture TargetPicture = new Picture(picObj.getWidth() + picture2.getWidth(), picObj.getHeight() + picture2.getHeight());
+
+        Pixel pic1;
+        Pixel pic2;
+        Pixel targetPixel;
+        int sourceX = 0;
+        int targetX = 0;
+        for (; sourceX < 150; sourceX++, targetX++) {
+            for (int sourceY = 0, targetY = 0; sourceY < picObj.getHeight(); sourceY++, targetY++) {
+                pic1 = picObj.getPixel(sourceX, sourceY);
+                targetPixel = TargetPicture.getPixel(targetX, targetY);
+                targetPixel.setColor(pic1.getColor());
+
+            }
+        }
+        for (; sourceX < picObj.getWidth(); sourceX++, targetX++) {
+            for (int sourceY = 0, targetY = 0; sourceY < picObj.getHeight(); sourceY++, targetY++) {
+                pic1 = picObj.getPixel(sourceX, sourceY);
+                pic2 = picture2.getPixel(sourceX - 150, sourceY);
+                targetPixel = TargetPicture.getPixel(targetX, targetY);
+                Color b = new Color((int) (pic1.getRed() * 0.5 + pic2.getRed() * 0.5), (int) (pic1.getGreen() * 0.5 + pic2.getGreen() * 0.5), (int) (pic1.getBlue() * 0.5 + pic2.getBlue() * 0.5));
+                targetPixel.setColor(b);
+            }
+        }
+        int tmpx = 0;
+        int tmpy = 0;
+        sourceX = sourceX - 150;
+        for (; sourceX < picture2.getWidth(); sourceX++, targetX++) {
+            for (int sourceY = 0, targetY = 0; sourceY < picture2.getHeight(); sourceY++, targetY++) {
+                pic2 = picture2.getPixel(sourceX, sourceY);
+                targetPixel = TargetPicture.getPixel(targetX, targetY);
+                targetPixel.setColor(pic2.getColor());
+                tmpy = targetY;
+            }
+            tmpx = targetX;
+        }
+
+        Pixel tmpc = null;
+        Pixel targetPixel1 = null;
+        Picture TargetPicture1 = new Picture(tmpx, tmpy);
+        for (int i = 0; i < tmpx; i++) {
+            for (int j = 0; j < tmpy; j++) {
+                tmpc = TargetPicture.getPixel(i, j);
+                targetPixel1 = TargetPicture1.getPixel(i, j);
+                targetPixel1.setColor(tmpc.getColor());
+            }
+        }
+        picObj = TargetPicture1;
+        Image img1 = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img1);
+        jLabel2.setIcon(icon);
+    } 
