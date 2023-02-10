@@ -25,7 +25,7 @@ In the main menu, users can choose which section they want to edit by pressing t
 - Users can adjust the darkness of the image by clicking the "Darken" button.
 - Users can adjust the brightness of the picture by clicking on the "Brighter" button.
 - 
-######  Change red,green,blue colors using sliders:
+######  Change red,green,blue colors using sliders code:
 
      private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         double red = -1;
@@ -77,5 +77,60 @@ In the main menu, users can choose which section they want to edit by pressing t
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
     }   
-
-
+###### Clear red code:
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Pixel[] pixelArray = picObj.getPixels();
+        for (Pixel pixelObj : pixelArray) {
+            pixelObj.setRed(0);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }
+###### Clear green code:
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Pixel[] pixelArray = picObj.getPixels();
+        for (Pixel pixelObj : pixelArray) {
+            pixelObj.setGreen(0);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    } 
+ 
+###### Clear blue code:
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Pixel[] pixelArray = picObj.getPixels();
+        for (Pixel pixelObj : pixelArray) {
+            pixelObj.setBlue(0);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }
+###### Darker code:
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Pixel[] pixelArray = picObj.getPixels();
+        Color color = null;
+        for (Pixel pixelArray1 : pixelArray) {
+            color = pixelArray1.getColor();
+            color = color.darker();
+            pixelArray1.setColor(color);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }  
+###### Brighter code:
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Pixel[] pixelArray = picObj.getPixels();
+        Color color = null;
+        for (Pixel pixelArray1 : pixelArray) {
+            color = pixelArray1.getColor();
+            color = color.brighter();
+            pixelArray1.setColor(color);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    } 
