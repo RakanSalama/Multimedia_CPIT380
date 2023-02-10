@@ -18,7 +18,7 @@ In the main menu, users can choose which section they want to edit by pressing t
 
 ## 1- Color change methods: 
 <p align="center">
-  <img width="432" height="471" src="https://user-images.githubusercontent.com/98660298/218203921-270da3ad-8219-4c99-81b6-891e6606c4ad.PNG](https://user-images.githubusercontent.com/98660298/218204907-1d92631f-7527-4e81-b4be-6f9279e88f1f.gif">
+  <img width="468" height="480" src="https://user-images.githubusercontent.com/98660298/218203921-270da3ad-8219-4c99-81b6-891e6606c4ad.PNG](https://user-images.githubusercontent.com/98660298/218204907-1d92631f-7527-4e81-b4be-6f9279e88f1f.gif">
 </p>
 
 
