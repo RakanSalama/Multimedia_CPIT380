@@ -198,7 +198,7 @@ Users can crop any part of the picture by selecting the starting point and the e
 ![giphy (1)](https://user-images.githubusercontent.com/98660298/218218375-285900c8-f507-492e-b5e7-b5952454ac1a.gif)
 
 By pressing the "Convert to Gray Scale" button, users can change the colors of the picture to gray.
-######   code:
+######   Convert RGB to Gray Scale Image code:
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         //Convert To Gray Scale
@@ -213,3 +213,35 @@ By pressing the "Convert to Gray Scale" button, users can change the colors of t
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
     }     
+## 4- Convert Gray scale to Binary Image using thresholding technique 
+![giphy (2)](https://user-images.githubusercontent.com/98660298/218220105-c1059513-3ed7-404b-94cb-1d8c005bbed6.gif)
+
+Users will select a threshold value, which will be used to convert an image to grayscale and then to a binary format.
+######   Convert Gray scale to Binary Image using thresholding technique code:
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        String threshold = JOptionPane.showInputDialog(null, "Please Enter the size: ");
+        Pixel[] pixels = picObj.getPixels();
+        int avg;
+        for (Pixel pixel1 : pixels) {
+            avg = (int) ((pixel1.getRed() + pixel1.getGreen() + pixel1.getBlue()) / 3);
+            Color grayColor = new Color(avg, avg, avg);
+            pixel1.setColor(grayColor);
+        }
+        int AVG;
+        Picture target = new Picture(picObj.getWidth(), picObj.getHeight());
+        for (int x = 0; x < picObj.getWidth(); x++) {
+            for (int y = 0; y < picObj.getHeight(); y++) {
+                AVG = (int) Math.abs(picObj.getPixel(x, y).getAverage());
+                if (AVG < Integer.parseInt(threshold)) {
+                    target.getPixel(x, y).setColor(Color.BLACK);
+                }
+            }
+        }
+
+        picObj = target;
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    } 
+
