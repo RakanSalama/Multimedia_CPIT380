@@ -302,6 +302,8 @@ public class sound extends javax.swing.JFrame {
 
         String first = JOptionPane.showInputDialog(null, "Enter the start Index the lowest index is 0: ");
         String last = JOptionPane.showInputDialog(null, "Enter the end Index the max value is " + (currentSound.getLengthInFrames() - 1) + ": ");
+        String first2 = JOptionPane.showInputDialog(null, "Enter the start Index the lowest index is 0: ");
+        String last2 = JOptionPane.showInputDialog(null, "Enter the end Index the max value is " + (currentSound.getLengthInFrames() - 1) + ": ");
         int start = Integer.parseInt(first);
         int end = Integer.parseInt(last);
         if (start < 0 || end >= currentSound.getLengthInFrames()) {
@@ -309,13 +311,23 @@ public class sound extends javax.swing.JFrame {
             first = JOptionPane.showInputDialog(null, "Enter the start Index the lowest index is 0: ");
             last = JOptionPane.showInputDialog(null, "Enter the end Index the max value is " + (currentSound.getLengthInFrames() - 1) + ": ");
         }
+
+        int start2 = Integer.parseInt(first2);
+        int end2 = Integer.parseInt(last2);
+        // calculate the number of samples in the clip
+        int lengthInSamples = end - start + 1; //s1
+        int lengthInSamples2 = end2 - start2 + 1; //s2
+        int lengthTarget = lengthInSamples + lengthInSamples2;
         start = Integer.parseInt(first);
         end = Integer.parseInt(last);
-        int lengthInSamples = end - start + 1;
-        Sound target = new Sound(lengthInSamples);
+        Sound target = new Sound(lengthTarget);
         int value = 0;
         int targetIndex = 0;
         for (int i = start; i <= end; i++, targetIndex++) {
+            value = currentSound.getSampleValueAt(i);
+            target.setSampleValueAt(targetIndex, value);
+        }
+        for (int i = start2; i <= end2; i++, targetIndex++) {
             value = currentSound.getSampleValueAt(i);
             target.setSampleValueAt(targetIndex, value);
         }
@@ -346,7 +358,7 @@ public class sound extends javax.swing.JFrame {
         jButton11.setEnabled(true);
         jButton12.setEnabled(true);
 
-
+ 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -354,15 +366,13 @@ public class sound extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+
         SoundSample[] sampleArray = currentSound.getSamples();
         int jv = jSlider1.getValue();
-        for (int i = 0; i < sampleArray.length; i++) {
-
-            currentSound.setSampleValueAt(i, (int) (currentSound.getSampleValueAt(i) * (jv / 100.00)));
-
+        for (SoundSample sample : sampleArray) {
+            sample.setValue((int) (sample.getValue() * (jv / 100.00)));
         }
         currentSound.play();
-        SoundSample[] sampleArray1 = currentSound.getSamples();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -434,12 +444,23 @@ public class sound extends javax.swing.JFrame {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         while (true) {
             Sound sound1 = new Sound(FileChooser.pickAFile());
-            for (int i = 0; i < currentSound.getLength() - 1; i++) {
-                if (i >= sound1.getLengthInFrames()) {
-                    currentSound.setSampleValueAt(i, currentSound.getSampleValueAt(i));
-                } else {
-                    currentSound.setSampleValueAt(i, currentSound.getSampleValueAt(i) + sound1.getSampleValueAt(i));
+            if ((currentSound.getLength() - 1) > (sound1.getLength() - 1)) {
+                for (int i = 0; i < currentSound.getLength() - 1; i++) {
+                    if (i >= sound1.getLengthInFrames()) {
+                        currentSound.setSampleValueAt(i, currentSound.getSampleValueAt(i));
+                    } else {
+                        currentSound.setSampleValueAt(i, currentSound.getSampleValueAt(i) + sound1.getSampleValueAt(i));
+                    }
                 }
+            } else {
+                for (int i = 0; i < sound1.getLength() - 1; i++) {
+                    if (i >= currentSound.getLengthInFrames()) {
+                        sound1.setSampleValueAt(i, sound1.getSampleValueAt(i));
+                    } else {
+                        sound1.setSampleValueAt(i, sound1.getSampleValueAt(i) + currentSound.getSampleValueAt(i));
+                    }
+                }
+                currentSound = sound1;
             }
             int reply = JOptionPane.showConfirmDialog(null, "To blend another sound Press yes", null, JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
@@ -471,15 +492,40 @@ public class sound extends javax.swing.JFrame {
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         SoundSample[] sampleArray = currentSound.getSamples();
         if (jComboBox1.getSelectedIndex() == 0) {
-            int average = 0;
+            /*          int average = 0;
             for (int i = 0; i < sampleArray.length; i++) {
-                average += currentSound.getSampleValueAt(i);
+            average += currentSound.getSampleValueAt(i);
             }
             double Value = round(average / (sampleArray.length + 0.00));
-
+            
             for (int i = 0; i < sampleArray.length; i++) {
-                currentSound.setSampleValueAt(i, (int) Value);
+            currentSound.setSampleValueAt(i, (int) Value);
             }
+            System.out.println(sampleArray.length);
+            System.out.println(sampleArray.length / 3.0);
+            
+            /////////////////       int[] array = new int[100];*/
+        int startIndex = 0;
+        int endIndex = 3;
+
+        while (endIndex <= sampleArray.length) {
+            int sum = 0;
+            for (int i = startIndex; i < endIndex; i++) {
+                sum += sampleArray[i].getValue();
+            }
+
+            int average = sum / 3;
+            for (int i = startIndex; i < endIndex; i++) {
+                sampleArray[i].setValue(average);  
+            }
+            startIndex += 3;
+            endIndex += 3;
+        }
+
+        for (int i = 0; i < sampleArray.length; i++) {
+            System.out.println(sampleArray[i].getValue());
+        }
+            ////
         } else if (jComboBox1.getSelectedIndex() == 1) {
             int[] weighted = new int[]{1, 5, 9, 7, 8, 10, 3, 4, 15, 11};
             int count = sampleArray.length / weighted.length;

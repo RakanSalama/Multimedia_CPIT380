@@ -9,11 +9,30 @@ import cpit380practice.FileChooser;
 import cpit380practice.FrameSequencer;
 import cpit380practice.Picture;
 import cpit380practice.Pixel;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import org.opencv.core.Point;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.opencv.core.*;
+import org.opencv.videoio.VideoCapture;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.objdetect.CascadeClassifier;
 
 /**
  *
@@ -53,7 +72,8 @@ public class video extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(450, 525));
+        setPreferredSize(new java.awt.Dimension(400, 500));
+        setSize(new java.awt.Dimension(400, 500));
 
         jButton12.setText("Back");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -74,6 +94,11 @@ public class video extends javax.swing.JFrame {
         jButton10.setText("Detecting A Violation");
 
         jButton11.setText("Shot Boundary Detection");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Ticker Tape");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +175,7 @@ public class video extends javax.swing.JFrame {
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -189,7 +214,7 @@ public class video extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -199,13 +224,14 @@ public class video extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton12)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -464,9 +490,10 @@ public class video extends javax.swing.JFrame {
         frameSequencer.setShown(true);
 
         // loop creating the frames
-        for (int i = 0; i < framesPerSec * time; i++) {
-            beachP.makeSunset(100 - i * time);
+        for (int i = framesPerSec*time; i >= 0; i--) {
+            beachP.makeSunset(i );
             frameSequencer.addFrame(beachP);
+            
         }
 
         // play the movie
@@ -479,6 +506,74 @@ public class video extends javax.swing.JFrame {
         new menu().toFront();
         new menu().setState(java.awt.Frame.NORMAL);
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        ArrayList<Double> distanceAvgArray = new ArrayList<Double>();
+        try {
+
+            int indexP1 = 0;
+            int indexP2 = 1;
+            while (true) {
+
+                Picture p1 = new Picture("C:\\Users\\Nero\\Documents\\NetBeansProjects\\Cpit380_Project\\outputVidtoP\\photo" + indexP1 + ".jpg");
+                Picture p2 = new Picture("C:\\Users\\Nero\\Documents\\NetBeansProjects\\Cpit380_Project\\outputVidtoP\\photo" + indexP2 + ".jpg");
+                
+                double distanceAvg = 0;
+                Pixel p1Pixel = null;
+                Pixel p2Pixel = null;
+
+                for (int x = 0; x < p1.getWidth(); x++) {
+                    for (int y = 0; y < p2.getHeight(); y++) {
+                        p1Pixel = p1.getPixel(x, y);
+                        p2Pixel = p2.getPixel(x, y);
+
+                        double distance = p1Pixel.colorDistance(p2Pixel.getColor());
+                        distanceAvg += distance;
+                    }
+                }
+                distanceAvgArray.add(((distanceAvg / p1.getPixels().length)));
+                indexP1++;
+                indexP2++;
+            }
+        } catch (Exception e) {
+
+        }
+
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (int i = 0; i < distanceAvgArray.size(); i++) {
+            dataset.setValue(distanceAvgArray.get(i), "", String.valueOf(i));
+        }
+        JFreeChart chart = ChartFactory.createLineChart("s", "1", "2", dataset);
+
+        CategoryPlot catPlot = chart.getCategoryPlot();
+        catPlot.setRangeGridlinePaint(Color.BLACK);
+        ChartFrame frame = new ChartFrame("b", chart);
+        frame.setSize(1900, 500);
+        frame.setVisible(true);
+
+        
+        double maxHeight = 0.0;
+        for (int i = 0;
+                i < distanceAvgArray.size();
+                i++) {
+            System.out.println(distanceAvgArray.get(i));
+            if (distanceAvgArray.get(i) > maxHeight) {
+                maxHeight = distanceAvgArray.get(i);
+            }
+        }
+        Picture histogram = new Picture(distanceAvgArray.size(), distanceAvgArray.size(), Color.white);
+        Color c = Color.RED;
+        for (int i = 0;
+                i < distanceAvgArray.size();
+                i++) {
+            double max = (distanceAvgArray.get(i) * distanceAvgArray.size() / maxHeight);
+            for (int j = distanceAvgArray.size() - 1; j >= (distanceAvgArray.size() - max); j--) {
+                histogram.getPixel(i, j).setColor(c);
+            }
+        }
+
+        histogram.show();
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -494,16 +589,24 @@ public class video extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(video.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(video.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(video.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(video.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(video.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(video.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(video.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(video.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

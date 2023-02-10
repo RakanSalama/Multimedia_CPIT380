@@ -10,19 +10,26 @@ import cpit380practice.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.*;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
-
 import java.lang.*;
-import static java.lang.Math.round;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.*;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.objdetect.CascadeClassifier;
 
 /**
  *
@@ -990,10 +997,25 @@ public class PictureEditor extends javax.swing.JFrame {
         });
 
         jButton54.setText("Automatic detection of red eye(s)");
+        jButton54.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton54ActionPerformed(evt);
+            }
+        });
 
         jButton55.setText("Compare two Images");
+        jButton55.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton55ActionPerformed(evt);
+            }
+        });
 
         jButton56.setText("Object Detection");
+        jButton56.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton56ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -1365,7 +1387,47 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
-        // TODO add your handling code here:
+        int x = jSlider4.getValue();
+        int y = (int) ((x / 100.00) * 255);
+        int aLowR = 257, aHighR = -1, aLowG = 257, aHighG = -1, aLowB = 257, aHighB = -1;
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int tempR = picObj.getPixel(i, j).getRed();
+                if (tempR < aLowR) {
+                    aLowR = tempR;
+                }
+                if (tempR > aHighR) {
+                    aHighR = tempR;
+                }
+                int tempG = picObj.getPixel(i, j).getGreen();
+                if (tempG < aLowG) {
+                    aLowG = tempG;
+                }
+                if (tempG > aHighG) {
+                    aHighG = tempG;
+                }
+                int tempB = picObj.getPixel(i, j).getBlue();
+                if (tempB < aLowB) {
+                    aLowB = tempB;
+                }
+                if (tempB > aHighB) {
+                    aHighB = tempB;
+                }
+
+            }
+        }
+        int aMin = 0;
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int equatR = aMin + (int) ((picObj.getPixel(i, j).getRed() - aLowR) * ((double) (y - aMin) / (aHighR - aLowR)));
+                int equatG = aMin + (int) ((picObj.getPixel(i, j).getGreen() - aLowG) * ((double) (y - aMin) / (aHighG - aLowG)));
+                int equatB = aMin + (int) ((picObj.getPixel(i, j).getBlue() - aLowB) * ((double) (y - aMin) / (aHighB - aLowB)));
+                picObj.getPixel(i, j).setColor(new Color(equatR, equatG, equatB));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton40ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
@@ -2898,6 +2960,98 @@ public class PictureEditor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERROR", "EROR", JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_jButton53ActionPerformed
+
+    private void jButton54ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton54ActionPerformed
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        CascadeClassifier faceDetector = new CascadeClassifier("opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_default.xml");
+        CascadeClassifier eyeDetector = new CascadeClassifier("opencv\\sources\\data\\haarcascades\\haarcascade_eye.xml");
+        String imagePath = "input.jpg";
+        Mat image = Imgcodecs.imread(imagePath);
+        MatOfRect faceDetections = new MatOfRect();
+        faceDetector.detectMultiScale(image, faceDetections);
+
+        for (Rect rect : faceDetections.toArray()) {
+            Mat faceROI = new Mat(image, rect);
+            MatOfRect eyes = new MatOfRect();
+            eyeDetector.detectMultiScale(faceROI, eyes);
+
+            for (Rect eye : eyes.toArray()) {
+                Point center = new Point(eye.x + eye.width / 2, eye.y + eye.height / 2);
+                Imgproc.rectangle(image, new Point(eye.x + rect.x, eye.y + rect.y),
+                        new Point(eye.x + rect.x + eye.width, eye.y + rect.y + eye.height), new Scalar(255, 0, 0));
+            }
+        }
+
+        Imgcodecs.imwrite("output.jpg", image);
+        
+    }//GEN-LAST:event_jButton54ActionPerformed
+
+    private void jButton56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton56ActionPerformed
+        // loading the OpenCV core library
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+        // loading the image
+        String imagePath = "input.jpg";
+        Mat newImage = Imgcodecs.imread(imagePath);
+
+        // loading the classifier
+        String classifierPath = "opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml";
+        CascadeClassifier classifier = new CascadeClassifier(classifierPath);
+
+        // detect the objects
+        MatOfRect objects = new MatOfRect();
+        classifier.detectMultiScale(newImage, objects);
+
+        // draw the rectangle
+        Rect[] objectsArray = objects.toArray();
+        for (int i = 0; i < objectsArray.length; i++) {
+            Imgproc.rectangle(newImage, new Point(objectsArray[i].x, objectsArray[i].y),
+                    new Point(objectsArray[i].x + objectsArray[i].width, objectsArray[i].y + objectsArray[i].height),
+                    new Scalar(0, 255, 0));
+        }
+
+        // save the image
+        String outputPath = "output.jpg";
+        Imgcodecs.imwrite(outputPath, newImage);
+    }//GEN-LAST:event_jButton56ActionPerformed
+
+    private void jButton55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton55ActionPerformed
+
+        try {
+            Picture p1 = picObj;
+            Picture p2 = new Picture(FileChooser.pickAFile());
+            Image img = (p2.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+            BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D bGr = bimage.createGraphics();
+            bGr.drawImage(img, 0, 0, null);
+            bGr.dispose();
+            File outputfile = new File("Tmp\\p2.png");
+            ImageIO.write(bimage, "png", outputfile);
+            String pathNameP2 = "Tmp\\p2.png";
+            p2 = new Picture(pathNameP2);
+            img = (p2.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+            icon = new ImageIcon(img);
+            jLabel2.setIcon(icon);
+
+            double distanceAvg = 0;
+            Pixel p1Pixel = null;
+            Pixel p2Pixel = null;
+
+            for (int x = 0; x < p1.getWidth(); x++) {
+                for (int y = 0; y < p2.getHeight(); y++) {
+                    p1Pixel = p1.getPixel(x, y);
+                    p2Pixel = p2.getPixel(x, y);
+
+                    double distance = p1Pixel.colorDistance(p2Pixel.getColor());
+                    distanceAvg += distance;
+                }
+            }
+            JOptionPane.showMessageDialog(null, "the difference between is" + (distanceAvg / p2.getPixels().length), "File", JOptionPane.OK_OPTION);
+        } catch (IOException ex) {
+            Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton55ActionPerformed
     //bouns
     private Pixel_LL[][] ComputeHistograms() {
 

@@ -327,7 +327,7 @@ public class Picture extends SimplePicture {
                 }
             }
         }
-    }
+    }   
 
     public void lighten(Color compColor, double distance,
             int numTimes) {

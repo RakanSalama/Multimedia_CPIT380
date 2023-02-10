@@ -145,7 +145,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="519" max="32767" attributes="0"/>
+                      <EmptySpace pref="524" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -435,7 +435,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton22" pref="539" max="32767" attributes="0"/>
+                          <Component id="jButton22" pref="544" max="32767" attributes="0"/>
                           <Component id="jButton21" alignment="0" max="32767" attributes="0"/>
                           <Component id="jButton23" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
@@ -508,7 +508,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton25" alignment="0" pref="539" max="32767" attributes="0"/>
+                          <Component id="jButton25" alignment="0" pref="544" max="32767" attributes="0"/>
                           <Component id="jButton24" alignment="0" max="32767" attributes="0"/>
                           <Component id="jButton26" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -1067,7 +1067,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton40" alignment="0" pref="539" max="32767" attributes="0"/>
+                          <Component id="jButton40" alignment="0" pref="544" max="32767" attributes="0"/>
                           <Component id="jButton38" alignment="0" max="32767" attributes="0"/>
                           <Component id="jSlider4" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
@@ -1143,7 +1143,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jSlider5" pref="404" max="32767" attributes="0"/>
+                              <Component id="jSlider5" pref="409" max="32767" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -1233,7 +1233,7 @@
                           <Component id="jButton49" max="32767" attributes="0"/>
                           <Component id="jButton51" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jButton52" pref="318" max="32767" attributes="0"/>
+                              <Component id="jButton52" pref="323" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jComboBox2" min="-2" pref="215" max="-2" attributes="0"/>
                           </Group>
@@ -1394,16 +1394,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Automatic detection of red eye(s)"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton54ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton55">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Compare two Images"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton55ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton56">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Object Detection"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton56ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
