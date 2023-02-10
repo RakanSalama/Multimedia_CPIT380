@@ -7,16 +7,13 @@ The aim of this project is to create an application that enables users to edit p
 -
 -
 ## Using & Implementing Our Project :
-
 This YouTube video will guide you on how to download and implement our project. It provides step-by-step instructions to help you get set up and running quickly.
-## About "Hotel Booking System":
-Our system will ask the receptionist to enter the username and password. If it is wrong, the system will not make the receptionist enter the system. After that, the receptionist will see the main menu which gives him 6 options which are: 
-- List all rooms
-- Update room
-- Search by room number
-- Show avaliable rooms
-- Set room to default 
-- Exit
+
+
+## Main Menu:
+![MainMenu](/Cpit380Project/Gifs & pictures/menu.PNG)
+In the main menu, users can choose which section they want to edit by pressing the corresponding button.
+
 
 "List all rooms": 
 will make the receptionist see all the rooms with its information(Room number, Room type, Visitor name, check in, check out, state)
