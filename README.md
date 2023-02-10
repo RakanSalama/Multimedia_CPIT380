@@ -11,7 +11,7 @@ This YouTube video will guide you on how to download and implement our project. 
 
 
 ## Main Menu:
-![MainMenu](/Cpit380Project/Gifs & pictures/menu.PNG)
+![menu](/Cpit380Project/Gifs & pictures/menu.PNG)
 In the main menu, users can choose which section they want to edit by pressing the corresponding button.
 
 
