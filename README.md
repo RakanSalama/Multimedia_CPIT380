@@ -13,7 +13,7 @@ This YouTube video will guide you on how to download and implement our project. 
 
 ## Main Menu:
 <p align="center">
-  <img width="432" height="471" src="![Menu](https://user-images.githubusercontent.com/98660298/218203921-270da3ad-8219-4c99-81b6-891e6606c4ad.PNG)">
+  <img width="432" height="471" src="https://user-images.githubusercontent.com/98660298/218203921-270da3ad-8219-4c99-81b6-891e6606c4ad.PNG">
 </p>
 
 
