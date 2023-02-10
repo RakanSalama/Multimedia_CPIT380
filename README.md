@@ -1,11 +1,14 @@
-# CPIT305 Course Project - "Hotel Booking System"
-To begin with, our main idea is to make a system to book a hotel room from the receptionist ( Client ). The customer will ask to book a room and the receptionist will check empty rooms. Our system ( Server ) will show available rooms to the receptionist.
-
+# CPIT380 Course Project
+The aim of this project is to create an application that enables users to edit pictures, audio and videos.
 ## Group Members
-- Rakan Adnan Salama / 2037276
-- Abdulrahman Ihab Nahfawi / 2035397
-- Moath Mosleh Alsolami / 1935160
+- Rakan Adnan Salama  / 2037276
+- Fahad Hamad Alsifri / 1743998
+- 
+-
+-
+## Using & Implementing Our Project :
 
+This YouTube video will guide you on how to download and implement our project. It provides step-by-step instructions to help you get set up and running quickly.
 ## About "Hotel Booking System":
 Our system will ask the receptionist to enter the username and password. If it is wrong, the system will not make the receptionist enter the system. After that, the receptionist will see the main menu which gives him 6 options which are: 
 - List all rooms
