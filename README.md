@@ -16,7 +16,7 @@ This YouTube video will guide you on how to download and implement our project. 
 </p>
 In the main menu, users can choose which section they want to edit by pressing the corresponding button.
 
-## 1- Color change methods: 
+## 1- Color change: 
 ![ChangeColors](https://user-images.githubusercontent.com/98660298/218205120-033d527b-5fc8-44e5-8a01-8cc40e0727ca.gif)
 - Users can customize the RGB colors of their choice by clicking on the color box, adjusting the slider to the desired amount, and selecting whether to increase or decrease the color value. Once they've adjusted the colors to their liking, they can click the "Apply" button to apply the changes.
 - Users can remove red from the picture by clicking on the 'Clear red' button.
@@ -133,3 +133,64 @@ In the main menu, users can choose which section they want to edit by pressing t
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
     } 
+## 2- Copy and Crop: 
+![giphy](https://user-images.githubusercontent.com/98660298/218214144-4244addc-8db6-4fb4-b5ec-043ad199ecbb.gif)
+Users can crop any part of the picture by selecting the starting point and the ending point with two clicks. The first click will mark the beginning of the cropping area and the second click will mark the end of the cropping area.
+ ###### Crop code:
+    private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // cropping
+        JFrame parent = new JFrame();
+        JOptionPane.showMessageDialog(parent, "Please click on two points in the image");
+        jLabel1.addMouseListener(new MouseAdapter() {
+            int numOfClicks = 0;
+            int x1;
+            int x2;
+            int y1;
+            int y2;
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                numOfClicks++;
+                if (numOfClicks == 1) {
+                    x1 = e.getX();
+                    y1 = e.getY();
+
+                } else if (numOfClicks == 2) {
+                    x2 = e.getX();
+                    y2 = e.getY();
+                    // call the crop method with both cordinates.
+
+                    double W = (picObj.getWidth() * 1.00 / jLabel1.getWidth());
+                    double H = (picObj.getHeight() * 1.00 / jLabel1.getHeight());
+
+                    x1 = (int) (W * x1);
+                    x2 = (int) (W * x2);
+                    y1 = (int) (H * y1);
+                    y2 = (int) (H * y2);
+
+                    Picture newPic = new Picture(picObj.getWidth(), picObj.getHeight());
+
+                    Pixel sourcePixel;
+                    Pixel targetPixel;
+
+                    for (int i = x1; i < x2; i++) {
+                        for (int j = y1; j < y2; j++) {
+                            sourcePixel = picObj.getPixel(i, j);
+                            targetPixel = newPic.getPixel(i, j);
+                            targetPixel.setColor(sourcePixel.getColor());
+                        }
+
+                    }
+                    picObj = newPic;
+                    numOfClicks = 0;
+                    jLabel1.removeMouseListener(this);
+                    Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+                    icon = new ImageIcon(img);
+                    jLabel2.setIcon(icon);
+                }
+            }
+        });
+
+
+    } 
+
