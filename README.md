@@ -11,7 +11,10 @@ This YouTube video will guide you on how to download and implement our project. 
 
 
 ## Main Menu:
-![Menu](          https://user-images.githubusercontent.com/98660298/218203347-d275b740-c783-4578-92e0-ca37858c43b3.PNG)
+<p align="center">
+  <img width="460" height="300" src="[http://www.fillmurray.com/460/300](https://user-images.githubusercontent.com/98660298/218203347-d275b740-c783-4578-92e0-ca37858c43b3.PNG)">
+</p>
+
 
 In the main menu, users can choose which section they want to edit by pressing the corresponding button.
 
