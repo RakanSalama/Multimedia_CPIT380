@@ -194,4 +194,22 @@ Users can crop any part of the picture by selecting the starting point and the e
 
 
     } 
+## 3- Convert RGB to Gray Scale Image: 
+![giphy (1)](https://user-images.githubusercontent.com/98660298/218218375-285900c8-f507-492e-b5e7-b5952454ac1a.gif)
 
+By pressing the "Convert to Gray Scale" button, users can change the colors of the picture to gray.
+######   code:
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        //Convert To Gray Scale
+        Pixel[] pixels = picObj.getPixels();
+        int avg;
+        for (Pixel pixel1 : pixels) {
+            avg = (int) ((pixel1.getRed() + pixel1.getGreen() + pixel1.getBlue()) / 3);
+            Color grayColor = new Color(avg, avg, avg);
+            pixel1.setColor(grayColor);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }     
