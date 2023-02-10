@@ -24,8 +24,10 @@ In the main menu, users can choose which section they want to edit by pressing t
 - Users can remove blue from the picture by clicking on the 'Clear blue' button.
 - Users can adjust the darkness of the image by clicking the "Darken" button.
 - Users can adjust the brightness of the picture by clicking on the "Brighter" button.
+- 
 ######Change red,green,blue colors using sliders:
-   private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         double red = -1;
         double green = -1;
         double blue = -1;
@@ -74,6 +76,6 @@ In the main menu, users can choose which section they want to edit by pressing t
         Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
-    }      
+    }   
 
 
