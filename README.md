@@ -18,7 +18,13 @@ In the main menu, users can choose which section they want to edit by pressing t
 
 ## 1- Color change methods: 
 ![ChangeColors](https://user-images.githubusercontent.com/98660298/218205120-033d527b-5fc8-44e5-8a01-8cc40e0727ca.gif)
-
-
+- Users can customize the RGB colors of their choice by clicking on the color box, adjusting the slider to the desired amount, and selecting whether to increase or decrease the color value. Once they've adjusted the colors to their liking, they can click the "Apply" button to apply the changes.
+- Users can remove red from the picture by clicking on the 'Clear red' button.
+- Users can remove green from the picture by clicking on the 'Clear green' button.
+- Users can remove blue from the picture by clicking on the 'Clear blue' button.
+- Users can adjust the darkness of the image by clicking the "Darken" button.
+- Users can adjust the brightness of the picture by clicking on the "Brighter" button.
+###code
+h
 
 
