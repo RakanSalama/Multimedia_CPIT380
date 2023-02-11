@@ -2390,7 +2390,7 @@ Press the "Top Right To Bottom Left" button to watch the RecatangleMovie move fr
 https://user-images.githubusercontent.com/98660298/218270626-9a503374-3cee-414f-a3b3-2a8143369cb0.mp4
 
 
-By pressing the "Sine wave" button, the user can insert the desired number of seconds for the video to continue. This will cause a rectangular shape to move in a sine wave formation.
+By pressing the "Sine wave" button, the user can insert the desired number of seconds for the video to continue. This will cause a rectangular shape to move in a sine wave motion.
 
 ######   Sine wave  code:
   
@@ -2425,8 +2425,45 @@ By pressing the "Sine wave" button, the user can insert the desired number of se
   
 ## 39- CreateRecatangleMovie method Show the trajectory of motion, when a ball is dropped on the floor:
 
+https://user-images.githubusercontent.com/98660298/218271451-e42eb653-6035-4a2b-b29c-f0434d6693d0.mp4
 
+By pressing the "Dropped Ball" button, the user can insert the desired number of seconds for the video to continue. This will cause a circle to move in a drop motion.
 
+######   Dropp ball  code:
+  
+      private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+            int framesPerSec = 30;
+            Picture p = null;
+            Graphics g = null;
+            FrameSequencer frameSequencer = new FrameSequencer("Movie");
+
+            frameSequencer.setShown(true);
+            int distance = 150;
+            int height = 480;
+            int start = (height - 50) - distance;
+            for (int i = 0; i < framesPerSec * time; i++) {
+                p = new Picture(640, height);
+                g = p.getGraphics();
+                int y = (int) (Math.sin(30 + (i)) * distance) + start;
+                if (y > (height - 50 - 10)) {
+                    distance = distance / 2;
+                    start = (height - 50) - distance;
+                }
+                y = (int) (Math.sin(30 + (i)) * distance) + start;
+                g.setColor(Color.GRAY);
+                g.fillOval(i * 20, y, 50, 50);
+                // add frame to sequencer
+                frameSequencer.addFrame(p);
+            }
+            // play the movie
+            frameSequencer.play(framesPerSec);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
 ## 40- CreateTickerTapeMovie – A string of text moves back and forth and does not disappear from screen. 
 
 ## 41- Create a movie, cropping a part of given image that appears randomly on screen:
