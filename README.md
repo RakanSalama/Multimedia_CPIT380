@@ -1,14 +1,24 @@
 # CPIT380 Course Project
 The aim of this project is to create an application that enables users to edit pictures, audio and videos.
+
 ## Group Members
-- Rakan Adnan Salama  / 2037276
-- Fahad Hamad Alsifri / 1743998
-- 
--
--
+- Abdulaziz Adnan Al-Sharif / 2036023
+- Rakan Adnan Salama       / 2037276
+- Fahad Hamad Alsifri      / 1743998
+- Omar Saeed Al-Zahrani    / 2040569
+- Majed Abdullah Alghmdi   / 1942874 
+
 ## Using & Implementing Our Project :
 This YouTube video will guide you on how to download and implement our project. It provides step-by-step instructions to help you get set up and running quickly.
 
+https://www.youtube.com/watch?v=fjpwWmMdilE&ab_channel=Nero
+
+After watching the Youtube video please fill the google form ♥ 
+
+https://docs.google.com/forms/d/e/1FAIpQLSd_4BxOBD0WKhbCigF-rGkjjsyPQ1UEMUC1fCGNlhJKJ8YOaQ/viewform?fbzx=8509294189677587184
+
+You must dowlonad open CV library and follow the introduction in the youtube video, Open CV download link:
+https://drive.google.com/file/d/1ityQhT3B4su30HZqUwVQ0wZhdy4JdgEz/view?usp=sharing
 
 ## Main Menu:
 <p align="center">
@@ -2390,7 +2400,7 @@ Press the "Top Right To Bottom Left" button to watch the RecatangleMovie move fr
 https://user-images.githubusercontent.com/98660298/218270626-9a503374-3cee-414f-a3b3-2a8143369cb0.mp4
 
 
-By pressing the "Sine wave" button, the user can insert the desired number of seconds for the video to continue. This will cause a rectangular shape to move in a sine wave formation.
+By pressing the "Sine wave" button, the user can insert the desired number of seconds for the video to continue. This will cause a rectangular shape to move in a sine wave motion.
 
 ######   Sine wave  code:
   
@@ -2425,32 +2435,473 @@ By pressing the "Sine wave" button, the user can insert the desired number of se
   
 ## 39- CreateRecatangleMovie method Show the trajectory of motion, when a ball is dropped on the floor:
 
+https://user-images.githubusercontent.com/98660298/218271451-e42eb653-6035-4a2b-b29c-f0434d6693d0.mp4
 
+By pressing the "Dropped Ball" button, the user can insert the desired number of seconds for the video to continue. This will cause a circle to move in a drop motion.
 
+######   Dropp ball  code:
+  
+      private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+            int framesPerSec = 30;
+            Picture p = null;
+            Graphics g = null;
+            FrameSequencer frameSequencer = new FrameSequencer("Movie");
+
+            frameSequencer.setShown(true);
+            int distance = 150;
+            int height = 480;
+            int start = (height - 50) - distance;
+            for (int i = 0; i < framesPerSec * time; i++) {
+                p = new Picture(640, height);
+                g = p.getGraphics();
+                int y = (int) (Math.sin(30 + (i)) * distance) + start;
+                if (y > (height - 50 - 10)) {
+                    distance = distance / 2;
+                    start = (height - 50) - distance;
+                }
+                y = (int) (Math.sin(30 + (i)) * distance) + start;
+                g.setColor(Color.GRAY);
+                g.fillOval(i * 20, y, 50, 50);
+                // add frame to sequencer
+                frameSequencer.addFrame(p);
+            }
+            // play the movie
+            frameSequencer.play(framesPerSec);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
 ## 40- CreateTickerTapeMovie – A string of text moves back and forth and does not disappear from screen. 
+
+https://user-images.githubusercontent.com/98660298/218271921-143c24f8-e8de-4245-aa7c-31dd75995b3b.mp4
+
+By pressing the "Tricker Tape" button, the user can enter the number of seconds they wish for the video to run and the text they want to move. This will cause the selected text to move along the screen according to the number of seconds specified.
+
+######  TickerTapeMovie  code:
+
+     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+            String message = JOptionPane.showInputDialog("please enter your message");
+            int framesPerSec = 30;
+            Picture p = null;
+            Graphics g = null;
+            FrameSequencer frameSequencer = new FrameSequencer("Movie");
+            Font font = new Font("Arial", Font.BOLD, 24);
+            boolean right = true;
+            // loop for 2 seconds of animation
+            for (int j = 0, k = 0; j < framesPerSec * time; j++) {
+                // draw the string
+                p = new Picture(500, 400);
+                g = p.getGraphics();
+                g.setColor(Color.BLACK);
+                g.setFont(font);
+                if (right) {
+                    if (k * 10 > p.getWidth() - message.length() * 12) {
+                        right = false;
+                    }
+                } else {
+                    if (k < 1) {
+                        right = true;
+                    }
+                }
+                if (right) {
+                    g.drawString(message, k++ * 10, 200);
+                } else {
+                    g.drawString(message, k-- * 10, 200);
+                }
+                // add frame to sequencer
+                frameSequencer.addFrame(p);
+            }
+
+            // play the movie
+            frameSequencer.play(framesPerSec);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }                                        
 
 ## 41- Create a movie, cropping a part of given image that appears randomly on screen:
 
+https://user-images.githubusercontent.com/98660298/218274233-b95b628c-91cf-4710-b5a0-dd0043b28216.mp4
+
+In this method, the users must specify the duration of the video and the picture that they want to crop. Afterwards, the method will randomly select a portion of the image to be moved.
+
+######  Cropping and move in a video  code:
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            int duration = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+            String fName = FileChooser.pickAFile();
+            Picture pic = new Picture(fName);
+            // declare other variables
+            Picture target = null;   // targeted piece of pic
+            FrameSequencer frameSequencer
+                    = new FrameSequencer("Movie");
+            int framesPerSec = 30;
+            // loop creating the frames
+            for (int i = 0; i < framesPerSec * duration; i++) {
+                target = new Picture(640, 480);
+                target.copy(pic, 250, 170, 390, 300, i * 10, i * 5);
+                frameSequencer.addFrame(target);
+            }
+            // play the movie
+            frameSequencer.play(framesPerSec);
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } 
+
 ## 42- Create Sunset movie:
+
+https://user-images.githubusercontent.com/98660298/218274582-73c4ce99-410e-4571-b11c-bbb9102e60ac.mp4
+
+By pressing the "Sunset" button, the user can enter the number of seconds they wish for the video to run and the the image thay whant to make sunset effect. 
+This will cause sunset effect to the photo  by time the user selected according to the number of seconds specified.
+
+######  Create Sunset movie code:
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
+        int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+        String fName = FileChooser.pickAFile();
+        Picture beachP = new Picture(fName);
+
+        FrameSequencer frameSequencer = new FrameSequencer("C:\intro-prog-java\movies\edge");
+        int framesPerSec = 30;
+
+        frameSequencer.setShown(true);
+
+        // loop creating the frames
+        for (int i = framesPerSec * time; i >= 0; i--) {
+            beachP.makeSunset(i);
+            frameSequencer.addFrame(beachP);
+
+        }
+
+        // play the movie
+        frameSequencer.play(framesPerSec);
+    }
 
 ## 43- Back Ground Subtraction Movie:
 
+https://user-images.githubusercontent.com/98660298/218274920-03e7c520-2c25-4ba5-b393-b825e6bff143.mp4
+
+This method allows the user to create a new video background by entering the duration of the video and three pictures. The first picture will be used as the new background, the second will be used as the foreground, and the third will be cut out and removed from the foreground. After these steps are completed, the first picture will be used as the new background of the video.
+
+######  Background subtraction code:
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+            // load the pictures
+            JFileChooser fc = new JFileChooser("");
+            fc.showOpenDialog(null);
+            String foreground = fc.getSelectedFile().getAbsolutePath();
+            Picture foregroundPic = null;
+
+            fc.showOpenDialog(null);
+            String oldBG = fc.getSelectedFile().getAbsolutePath();
+            Picture oldBGPic = new Picture(oldBG);
+
+            fc.showOpenDialog(null);
+            String newBG = fc.getSelectedFile().getAbsolutePath();
+            Picture newBGPic = new Picture(newBG);
+
+            // declare other variables
+            FrameSequencer frameSequencer = new FrameSequencer("Movie_Edit");
+            int framesPerSec = 30;
+            frameSequencer.setShown(true);
+            // loop creating the frames
+            for (int i = 0; i < framesPerSec * time; i++) {
+                foregroundPic = new Picture(foreground);
+                foregroundPic.swapBackground(oldBGPic, newBGPic, i);
+                frameSequencer.addFrame(foregroundPic);
+            }
+
+            // play the movie
+            frameSequencer.play(framesPerSec);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 ## 44- Edge Detection Movie:
+
+https://user-images.githubusercontent.com/98660298/218275055-8d95e0af-9ca2-44d6-8942-d6877bd1b776.mp4
+
+In this method, the user needs to specify the duration of the video and upload an image to detect the edges. The method will then output a video displaying the detected edges.
+
+######  Edge detection Movie code:
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+            JFileChooser fc = new JFileChooser("");
+            fc.showOpenDialog(null);
+            String fName = fc.getSelectedFile().getAbsolutePath();
+            Picture pic = new Picture(fName);
+
+            Picture copyPict = null;
+
+            FrameSequencer frameSequencer = new FrameSequencer("movie_Edit");
+            int framesPerSec = 30;
+
+            for (int i = 0; i < framesPerSec * time; i++) {
+                copyPict = new Picture(pic);
+                double topAverage = 0.0;
+                double bottomAverage = 0.0;
+
+                for (int x = 0; x < pic.getHeight() - 1; x++) {
+                    for (int y = 0; y < copyPict.getWidth(); y++) {
+                        Pixel topPixel = copyPict.getPixel(y, x);
+                        Pixel bottomPixel = copyPict.getPixel(y, x + 1);
+
+                        topAverage = (topPixel.getRed() + topPixel.getGreen() + topPixel.getBlue()) / 3.0;
+                        bottomAverage = (bottomPixel.getRed() + bottomPixel.getGreen() + bottomPixel.getBlue()) / 3.0;
+
+                        if (Math.abs(topAverage - bottomAverage) < (time * framesPerSec + 1) - i) {
+                            topPixel.setColor(Color.WHITE);
+                        } else {
+                            topPixel.setColor(Color.BLACK);
+                        }
+                    }
+                }
+
+                frameSequencer.addFrame(copyPict);
+            }
+
+            frameSequencer.play(framesPerSec);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }  
 
 ## 45- Compare two Images:
 
+https://user-images.githubusercontent.com/98660298/218275253-2ec847f1-70ed-4999-a7ae-9677722596d8.mp4
+
+In this method, the user will insert two pictures which will then be compared to determine how much difference there is between them. If the difference is less than 50, it indicates a small difference between the two images. If the difference is greater than 50, it indicates a significant difference.
+
+######  Compare two Images code:
+    private void jButton55ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        try {
+            Picture p1 = picObj;
+            Picture p2 = new Picture(FileChooser.pickAFile());
+            Image img = (p2.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+            BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D bGr = bimage.createGraphics();
+            bGr.drawImage(img, 0, 0, null);
+            bGr.dispose();
+            File outputfile = new File("Tmp\\p2.png");
+            ImageIO.write(bimage, "png", outputfile);
+            String pathNameP2 = "Tmp\\p2.png";
+            p2 = new Picture(pathNameP2);
+            img = (p2.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+            icon = new ImageIcon(img);
+            jLabel2.setIcon(icon);
+
+            double distanceAvg = 0;
+            Pixel p1Pixel = null;
+            Pixel p2Pixel = null;
+
+            for (int x = 0; x < p1.getWidth(); x++) {
+                for (int y = 0; y < p2.getHeight(); y++) {
+                    p1Pixel = p1.getPixel(x, y);
+                    p2Pixel = p2.getPixel(x, y);
+
+                    double distance = p1Pixel.colorDistance(p2Pixel.getColor());
+                    distanceAvg += distance;
+                }
+            }
+            JOptionPane.showMessageDialog(null, "the difference between is" + (distanceAvg / p2.getPixels().length), "File", JOptionPane.OK_OPTION);
+        } catch (IOException ex) {
+            Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 ## 46- Shot boundary detection:
+
+https://user-images.githubusercontent.com/98660298/218275426-069b3bf7-b2aa-488c-82ee-e3b81784f0c2.mp4
+
+In this method, the user can input a video and view a chart that shows the differences between the frames of that video. If the video has significant differences between the frames, the chart will show a high value, whereas if there are not many differences, the chart will remain low.
+
+
+######  Shot boundary detection code:
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        String path = FileChooser.pickAFile();
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        VideoCapture capture = new VideoCapture(path);
+        Mat frameg = new Mat();
+
+        int u = 0;
+        while (capture.read(frameg)) {
+            Imgcodecs.imwrite("outputVidtoP\\photo" + u + ".jpg", frameg);
+            u++;
+        }
+
+        capture.release();
+        ArrayList<Double> distanceAvgArray = new ArrayList<Double>();
+        try {
+
+            int indexP1 = 0;
+            int indexP2 = 1;
+            while (true) {
+
+                Picture p1 = new Picture("outputVidtoP\\photo" + indexP1 + ".jpg");
+                Picture p2 = new Picture("outputVidtoP\\photo" + indexP2 + ".jpg");
+
+                double distanceAvg = 0;
+                Pixel p1Pixel = null;
+                Pixel p2Pixel = null;
+
+                for (int x = 0; x < p1.getWidth(); x++) {
+                    for (int y = 0; y < p2.getHeight(); y++) {
+                        p1Pixel = p1.getPixel(x, y);
+                        p2Pixel = p2.getPixel(x, y);
+
+                        double distance = p1Pixel.colorDistance(p2Pixel.getColor());
+                        distanceAvg += distance;
+                    }
+                }
+                distanceAvgArray.add(((distanceAvg / p1.getPixels().length)));
+                indexP1++;
+                indexP2++;
+            }
+        } catch (Exception e) {
+
+        }
+
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (int i = 0; i < distanceAvgArray.size(); i++) {
+            dataset.setValue(distanceAvgArray.get(i), "", String.valueOf(i));
+        }
+        JFreeChart chart = ChartFactory.createLineChart("s", "1", "2", dataset);
+
+        CategoryPlot catPlot = chart.getCategoryPlot();
+        catPlot.setRangeGridlinePaint(Color.BLACK);
+        ChartFrame frame = new ChartFrame("b", chart);
+        frame.setSize(1900, 500);
+        frame.setVisible(true);
+
+        double maxHeight = 0.0;
+        for (int i = 0;
+                i < distanceAvgArray.size();
+                i++) {
+            System.out.println(distanceAvgArray.get(i));
+            if (distanceAvgArray.get(i) > maxHeight) {
+                maxHeight = distanceAvgArray.get(i);
+            }
+        }
+        Picture histogram = new Picture(distanceAvgArray.size(), distanceAvgArray.size(), Color.white);
+        Color c = Color.RED;
+        for (int i = 0;
+                i < distanceAvgArray.size();
+                i++) {
+            double max = (distanceAvgArray.get(i) * distanceAvgArray.size() / maxHeight);
+            for (int j = distanceAvgArray.size() - 1; j >= (distanceAvgArray.size() - max); j--) {
+                histogram.getPixel(i, j).setColor(c);
+            }
+        }
+
+        histogram.show();
+    }
 
 ## 47- Detecting a violation of traffic rule:
 
+https://user-images.githubusercontent.com/98660298/218275638-1ba38785-5267-4eca-97fc-98641397608d.mp4
+
+This method allows users to upload two photos to check for any traffic rule violations. If a violation is detected, such as a vehicle passing or touching the yellow line, the user will be notified of the violation. If no violation is found, the user will be informed that there is no violation.
+
+######  Detecting a violation of traffic rule code:
+     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Picture p1 = new Picture(FileChooser.pickAFile());
+        Picture p2 = new Picture(FileChooser.pickAFile());
+        double sum = 0;
+        for (int i = 521; i < 707; i++) {
+            for (int j = 1288; j < 1305; j++) {
+                Pixel p1Pixel = p1.getPixel(j, i);
+                Pixel p2Pixel = p2.getPixel(j, i);
+                double colorDist = p1Pixel.colorDistance(p2Pixel.getColor());
+                sum += colorDist;
+            }
+        }
+        double difference = (sum / ((707.00 - 521.00) * (1305.00 - 1288.00)));
+        if (difference > 15) {
+            JOptionPane.showMessageDialog(null, "there are traffic violation");
+        } else {
+            JOptionPane.showMessageDialog(null, "there are no traffic violation");
+        }
+        System.out.println(difference);
+        p1.show();
+        p2.show();
+    } 
+
 ## 48- Object Detection:
 
-## 49- Tracking Method:
 
-## 50- Counting Number of Vehicles:
+![image](https://user-images.githubusercontent.com/98660298/218275731-de21bebd-a70d-4254-bd62-8cd8bed80f46.png)
+
+This method can be used to detect objects, such as heads, and draw a rectangle around them. To increase accuracy, it needs to be trained further to recognize more objects.
+
+######  Object detection code:
+    private void jButton56ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // loading the OpenCV core library
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+        // loading the image
+        String imagePath = pathName;;
+        Mat newImage = Imgcodecs.imread(imagePath);
+
+        // loading the classifier
+        String classifierPath = "opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml";
+        CascadeClassifier classifier = new CascadeClassifier(classifierPath);
+
+        // detect the objects
+        MatOfRect objects = new MatOfRect();
+        classifier.detectMultiScale(newImage, objects);
+
+        // draw the rectangle
+        Rect[] objectsArray = objects.toArray();
+        for (int i = 0; i < objectsArray.length; i++) {
+            Imgproc.rectangle(newImage, new Point(objectsArray[i].x, objectsArray[i].y),
+                    new Point(objectsArray[i].x + objectsArray[i].width, objectsArray[i].y + objectsArray[i].height),
+                    new Scalar(0, 255, 0));
+        }
+
+        // save the image
+        String outputPath = "Tmp\\ODF.jpg";
+        Imgcodecs.imwrite(outputPath, newImage);
+        Picture first = new Picture("Tmp\\ODF.jpg");
+        Image img = (first.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+
+    } 
 
 
 
+## Challenges we faced while doing this project:
 
+One of the most difficult challenges we faced during this project was dealing with the size of pictures that the user would insert. Many methods did not accept differences in size, resulting in an array out of bounds error. Additionally, uploading and pushing the project onto GitHub was a significant problem because of its file size restrictions. We also encountered difficulties with OpenCV, both in terms of implementation and usage, as it did not support our Netbeans version. Additionally, a large amount of effort was put into making the detailed documentation for this project. Lastly, we faced a lack of codes and information, such as shot boundary, which was necessary for the project’s completion.
 
+## References:
+
+[1] B. Ericson, "Picture class," in IntroCS, Princeton University, https://introcs.cs.princeton.edu/java/stdlib/javadoc/Picture.html, Accessed: Month Day, Year. 
+
+[2] B. Ericson, "SimplePicture class," in UIC, University of Illinois at Chicago, https://www2.cs.uic.edu/~i101/doc/SimplePicture.html, Accessed: Month Day, Year. 
+
+[3] "RGB to HSV color conversion," RapidTables, https://www.rapidtables.com/convert/color/rgb-to-hsv.html, Accessed: Month Day, Year. 
+
+[4] OpenCV Development Team, "OpenCV library," in OpenCV, Accessed: Month Day, Year. 
+
+[5] B. Ericson, "Sound class," in Duke University, https://www2.cs.duke.edu/courses/spring07/cps001/doc/mediaClasses/Sound.html, Accessed: Month Day, Year. 
+
+[6] B. Ericson, "MovieMaker class," in Georgia Institute of Technology, Accessed: Month Day, Year. 
+
+[7] B. Ericson, "FrameSequencer class," in UIC, University of Illinois at Chicago, https://www2.cs.uic.edu/~i101/doc/FrameSequencer.html, Accessed: Month Day, Year.
 
