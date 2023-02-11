@@ -2555,7 +2555,7 @@ This will cause sunset effect to the photo  by time the user selected according 
 
 ######  Create Sunset movie code:
 
-private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
         int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
         String fName = FileChooser.pickAFile();
         Picture beachP = new Picture(fName);
@@ -2622,6 +2622,52 @@ This method allows the user to create a new video background by entering the dur
 ## 44- Edge Detection Movie:
 
 https://user-images.githubusercontent.com/98660298/218275055-8d95e0af-9ca2-44d6-8942-d6877bd1b776.mp4
+
+In this method, the user needs to specify the duration of the video and upload an image to detect the edges. The method will then output a video displaying the detected edges.
+
+######  Edge detection Movie code:
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+            JFileChooser fc = new JFileChooser("");
+            fc.showOpenDialog(null);
+            String fName = fc.getSelectedFile().getAbsolutePath();
+            Picture pic = new Picture(fName);
+
+            Picture copyPict = null;
+
+            FrameSequencer frameSequencer = new FrameSequencer("movie_Edit");
+            int framesPerSec = 30;
+
+            for (int i = 0; i < framesPerSec * time; i++) {
+                copyPict = new Picture(pic);
+                double topAverage = 0.0;
+                double bottomAverage = 0.0;
+
+                for (int x = 0; x < pic.getHeight() - 1; x++) {
+                    for (int y = 0; y < copyPict.getWidth(); y++) {
+                        Pixel topPixel = copyPict.getPixel(y, x);
+                        Pixel bottomPixel = copyPict.getPixel(y, x + 1);
+
+                        topAverage = (topPixel.getRed() + topPixel.getGreen() + topPixel.getBlue()) / 3.0;
+                        bottomAverage = (bottomPixel.getRed() + bottomPixel.getGreen() + bottomPixel.getBlue()) / 3.0;
+
+                        if (Math.abs(topAverage - bottomAverage) < (time * framesPerSec + 1) - i) {
+                            topPixel.setColor(Color.WHITE);
+                        } else {
+                            topPixel.setColor(Color.BLACK);
+                        }
+                    }
+                }
+
+                frameSequencer.addFrame(copyPict);
+            }
+
+            frameSequencer.play(framesPerSec);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }  
 
 ## 45- Compare two Images:
 
