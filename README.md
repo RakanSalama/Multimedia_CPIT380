@@ -585,5 +585,71 @@ Users can make four different types of reflections by pressing the corresponding
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
     } 
+## 12 + 13- Scalling Up/Down:
+![giphy (5)](https://user-images.githubusercontent.com/98660298/218227613-9281216a-3d88-4f4d-8d00-5b00b07d3a8e.gif)
 
+Users can adjust the size of the picture by using the slider. Moving it to the left will cause the picture to scale down, and moving it to the right will cause it to scale up. To apply the changes, press the "apply" button.
 
+  ######  Scalling Up/Down Code:
+
+    private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        //Scalling
+        int value = jSlider5.getValue();
+        int scaleValue = 0;
+        if (value == -4) {
+            scaleValue = 5;
+        } else if (value == -3) {
+            scaleValue = 4;
+        } else if (value == -2) {
+            scaleValue = 3;
+        } else if (value == -1) {
+            scaleValue = 2;
+        } else if (value == 1) {
+            scaleValue = 2;
+        } else if (value == 2) {
+            scaleValue = 3;
+        } else if (value == 3) {
+            scaleValue = 4;
+        } else if (value == 4) {
+            scaleValue = 5;
+        } else {
+            scaleValue = 1;
+        }
+        if (value < 0) {
+            Picture targetPicture = new Picture((picObj.getWidth() / scaleValue + 1), (picObj.getHeight() / scaleValue + 1));
+            Pixel sourcePixel = null;
+            Pixel targetPixel = null;
+            for (int sourceX = 0, targetX = 0; sourceX < picObj.getWidth(); sourceX += scaleValue, targetX++) {
+                for (int sourceY = 0, targetY = 0; sourceY < picObj.getHeight(); sourceY += scaleValue, targetY++) {
+                    sourcePixel = picObj.getPixel(sourceX, sourceY);
+                    targetPixel = targetPicture.getPixel(targetX, targetY);
+                    targetPixel.setColor(sourcePixel.getColor());
+                }
+            }
+            targetPicture.show();
+            picObj = targetPicture;
+        } else {
+
+            Picture targetPicture = new Picture((picObj.getWidth() * scaleValue), (picObj.getHeight() * scaleValue));
+            Pixel sourcePixel;
+            Pixel targetPixel;
+            int targetX = 0;
+            int targetY = 0;
+            for (int sourceX = 0; sourceX < picObj.getWidth(); sourceX++) {
+                for (int sourceY = 0; sourceY < picObj.getHeight(); sourceY++) {
+                    sourcePixel = picObj.getPixel(sourceX, sourceY);
+                    for (int indexY = 0; indexY < scaleValue; indexY++) {
+                        for (int indexX = 0; indexX < scaleValue; indexX++) {
+                            targetX = (sourceX * scaleValue + indexX);
+                            targetY = (sourceY * scaleValue + indexY);
+                            targetPixel = targetPicture.getPixel(targetX, targetY);
+                            targetPixel.setColor(sourcePixel.getColor());
+                        }
+                    }
+                }
+            }
+            targetPicture.show();
+            picObj = targetPicture;
+        }
+
+    } 
