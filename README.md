@@ -869,7 +869,7 @@ Users can create a collage by placing four different pictures into the corners, 
 
 Computing histograms For all RGB color and the Gray scale, every color in separate button GUI, and it will represent it  in GUI graph of the choosing histogram color.
 
-######   Computing histograms:
+######   Computing histograms Code:
         private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         Pixel_LL[][] Histograms = new Pixel_LL[1][256];
 
@@ -1696,7 +1696,104 @@ To apply Box, min and max filters, users must enter an odd number, such as 3, 5,
 
 ## 24- Red Eye Reduction using thresholding technique:
 
+https://user-images.githubusercontent.com/98660298/218268108-5f463302-bc2c-4f31-85ca-642fc8474cb6.mp4
+
+By pressing the "Red Eye Reduction" button, the user can reduce the red eye in the selected picture. The user will then be prompted to select the area of the picture with the red eye and choose a color to replace it. Finally, the user will adjust the thresholding value and the resulting image will be displayed without the red eye.
+
+######   Red Eye reduction code:
+    private void jButton49ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // redeye
+        if (picObj == null) {
+            JOptionPane.showMessageDialog(null, "Select an image please!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JFrame parent = new JFrame();
+            JOptionPane.showMessageDialog(parent, "Please click on two points in the image");
+
+            jLabel1.addMouseListener(new MouseAdapter() {
+                int numOfClicks = 0;
+                int x1;
+                int x2;
+                int y1;
+                int y2;
+
+                public void mouseClicked(MouseEvent e) {
+                    System.out.println("Clicked!");
+                    System.out.println(e.getX());
+                    System.out.println(e.getY());
+                    numOfClicks++;
+                    if (numOfClicks == 1) {
+                        x1 = e.getX();
+                        y1 = e.getY();
+                    } else if (numOfClicks == 2) {
+                        x2 = e.getX();
+                        y2 = e.getY();
+
+                        double W = (picObj.getWidth() * 1.00 / jLabel1.getWidth());
+                        double H = (picObj.getHeight() * 1.00 / jLabel1.getHeight());
+
+                        x1 = (int) (W * x1);
+                        x2 = (int) (W * x2);
+                        y1 = (int) (H * y1);
+                        y2 = (int) (H * y2);
+
+                        Color newColor = JColorChooser.showDialog(null, "Choose New Color", Color.BLACK);
+                        int trashhold = Integer.parseInt(JOptionPane.showInputDialog("TrashHold?"));
+                        for (int i = y1; i < y2; i++) {
+                            for (int j = x1; j < x2; j++) {
+                                Pixel p = picObj.getPixel(j, i);
+                                //here we compare because get the different between Red color amd pxl .
+                                if (p.colorDistance(Color.RED) < trashhold) {
+                                    p.setColor(newColor);
+                                }
+                            }
+                        }
+                        numOfClicks = 0;
+                        jLabel1.removeMouseListener(this);
+                        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+                        jLabel2.setText("");
+                        jLabel2.setIcon(new ImageIcon(img));
+                    }
+                }
+            });
+        }
+    } 
+    
 ## 25- Automatic detection of red eyes:
+
+![image](https://user-images.githubusercontent.com/98660298/218268518-e0c0f75b-a7a4-4e07-a946-24e02f2538b4.png)
+
+To detect red eyes in an image, simply press the "Automatic Detection of Red Eyes" button. This feature utilizes OpenCV, an external library, to identify and outline the red eyes in the image with a rectangle. The result is a picture that clearly highlights the red eyes.
+
+######   Automatic detection of red eyes code:
+
+    private void jButton54ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        CascadeClassifier faceDetector = new CascadeClassifier("opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_default.xml");
+        CascadeClassifier eyeDetector = new CascadeClassifier("opencv\\sources\\data\\haarcascades\\haarcascade_eye.xml");
+        String imagePath = pathName;
+        Mat image = Imgcodecs.imread(imagePath);
+        MatOfRect faceDetections = new MatOfRect();
+        faceDetector.detectMultiScale(image, faceDetections);
+
+        for (Rect rect : faceDetections.toArray()) {
+            Mat faceROI = new Mat(image, rect);
+            MatOfRect eyes = new MatOfRect();
+            eyeDetector.detectMultiScale(faceROI, eyes);
+
+            for (Rect eye : eyes.toArray()) {
+                Point center = new Point(eye.x + eye.width / 2, eye.y + eye.height / 2);
+                Imgproc.rectangle(image, new Point(eye.x + rect.x, eye.y + rect.y),
+                        new Point(eye.x + rect.x + eye.width, eye.y + rect.y + eye.height), new Scalar(255, 0, 0));
+            }
+        }
+
+        Imgcodecs.imwrite("Tmp\\ARE.jpg", image);
+        Picture first = new Picture("Tmp\\ARE.jpg");
+        Image img = (first.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+
+    } 
 
 ## 26- Background Subtraction:
 
