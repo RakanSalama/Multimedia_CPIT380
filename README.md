@@ -2466,6 +2466,54 @@ By pressing the "Dropped Ball" button, the user can insert the desired number of
     
 ## 40- CreateTickerTapeMovie – A string of text moves back and forth and does not disappear from screen. 
 
+https://user-images.githubusercontent.com/98660298/218271921-143c24f8-e8de-4245-aa7c-31dd75995b3b.mp4
+
+By pressing the "Tricker Tape" button, the user can enter the number of seconds they wish for the video to run and the text they want to move. This will cause the selected text to move along the screen according to the number of seconds specified.
+
+######  TickerTapeMovie  code:
+
+     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+            String message = JOptionPane.showInputDialog("please enter your message");
+            int framesPerSec = 30;
+            Picture p = null;
+            Graphics g = null;
+            FrameSequencer frameSequencer = new FrameSequencer("Movie");
+            Font font = new Font("Arial", Font.BOLD, 24);
+            boolean right = true;
+            // loop for 2 seconds of animation
+            for (int j = 0, k = 0; j < framesPerSec * time; j++) {
+                // draw the string
+                p = new Picture(500, 400);
+                g = p.getGraphics();
+                g.setColor(Color.BLACK);
+                g.setFont(font);
+                if (right) {
+                    if (k * 10 > p.getWidth() - message.length() * 12) {
+                        right = false;
+                    }
+                } else {
+                    if (k < 1) {
+                        right = true;
+                    }
+                }
+                if (right) {
+                    g.drawString(message, k++ * 10, 200);
+                } else {
+                    g.drawString(message, k-- * 10, 200);
+                }
+                // add frame to sequencer
+                frameSequencer.addFrame(p);
+            }
+
+            // play the movie
+            frameSequencer.play(framesPerSec);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }                                        
+
 ## 41- Create a movie, cropping a part of given image that appears randomly on screen:
 
 ## 42- Create Sunset movie:
