@@ -2883,11 +2883,17 @@ This method can be used to detect objects, such as heads, and draw a rectangle a
 ## References:
 
 [1] B. Ericson, "Picture class," in IntroCS, Princeton University, https://introcs.cs.princeton.edu/java/stdlib/javadoc/Picture.html, Accessed: Month Day, Year. 
+
 [2] B. Ericson, "SimplePicture class," in UIC, University of Illinois at Chicago, https://www2.cs.uic.edu/~i101/doc/SimplePicture.html, Accessed: Month Day, Year. 
+
 [3] "RGB to HSV color conversion," RapidTables, https://www.rapidtables.com/convert/color/rgb-to-hsv.html, Accessed: Month Day, Year. 
+
 [4] OpenCV Development Team, "OpenCV library," in OpenCV, Accessed: Month Day, Year. 
+
 [5] B. Ericson, "Sound class," in Duke University, https://www2.cs.duke.edu/courses/spring07/cps001/doc/mediaClasses/Sound.html, Accessed: Month Day, Year. 
+
 [6] B. Ericson, "MovieMaker class," in Georgia Institute of Technology, Accessed: Month Day, Year. 
+
 [7] B. Ericson, "FrameSequencer class," in UIC, University of Illinois at Chicago, https://www2.cs.uic.edu/~i101/doc/FrameSequencer.html, Accessed: Month Day, Year.
 
 
