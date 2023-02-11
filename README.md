@@ -2022,4 +2022,139 @@ Users can blend two or more sounds into one sound by pressing the "Blending" but
         }
     }  
 
+## 35- Apply simple average, weighted average, max, min and median filters on sounds.
 
+https://user-images.githubusercontent.com/98660298/218257116-c7f8cff6-f71f-4524-a99f-37b4b590b4fa.mp4
+
+Users can modify the selected sound by applying different filters. To apply the filter they want, they must select it from the combo box and press the "Apply filter" button. To hear the changed sound, they must then press the "Play" button.
+
+######   SoundFilters code:
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        SoundSample[] sampleArray = currentSound.getSamples();
+        //simAvg
+        if (jComboBox1.getSelectedIndex() == 0) {
+            int startIndex = 0;
+            int endIndex = 3;
+
+            while (endIndex <= sampleArray.length) {
+                int sum = 0;
+                for (int i = startIndex; i < endIndex; i++) {
+                    sum += sampleArray[i].getValue();
+                }
+
+                int average = sum / 3;
+                for (int i = startIndex; i < endIndex; i++) {
+                    sampleArray[i].setValue(average);
+                }
+                startIndex += 3;
+                endIndex += 3;
+            }
+
+            for (int i = 0; i < sampleArray.length; i++) {
+                System.out.println(sampleArray[i].getValue());
+            }
+            ////
+        } else if (jComboBox1.getSelectedIndex() == 1) {
+            //wightAvg
+            int[] weighted = new int[]{2, 3, 2};
+            int startIndex = 0;
+            int endIndex = 3;
+
+            while (endIndex <= sampleArray.length) {
+                int sum = 0;
+                int tmpIndex = 0;
+                for (int i = startIndex; i < endIndex; i++) {
+                    sum += (sampleArray[i].getValue() * weighted[tmpIndex]);
+                    tmpIndex++;
+                }
+
+                int average = sum / 3;
+                for (int i = startIndex; i < endIndex; i++) {
+                    sampleArray[i].setValue(average);
+                }
+                startIndex += 3;
+                endIndex += 3;
+            }
+
+            for (int i = 0; i < sampleArray.length; i++) {
+                System.out.println(sampleArray[i].getValue());
+            }
+
+        } else if (jComboBox1.getSelectedIndex() == 2) {
+//max
+            int startIndex = 0;
+            int endIndex = 3;
+
+            while (endIndex <= sampleArray.length) {
+                int max = Integer.MIN_VALUE;
+
+                for (int i = startIndex; i < endIndex; i++) {
+                    int tmp = sampleArray[i].getValue();
+                    if (tmp > max) {
+                        max = tmp;
+                    }
+                }
+
+                for (int i = startIndex; i < endIndex; i++) {
+                    sampleArray[i].setValue(max);
+                }
+                startIndex += 3;
+                endIndex += 3;
+            }
+            for (int i = 0; i < sampleArray.length; i++) {
+                System.out.println(sampleArray[i].getValue());
+            }
+
+        } else if (jComboBox1.getSelectedIndex() == 3) {
+//min
+            int startIndex = 0;
+            int endIndex = 3;
+
+            while (endIndex <= sampleArray.length) {
+                int min = Integer.MAX_VALUE;
+
+                for (int i = startIndex; i < endIndex; i++) {
+                    int tmp = sampleArray[i].getValue();
+                    if (tmp < min) {
+                        min = tmp;
+                    }
+                }
+
+                for (int i = startIndex; i < endIndex; i++) {
+                    sampleArray[i].setValue(min);
+                }
+                startIndex += 3;
+                endIndex += 3;
+            }
+            for (int i = 0; i < sampleArray.length; i++) {
+                System.out.println(sampleArray[i].getValue());
+            }
+
+        } else if (jComboBox1.getSelectedIndex() == 4) {
+//midin
+            int[] medianArray = new int[3];
+            int startIndex = 0;
+            int endIndex = 3;
+            while (endIndex <= sampleArray.length) {
+                int tmpIndx = 0;
+
+                for (int i = startIndex; i < endIndex; i++) {
+                    medianArray[tmpIndx] = sampleArray[i].getValue();
+                    tmpIndx++;
+                }
+                Arrays.sort(medianArray);
+                for (int i = startIndex; i < endIndex; i++) {
+                    sampleArray[i].setValue(medianArray[1]);
+                }
+                startIndex += 3;
+                endIndex += 3;
+            }
+            for (int i = 0; i < sampleArray.length; i++) {
+                System.out.println(sampleArray[i].getValue());
+            }
+        }
+
+
+    }
