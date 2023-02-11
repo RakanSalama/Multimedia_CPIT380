@@ -1350,3 +1350,346 @@ Users can adjust the contrast of the chosen picture by using a slider. Moving th
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
     }
+
+## 19 + 20 + 21 + 22 + 23- Filters(Box,Gaussian,Laplacian,Min,Max,Median and Weighted median)
+
+https://user-images.githubusercontent.com/98660298/218251491-6c4871e3-c5ed-4670-8a22-0197874ac1dd.mp4
+
+To apply Box, min and max filters, users must enter an odd number, such as 3, 5, 7 or 9, and then check the corresponding box and press the button for the filter they want. For Gaussian, median and weighted median filters, simply press the button to apply the changes. For Laplacian filter, users must select which Laplacian change to implement and then press the “Laplacian filter” button to apply the changes.
+
+######   Box Filter code:
+
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {
+
+        int sof = 3;
+        if (jCheckBox5.isSelected()) {
+
+            sof = Integer.valueOf(jTextField2.getText());
+        }
+
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        int q = sof / 2;
+
+        Picture Image = new Picture(x, y);
+        Image.copy(picObj, 0, 0, x, y, 0, 0);
+        for (int v = q; v <= y - (q + 1); v++) {
+            for (int u = q; u <= x - (q + 1); u++) {
+
+                int sumRed = 0, sumGreen = 0, sumBlue = 0;
+                for (int j = -q; j <= q; j++) {
+                    for (int i = -q; i <= q; i++) {
+
+                        int red = Image.getPixel(u + i, v + j).getRed();
+                        sumRed += red;
+                        int green = Image.getPixel(u + i, v + j).getGreen();
+                        sumGreen += green;
+                        int blue = Image.getPixel(u + i, v + j).getBlue();
+                        sumBlue += blue;
+                    }
+                }
+                int Red = (int) Math.round(sumRed / (sof * sof));
+                int Green = (int) Math.round(sumGreen / (sof * sof));
+                int Blue = (int) Math.round(sumBlue / (sof * sof));
+                picObj.getPixel(u, v).setColor(new Color(Red, Green, Blue));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+        
+    }
+    
+######  Min Filter code:
+
+    private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        int sof = 3;
+        if (jCheckBox6.isSelected()) {
+
+            sof = Integer.valueOf(jTextField3.getText());
+        }
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        int q = sof / 2;
+        Picture copy = new Picture(x, y);
+        copy.copy(picObj, 0, 0, x, y, 0, 0);
+        int Red[] = new int[sof * sof];
+        int Green[] = new int[sof * sof];
+        int Blue[] = new int[sof * sof];
+        for (int v = q; v <= y - (q + 1); v++) {
+            for (int u = q; u <= x - (q + 1); u++) {
+                int k = 0;
+                for (int j = -q; j <= q; j++) {
+                    for (int i = -q; i <= q; i++) {
+                        Red[k] = copy.getPixel(u + i, v + j).getRed();
+                        Green[k] = copy.getPixel(u + i, v + j).getGreen();
+                        Blue[k] = copy.getPixel(u + i, v + j).getBlue();
+                        k++;
+                    }
+                }
+                Arrays.sort(Red);
+                Arrays.sort(Green);
+                Arrays.sort(Blue);
+                picObj.getPixel(u, v).setColor(new Color(Red[0], Green[0], Blue[0]));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    } 
+    
+######  Max Filter code:
+
+    private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        int sof = 3;
+        if (jCheckBox7.isSelected()) {
+
+            sof = Integer.valueOf(jTextField4.getText());
+        }
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        int q = sof / 2;
+        Picture copy = new Picture(x, y);
+        copy.copy(picObj, 0, 0, x, y, 0, 0);
+        int Red[] = new int[sof * sof];
+        int Green[] = new int[sof * sof];
+        int Blue[] = new int[sof * sof];
+        for (int v = q; v <= y - (q + 1); v++) {
+            for (int u = q; u <= x - (q + 1); u++) {
+                int k = 0;
+                for (int j = -q; j <= q; j++) {
+                    for (int i = -q; i <= q; i++) {
+                        Red[k] = copy.getPixel(u + i, v + j).getRed();
+                        Green[k] = copy.getPixel(u + i, v + j).getGreen();
+                        Blue[k] = copy.getPixel(u + i, v + j).getBlue();
+                        k++;
+                    }
+                }
+                Arrays.sort(Red);
+                Arrays.sort(Green);
+                Arrays.sort(Blue);
+                picObj.getPixel(u, v).setColor(new Color(Red[sof * sof - 1], Green[sof * sof - 1], Blue[sof * sof - 1]));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    } 
+
+######  Gaussian Filter code:
+
+    private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        Picture Image = new Picture(x, y);
+        Image.copy(picObj, 0, 0, x, y, 0, 0);
+        double filter[][] = {{0.075, 0.125, 0.075},
+        {0.125, 0.200, 0.125},
+        {0.075, 0.125, 0.075}};
+        for (int v = 1; v <= y - 2; v++) {
+            for (int u = 1; u <= x - 2; u++) {
+                double sumRed = 0, sumGreen = 0, sumBlue = 0;
+                for (int j = -1; j <= 1; j++) {
+                    for (int i = -1; i <= 1; i++) {
+                        double c = filter[j + 1][i + 1];
+                        int red = Image.getPixel(u + i, v + j).getRed();
+                        sumRed += red * c;
+                        int green = Image.getPixel(u + i, v + j).getGreen();
+                        sumGreen += green * c;
+                        int blue = Image.getPixel(u + i, v + j).getBlue();
+                        sumBlue += blue * c;
+
+                    }
+                }
+                int Red = (int) Math.round(sumRed);
+                int Green = (int) Math.round(sumGreen);
+                int Blue = (int) Math.round(sumBlue);
+                picObj.getPixel(u, v).setColor(new Color(Red, Green, Blue));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    } 
+    
+######  Laplacian Filter code:
+
+    private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        Picture Image = new Picture(x, y);
+        Image.copy(picObj, 0, 0, x, y, 0, 0);
+        int filter[][] = {{0, 1, 0}, {1, -4, 1}, {0, 1, 0}};
+        if (jComboBox3.getSelectedIndex() == 0) {
+            filter[0][0] = 0;
+            filter[0][1] = 1;
+            filter[0][2] = 0;
+            filter[1][0] = 1;
+            filter[1][1] = -4;
+            filter[1][2] = 1;
+            filter[2][0] = 0;
+            filter[2][1] = 1;
+            filter[2][2] = 0;
+
+        } else if (jComboBox3.getSelectedIndex() == 1) {
+            filter[0][0] = -1;
+            filter[0][1] = 0;
+            filter[0][2] = 1;
+            filter[1][0] = -1;
+            filter[1][1] = 0;
+            filter[1][2] = 1;
+            filter[2][0] = -1;
+            filter[2][1] = 0;
+            filter[2][2] = 1;
+
+        } else if (jComboBox3.getSelectedIndex() == 2) {
+            filter[0][0] = -1;
+            filter[0][1] = -1;
+            filter[0][2] = -1;
+            filter[1][0] = 0;
+            filter[1][1] = 0;
+            filter[1][2] = 0;
+            filter[2][0] = 1;
+            filter[2][1] = 1;
+            filter[2][2] = 1;
+        } else if (jComboBox3.getSelectedIndex() == 3) {
+            filter[0][0] = -1;
+            filter[0][1] = 0;
+            filter[0][2] = 1;
+            filter[1][0] = -2;
+            filter[1][1] = 0;
+            filter[1][2] = 2;
+            filter[2][0] = -1;
+            filter[2][1] = 0;
+            filter[2][2] = 1;
+
+        } else if (jComboBox3.getSelectedIndex() == 4) {
+            filter[0][0] = -1;
+            filter[0][1] = -2;
+            filter[0][2] = -1;
+            filter[1][0] = 0;
+            filter[1][1] = 0;
+            filter[1][2] = 0;
+            filter[2][0] = 1;
+            filter[2][1] = 2;
+            filter[2][2] = 1;
+        }
+        for (int v = 1; v <= y - 2; v++) {
+            for (int u = 1; u <= x - 2; u++) {
+                double sumRed = 0, sumGreen = 0, sumBlue = 0;
+                for (int j = -1; j <= 1; j++) {
+                    for (int i = -1; i <= 1; i++) {
+                        int c = filter[j + 1][i + 1];
+                        int red = Image.getPixel(u + i, v + j).getRed();
+                        sumRed += red * c;
+                        int green = Image.getPixel(u + i, v + j).getGreen();
+                        sumGreen += green * c;
+                        int blue = Image.getPixel(u + i, v + j).getBlue();
+                        sumBlue += blue * c;
+
+                    }
+                }
+                int Red = (int) Math.min(255, Math.max(0, sumRed));
+                int Green = (int) Math.min(255, Math.max(0, sumGreen));
+                int Blue = (int) Math.min(255, Math.max(0, sumBlue));
+                picObj.getPixel(u, v).setColor(new Color(Red, Green, Blue));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    } 
+
+######  Median Filter code:
+
+    private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        Picture copy = new Picture(x, y);
+        copy.copy(picObj, 0, 0, x, y, 0, 0);
+        int Red[] = new int[9];
+        int Green[] = new int[9];
+        int Blue[] = new int[9];
+        for (int v = 1; v <= y - 2; v++) {
+            for (int u = 1; u <= x - 2; u++) {
+                int k = 0;
+                for (int j = -1; j <= 1; j++) {
+                    for (int i = -1; i <= 1; i++) {
+                        Red[k] = copy.getPixel(u + i, v + j).getRed();
+                        Green[k] = copy.getPixel(u + i, v + j).getGreen();
+                        Blue[k] = copy.getPixel(u + i, v + j).getBlue();
+                        k++;
+                    }
+                }
+
+                Arrays.sort(Red);
+                Arrays.sort(Green);
+                Arrays.sort(Blue);
+                picObj.getPixel(u, v).setColor(new Color(Red[4], Green[4], Blue[4]));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }
+    
+######  Weighted Median Filter code:
+
+    private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        int x = picObj.getWidth();
+        int y = picObj.getHeight();
+        Picture copy = new Picture(x, y);
+        copy.copy(picObj, 0, 0, x, y, 0, 0);
+        int Weight[] = {1, 2, 1, 2, 3, 2, 1, 2, 1};
+        int sumW = 0;
+        for (int i = 0; i < Weight.length; i++) {
+            sumW += Weight[i];
+        }
+        int Red[] = new int[9];
+        int Green[] = new int[9];
+        int Blue[] = new int[9];
+        int Redw[] = new int[sumW];
+        int Greenw[] = new int[sumW];
+        int Bluew[] = new int[sumW];
+
+        for (int v = 1; v <= y - 2; v++) {
+            for (int u = 1; u <= x - 2; u++) {
+                int k = 0;
+                for (int j = -1; j <= 1; j++) {
+                    for (int i = -1; i <= 1; i++) {
+                        Red[k] = copy.getPixel(u + i, v + j).getRed();
+                        Green[k] = copy.getPixel(u + i, v + j).getGreen();
+                        Blue[k] = copy.getPixel(u + i, v + j).getBlue();
+                        k++;
+                    }
+                }
+                int time;
+                int red;
+                int green;
+                int blue;
+                int counter = 0;
+                for (int i = 0; i < Weight.length; i++) {
+                    time = Weight[i];
+                    red = Red[i];
+                    green = Green[i];
+                    blue = Blue[i];
+                    for (int j = 0; j < time; j++) {
+                        Redw[counter] = red;
+                        Greenw[counter] = green;
+                        Bluew[counter] = blue;
+                        counter++;
+                    }
+
+                }
+
+                Arrays.sort(Redw);
+                Arrays.sort(Greenw);
+                Arrays.sort(Bluew);
+                picObj.getPixel(u, v).setColor(new Color(Redw[Redw.length / 2], Greenw[Greenw.length / 2], Bluew[Bluew.length / 2]));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }
