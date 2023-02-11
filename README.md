@@ -1270,4 +1270,31 @@ Export Histogram TXT that contain saved location information of a pixel and the 
             JOptionPane.showMessageDialog(null, "ERROR", "EROR", JOptionPane.OK_OPTION);
         }
     }
-      
+    
+ ## 17- Computing  Contrast:  
+ 
+ ![giphy](https://user-images.githubusercontent.com/98660298/218250726-61e24deb-f3b5-4cfc-97d5-b9e2ed8b2009.gif)
+
+By pressing the "Computing contrast" button, users can see what the contrast level of an inserted picture is, ranging from 0 to 1.
+
+######   Computing contrast code:
+
+
+    private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        //constrant
+        int Contrast;
+        double max_val = 0;
+        double min_val = Integer.MAX_VALUE;
+        Pixel[] pixels = picObj.getPixels();
+        for (Pixel pixel : pixels) {
+            Contrast = (int) ((pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3);
+            if (Contrast > max_val) {
+                max_val = Contrast;
+            }
+            if (Contrast < min_val) {
+                min_val = Contrast;
+            }
+        }
+        double contrast = ((max_val - min_val) / (max_val + min_val));
+        JOptionPane.showMessageDialog(null, "The level of Contrast is = " + contrast);
+    } 
