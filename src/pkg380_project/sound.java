@@ -479,23 +479,9 @@ public class sound extends javax.swing.JFrame {
         for (int sourceIndex = 0, targetIndex = 0; sourceIndex < currentSound.getLength(); sourceIndex = sourceIndex + 4, targetIndex++) {
             currentSound.setSampleValueAt(targetIndex, s.getSampleValueAt(sourceIndex));
         }
-        for (int i = currentSound.getLength() / 2; i < currentSound.getLength(); i++) {
+        for (int i = currentSound.getLength() / 4; i < currentSound.getLength(); i++) {
             currentSound.setSampleValueAt(i, 0);
         }
-
-        /*      SoundSample[] sample = currentSound.getSamples();
-    
-    Sound spreaded = new Sound((int) sample.length * 4);
-    for (double sourceIndex = 0, targetIndex = 0; targetIndex < spreaded.getLength(); sourceIndex += 0.25, targetIndex++) {
-    spreaded.setSampleValueAt((int) targetIndex, sample[((int) sourceIndex)].getValue());
-    }
-    
-    SoundSample[] sampleSpreaded = spreaded.getSamples();
-    Sound squeezed = new Sound((int) sampleSpreaded.length / 4);
-    for (double sourceIndex = 0, targetIndex = 0; targetIndex < squeezed.getLength(); sourceIndex += 4, targetIndex++) {
-    squeezed.setSampleValueAt((int) targetIndex, sampleSpreaded[((int) sourceIndex)].getValue());
-    }
-    currentSound = squeezed;*/
 
     }//GEN-LAST:event_jButton11ActionPerformed
 

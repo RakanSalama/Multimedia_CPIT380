@@ -124,7 +124,7 @@ public class video extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Top Left To Bottom Rghit");
+        jButton2.setText("Top Left To Bottom Right");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -152,7 +152,7 @@ public class video extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Top Rghit To Bottom Left");
+        jButton1.setText("Top Right To Bottom Left");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -496,13 +496,23 @@ public class video extends javax.swing.JFrame {
         Graphics g = null;
         FrameSequencer frameSequencer = new FrameSequencer("C:\\intro-prog-java\\movies\\edge");
         frameSequencer.setShown(true);
+        int x = 0;
+        int y = 0;
         for (int i = 0; i < framesPerSec * time; i++) {
+            if (x >= 590) {
+                break;
+            }
             p = new Picture(640, 480);
             g = p.getGraphics();
             g.setColor(Color.RED);
             g.drawLine(0, 160, 640, 160);
             g.fillRect(i * 10, (215 + (int) (150 * -Math.abs(Math.sin(i * ((4 * 10) / 180.000))))), 50, 50);
+            x = i * 10;
+            y = (215 + (int) (150 * -Math.abs(Math.sin(i * ((4 * 10) / 180.000)))));
+            System.out.println(i * 10 + " " + (215 + (int) (150 * -Math.abs(Math.sin(i * ((4 * 10) / 180.000))))));
+
             frameSequencer.addFrame(p);
+
         }
         frameSequencer.play(framesPerSec);
 
@@ -628,6 +638,11 @@ public class video extends javax.swing.JFrame {
             }
         }
         double difference = (sum / ((707.00 - 521.00) * (1305.00 - 1288.00)));
+        if (difference > 15) {
+            JOptionPane.showMessageDialog(null, "there are traffic violation");
+        } else {
+            JOptionPane.showMessageDialog(null, "there are no traffic violation");
+        }
         System.out.println(difference);
         p1.show();
         p2.show();

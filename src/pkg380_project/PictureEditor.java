@@ -1388,46 +1388,47 @@ public class PictureEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
-        int x = jSlider4.getValue();
-        int y = (int) ((x / 100.00) * 255);
-        int aLowR = 257, aHighR = -1, aLowG = 257, aHighG = -1, aLowB = 257, aHighB = -1;
+        int sliderValue = jSlider4.getValue();
+        int newValue = (int) ((sliderValue / 100.00) * 255);
+        int lowestRed = 257, highestRed = -1, lowestGreen = 257, highestGreen = -1, lowestBlue = 257, highestBlue = -1;
+
         for (int i = 0; i < picObj.getWidth(); i++) {
             for (int j = 0; j < picObj.getHeight(); j++) {
-                int tempR = picObj.getPixel(i, j).getRed();
-                if (tempR < aLowR) {
-                    aLowR = tempR;
+                int tempRed = picObj.getPixel(i, j).getRed();
+                if (tempRed < lowestRed) {
+                    lowestRed = tempRed;
                 }
-                if (tempR > aHighR) {
-                    aHighR = tempR;
+                if (tempRed > highestRed) {
+                    highestRed = tempRed;
                 }
-                int tempG = picObj.getPixel(i, j).getGreen();
-                if (tempG < aLowG) {
-                    aLowG = tempG;
+                int tempGreen = picObj.getPixel(i, j).getGreen();
+                if (tempGreen < lowestGreen) {
+                    lowestGreen = tempGreen;
                 }
-                if (tempG > aHighG) {
-                    aHighG = tempG;
+                if (tempGreen > highestGreen) {
+                    highestGreen = tempGreen;
                 }
-                int tempB = picObj.getPixel(i, j).getBlue();
-                if (tempB < aLowB) {
-                    aLowB = tempB;
+                int tempBlue = picObj.getPixel(i, j).getBlue();
+                if (tempBlue < lowestBlue) {
+                    lowestBlue = tempBlue;
                 }
-                if (tempB > aHighB) {
-                    aHighB = tempB;
+                if (tempBlue > highestBlue) {
+                    highestBlue = tempBlue;
                 }
 
             }
         }
-        int aMin = 0;
+        int minValue = 0;
         for (int i = 0; i < picObj.getWidth(); i++) {
             for (int j = 0; j < picObj.getHeight(); j++) {
-                int equatR = aMin + (int) ((picObj.getPixel(i, j).getRed() - aLowR) * ((double) (y - aMin) / (aHighR - aLowR)));
-                int equatG = aMin + (int) ((picObj.getPixel(i, j).getGreen() - aLowG) * ((double) (y - aMin) / (aHighG - aLowG)));
-                int equatB = aMin + (int) ((picObj.getPixel(i, j).getBlue() - aLowB) * ((double) (y - aMin) / (aHighB - aLowB)));
-                picObj.getPixel(i, j).setColor(new Color(equatR, equatG, equatB));
+                int redEquation = minValue + (int) ((picObj.getPixel(i, j).getRed() - lowestRed) * ((double) (newValue - minValue) / (highestRed - lowestRed)));
+                int greenEquation = minValue + (int) ((picObj.getPixel(i, j).getGreen() - lowestGreen) * ((double) (newValue - minValue) / (highestGreen - lowestGreen)));
+                int blueEquation = minValue + (int) ((picObj.getPixel(i, j).getBlue() - lowestBlue) * ((double) (newValue - minValue) / (highestBlue - lowestBlue)));
+                picObj.getPixel(i, j).setColor(new Color(redEquation, greenEquation, blueEquation));
             }
         }
-        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
-        icon = new ImageIcon(img);
+        Image image = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(image);
         jLabel2.setIcon(icon);
     }//GEN-LAST:event_jButton40ActionPerformed
 
@@ -2829,9 +2830,9 @@ public class PictureEditor extends javax.swing.JFrame {
         Pixel currPixel = null;
         Pixel oldPixel = null;
         Pixel newPixel = null;
-        JOptionPane.showMessageDialog(null, "Enter the background");
-        Picture first = new Picture(FileChooser.pickAFile());
         JOptionPane.showMessageDialog(null, "Enter the forground");
+        Picture first = new Picture(FileChooser.pickAFile());
+        JOptionPane.showMessageDialog(null, "Enter the background");
         Picture secend = new Picture(FileChooser.pickAFile());
         String size = JOptionPane.showInputDialog(null, "Please Enter the threshold value: ");
         for (int x = 0; x < first.getWidth(); x++) {
