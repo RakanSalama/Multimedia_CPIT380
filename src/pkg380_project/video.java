@@ -14,9 +14,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import org.opencv.core.Point;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -33,6 +39,12 @@ import org.opencv.core.*;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
+
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.videoio.VideoCapture;
+import org.opencv.imgcodecs.Imgcodecs;
+import static pkg380_project.PictureEditor.icon;
 
 /**
  *
@@ -92,6 +104,11 @@ public class video extends javax.swing.JFrame {
         });
 
         jButton10.setText("Detecting A Violation");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setText("Shot Boundary Detection");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -235,31 +252,36 @@ public class video extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        //take the time form the user 
-        int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+        int Sec = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+        int framesPerSec = 30;
+        Picture p = null;
+        Graphics g = null;
+        FrameSequencer frameSequencer = new FrameSequencer("re");
+        frameSequencer.setShown(true);
+        int x = 450;
+        int y = 0;
+        for (int i = 0; i < framesPerSec * Sec; i++) {
+            System.out.println(x + " " + y);
+            x = x - 10;
+            y = y + 10;
 
-        int FPS = 30;
-        Picture p;
-        Graphics g;
-
-        FrameSequencer frameSequencer = new FrameSequencer("Movie");
-
-        //for each 1 SEC 30 FPS
-        for (int i = 0; i < FPS * time; i++) {
-            p = new Picture(640, 480);
+            if (x == -10 && y == 460) {
+                break;
+            }
+            p = new Picture(500, 500);
             g = p.getGraphics();
-            g.setColor(Color.BLACK);
-            g.fillRect(Math.abs((i * 10) - 570), i * 7, 70, 70);
-
+            g.setColor(Color.RED);
+            g.drawLine(0, 250, 500, 250);
+            g.drawLine(250, 0, 250, 500);
+            // x y w h
+            g.fillRect(x, y, 50, 50);
+            g.setColor(Color.CYAN);
             frameSequencer.addFrame(p);
-        }
 
-        frameSequencer.play(FPS);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
         try {
             int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
             String message = JOptionPane.showInputDialog("please enter your message");
@@ -302,27 +324,34 @@ public class video extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
-
-        int FPS = 30;
-        Picture p;
-        Graphics g;
-
-        FrameSequencer frameSequencer = new FrameSequencer("Movie");
-
-        //for each 1 SEC 30 FPS
-        for (int i = 0; i < FPS * time; i++) {
-
-            p = new Picture(640, 480);
+        int Sec = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+        int framesPerSec = 30;
+        Picture p = null;
+        Graphics g = null;
+        FrameSequencer frameSequencer = new FrameSequencer("re");
+        frameSequencer.setShown(true);
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < framesPerSec * Sec; i++) {
+            System.out.println(x + " " + y);
+            x = x + 10;
+            y = y + 10;
+            if (x == 460 && y == 460) {
+                break;
+            }
+            // draw a filled rectangle
+            p = new Picture(500, 500);
             g = p.getGraphics();
-            g.setColor(Color.BLACK);
-            g.fillRect(i * 10, i * 7, 70, 70);
+            g.setColor(Color.RED);
+            g.drawLine(0, 250, 500, 250);
+            g.drawLine(250, 0, 250, 500);
 
+            // x y w h
+            g.fillRect(x, y, 50, 50);
+            g.setColor(Color.CYAN);
             frameSequencer.addFrame(p);
-        }
 
-        frameSequencer.play(FPS);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -490,10 +519,10 @@ public class video extends javax.swing.JFrame {
         frameSequencer.setShown(true);
 
         // loop creating the frames
-        for (int i = framesPerSec*time; i >= 0; i--) {
-            beachP.makeSunset(i );
+        for (int i = framesPerSec * time; i >= 0; i--) {
+            beachP.makeSunset(i);
             frameSequencer.addFrame(beachP);
-            
+
         }
 
         // play the movie
@@ -508,6 +537,18 @@ public class video extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        String path = FileChooser.pickAFile();
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        VideoCapture capture = new VideoCapture(path);
+        Mat frameg = new Mat();
+
+        int u = 0;
+        while (capture.read(frameg)) {
+            Imgcodecs.imwrite("outputVidtoP\\photo" + u + ".jpg", frameg);
+            u++;
+        }
+
+        capture.release();
         ArrayList<Double> distanceAvgArray = new ArrayList<Double>();
         try {
 
@@ -515,9 +556,9 @@ public class video extends javax.swing.JFrame {
             int indexP2 = 1;
             while (true) {
 
-                Picture p1 = new Picture("C:\\Users\\Nero\\Documents\\NetBeansProjects\\Cpit380_Project\\outputVidtoP\\photo" + indexP1 + ".jpg");
-                Picture p2 = new Picture("C:\\Users\\Nero\\Documents\\NetBeansProjects\\Cpit380_Project\\outputVidtoP\\photo" + indexP2 + ".jpg");
-                
+                Picture p1 = new Picture("outputVidtoP\\photo" + indexP1 + ".jpg");
+                Picture p2 = new Picture("outputVidtoP\\photo" + indexP2 + ".jpg");
+
                 double distanceAvg = 0;
                 Pixel p1Pixel = null;
                 Pixel p2Pixel = null;
@@ -551,7 +592,6 @@ public class video extends javax.swing.JFrame {
         frame.setSize(1900, 500);
         frame.setVisible(true);
 
-        
         double maxHeight = 0.0;
         for (int i = 0;
                 i < distanceAvgArray.size();
@@ -574,6 +614,24 @@ public class video extends javax.swing.JFrame {
 
         histogram.show();
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        Picture p1 = new Picture(FileChooser.pickAFile());
+        Picture p2 = new Picture(FileChooser.pickAFile());
+        double sum = 0;
+        for (int i = 521; i < 707; i++) {
+            for (int j = 1288; j < 1305; j++) {
+                Pixel p1Pixel = p1.getPixel(j, i);
+                Pixel p2Pixel = p2.getPixel(j, i);
+                double colorDist = p1Pixel.colorDistance(p2Pixel.getColor());
+                sum += colorDist;
+            }
+        }
+        double difference = (sum / ((707.00 - 521.00) * (1305.00 - 1288.00)));
+        System.out.println(difference);
+        p1.show();
+        p2.show();
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments

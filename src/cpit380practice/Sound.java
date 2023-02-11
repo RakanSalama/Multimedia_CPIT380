@@ -1577,11 +1577,8 @@ public class Sound extends SimpleSound
      * by one but source index by 0.5 and set target value
      * to the copy of the original sound
      */
-    for (double sourceIndex=0, targetIndex = 0; 
-         targetIndex < this.getLength(); 
-         sourceIndex=sourceIndex+0.5, targetIndex++)
-      this.setSampleValueAt((int) targetIndex,
-              s.getSampleValueAt((int) sourceIndex));
+    for (double sourceIndex=0, targetIndex = 0; targetIndex < this.getLength(); sourceIndex=sourceIndex+0.5, targetIndex++)
+      this.setSampleValueAt((int) targetIndex, s.getSampleValueAt((int) sourceIndex));
     
   }
   

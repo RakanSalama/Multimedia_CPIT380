@@ -6,6 +6,7 @@
 package pkg380_project;
 
 import cpit380practice.FileChooser;
+import cpit380practice.SimpleSound;
 import cpit380practice.Sound;
 import cpit380practice.SoundException;
 import cpit380practice.SoundSample;
@@ -296,14 +297,13 @@ public class sound extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
         String first = JOptionPane.showInputDialog(null, "Enter the start Index the lowest index is 0: ");
         String last = JOptionPane.showInputDialog(null, "Enter the end Index the max value is " + (currentSound.getLengthInFrames() - 1) + ": ");
-        String first2 = JOptionPane.showInputDialog(null, "Enter the start Index the lowest index is 0: ");
-        String last2 = JOptionPane.showInputDialog(null, "Enter the end Index the max value is " + (currentSound.getLengthInFrames() - 1) + ": ");
         int start = Integer.parseInt(first);
         int end = Integer.parseInt(last);
         if (start < 0 || end >= currentSound.getLengthInFrames()) {
@@ -312,22 +312,15 @@ public class sound extends javax.swing.JFrame {
             last = JOptionPane.showInputDialog(null, "Enter the end Index the max value is " + (currentSound.getLengthInFrames() - 1) + ": ");
         }
 
-        int start2 = Integer.parseInt(first2);
-        int end2 = Integer.parseInt(last2);
         // calculate the number of samples in the clip
         int lengthInSamples = end - start + 1; //s1
-        int lengthInSamples2 = end2 - start2 + 1; //s2
-        int lengthTarget = lengthInSamples + lengthInSamples2;
+        int lengthTarget = lengthInSamples;
         start = Integer.parseInt(first);
         end = Integer.parseInt(last);
         Sound target = new Sound(lengthTarget);
         int value = 0;
         int targetIndex = 0;
         for (int i = start; i <= end; i++, targetIndex++) {
-            value = currentSound.getSampleValueAt(i);
-            target.setSampleValueAt(targetIndex, value);
-        }
-        for (int i = start2; i <= end2; i++, targetIndex++) {
             value = currentSound.getSampleValueAt(i);
             target.setSampleValueAt(targetIndex, value);
         }
@@ -340,6 +333,9 @@ public class sound extends javax.swing.JFrame {
 
         try {
             pathName = FileChooser.pickAFile();
+            if (!pathName.endsWith(".wav")) {
+
+            }
             currentSound = new Sound(pathName);
 
         } catch (Exception e) {
@@ -358,7 +354,7 @@ public class sound extends javax.swing.JFrame {
         jButton11.setEnabled(true);
         jButton12.setEnabled(true);
 
- 
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -366,13 +362,13 @@ public class sound extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-
-        SoundSample[] sampleArray = currentSound.getSamples();
+        Sound sound1 = new Sound(currentSound);
+        SoundSample[] sampleArray = sound1.getSamples();
         int jv = jSlider1.getValue();
         for (SoundSample sample : sampleArray) {
             sample.setValue((int) (sample.getValue() * (jv / 100.00)));
         }
-        currentSound.play();
+        sound1.play();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -472,112 +468,160 @@ public class sound extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        Sound s = new Sound(pathName);
         SoundSample[] sample = currentSound.getSamples();
 
-        Sound spreaded = new Sound((int) sample.length * 4);
-        for (double sourceIndex = 0, targetIndex = 0; targetIndex < spreaded.getLength(); sourceIndex += 0.25, targetIndex++) {
-            spreaded.setSampleValueAt((int) targetIndex, sample[((int) sourceIndex)].getValue());
+        for (double sourceIndex = 0, targetIndex = 0; targetIndex < currentSound.getLength(); sourceIndex = sourceIndex + 0.5, targetIndex++) {
+            currentSound.setSampleValueAt((int) targetIndex, s.getSampleValueAt((int) sourceIndex));
         }
 
-        SoundSample[] sampleSpreaded = spreaded.getSamples();
-        Sound squeezed = new Sound((int) sampleSpreaded.length / 8);
-        for (double sourceIndex = 0, targetIndex = 0; targetIndex < squeezed.getLength(); sourceIndex += 8, targetIndex++) {
-            squeezed.setSampleValueAt((int) targetIndex, sampleSpreaded[((int) sourceIndex)].getValue());
+        s = new Sound(pathName);
+        for (int sourceIndex = 0, targetIndex = 0; sourceIndex < currentSound.getLength(); sourceIndex = sourceIndex + 4, targetIndex++) {
+            currentSound.setSampleValueAt(targetIndex, s.getSampleValueAt(sourceIndex));
         }
-        currentSound = squeezed;
+        for (int i = currentSound.getLength() / 2; i < currentSound.getLength(); i++) {
+            currentSound.setSampleValueAt(i, 0);
+        }
 
+        /*      SoundSample[] sample = currentSound.getSamples();
+    
+    Sound spreaded = new Sound((int) sample.length * 4);
+    for (double sourceIndex = 0, targetIndex = 0; targetIndex < spreaded.getLength(); sourceIndex += 0.25, targetIndex++) {
+    spreaded.setSampleValueAt((int) targetIndex, sample[((int) sourceIndex)].getValue());
+    }
+    
+    SoundSample[] sampleSpreaded = spreaded.getSamples();
+    Sound squeezed = new Sound((int) sampleSpreaded.length / 4);
+    for (double sourceIndex = 0, targetIndex = 0; targetIndex < squeezed.getLength(); sourceIndex += 4, targetIndex++) {
+    squeezed.setSampleValueAt((int) targetIndex, sampleSpreaded[((int) sourceIndex)].getValue());
+    }
+    currentSound = squeezed;*/
 
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+
         SoundSample[] sampleArray = currentSound.getSamples();
+        //simAvg
         if (jComboBox1.getSelectedIndex() == 0) {
-            /*          int average = 0;
+            int startIndex = 0;
+            int endIndex = 3;
+
+            while (endIndex <= sampleArray.length) {
+                int sum = 0;
+                for (int i = startIndex; i < endIndex; i++) {
+                    sum += sampleArray[i].getValue();
+                }
+
+                int average = sum / 3;
+                for (int i = startIndex; i < endIndex; i++) {
+                    sampleArray[i].setValue(average);
+                }
+                startIndex += 3;
+                endIndex += 3;
+            }
+
             for (int i = 0; i < sampleArray.length; i++) {
-            average += currentSound.getSampleValueAt(i);
+                System.out.println(sampleArray[i].getValue());
             }
-            double Value = round(average / (sampleArray.length + 0.00));
-            
-            for (int i = 0; i < sampleArray.length; i++) {
-            currentSound.setSampleValueAt(i, (int) Value);
-            }
-            System.out.println(sampleArray.length);
-            System.out.println(sampleArray.length / 3.0);
-            
-            /////////////////       int[] array = new int[100];*/
-        int startIndex = 0;
-        int endIndex = 3;
-
-        while (endIndex <= sampleArray.length) {
-            int sum = 0;
-            for (int i = startIndex; i < endIndex; i++) {
-                sum += sampleArray[i].getValue();
-            }
-
-            int average = sum / 3;
-            for (int i = startIndex; i < endIndex; i++) {
-                sampleArray[i].setValue(average);  
-            }
-            startIndex += 3;
-            endIndex += 3;
-        }
-
-        for (int i = 0; i < sampleArray.length; i++) {
-            System.out.println(sampleArray[i].getValue());
-        }
             ////
         } else if (jComboBox1.getSelectedIndex() == 1) {
-            int[] weighted = new int[]{1, 5, 9, 7, 8, 10, 3, 4, 15, 11};
-            int count = sampleArray.length / weighted.length;
-            int check = 0;
-            int arrayIndx = 0;
-            int average = 0;
-            for (int i = 0; i < sampleArray.length; i++) {
-                if (check <= count) {
-                    average += currentSound.getSampleValueAt(i) * weighted[arrayIndx];
-                    check++;
-                } else {
-                    check = 0;
-                    arrayIndx++;
+            //wightAvg
+            int[] weighted = new int[]{2, 3, 2};
+            int startIndex = 0;
+            int endIndex = 3;
+
+            while (endIndex <= sampleArray.length) {
+                int sum = 0;
+                int tmpIndex = 0;
+                for (int i = startIndex; i < endIndex; i++) {
+                    sum += (sampleArray[i].getValue() * weighted[tmpIndex]);
+                    tmpIndex++;
                 }
+
+                int average = sum / 3;
+                for (int i = startIndex; i < endIndex; i++) {
+                    sampleArray[i].setValue(average);
+                }
+                startIndex += 3;
+                endIndex += 3;
             }
-            double Value = round(average / (sampleArray.length + 0.00));
+
             for (int i = 0; i < sampleArray.length; i++) {
-                currentSound.setSampleValueAt(i, (int) Value);
+                System.out.println(sampleArray[i].getValue());
             }
 
         } else if (jComboBox1.getSelectedIndex() == 2) {
-            int max = 0;
-            for (int i = 0; i < sampleArray.length; i++) {
-                max = Math.max(max, currentSound.getSampleValueAt(i));
+//max
+            int startIndex = 0;
+            int endIndex = 3;
 
+            while (endIndex <= sampleArray.length) {
+                int max = Integer.MIN_VALUE;
+
+                for (int i = startIndex; i < endIndex; i++) {
+                    int tmp = sampleArray[i].getValue();
+                    if (tmp > max) {
+                        max = tmp;
+                    }
+                }
+
+                for (int i = startIndex; i < endIndex; i++) {
+                    sampleArray[i].setValue(max);
+                }
+                startIndex += 3;
+                endIndex += 3;
             }
             for (int i = 0; i < sampleArray.length; i++) {
-                currentSound.setSampleValueAt(i, (int) max);
+                System.out.println(sampleArray[i].getValue());
             }
+
         } else if (jComboBox1.getSelectedIndex() == 3) {
-            int min = 0;
-            for (int i = 0; i < sampleArray.length; i++) {
-                min = Math.min(min, currentSound.getSampleValueAt(i));
+//min
+            int startIndex = 0;
+            int endIndex = 3;
 
+            while (endIndex <= sampleArray.length) {
+                int min = Integer.MAX_VALUE;
+
+                for (int i = startIndex; i < endIndex; i++) {
+                    int tmp = sampleArray[i].getValue();
+                    if (tmp < min) {
+                        min = tmp;
+                    }
+                }
+
+                for (int i = startIndex; i < endIndex; i++) {
+                    sampleArray[i].setValue(min);
+                }
+                startIndex += 3;
+                endIndex += 3;
             }
             for (int i = 0; i < sampleArray.length; i++) {
-                currentSound.setSampleValueAt(i, (int) min);
+                System.out.println(sampleArray[i].getValue());
             }
+
         } else if (jComboBox1.getSelectedIndex() == 4) {
-            int[] medianArray = new int[sampleArray.length];
-            for (int i = 0; i < sampleArray.length; i++) {
-                medianArray[i] = currentSound.getSampleValueAt(i);
+//midin
+            int[] medianArray = new int[3];
+            int startIndex = 0;
+            int endIndex = 3;
+            while (endIndex <= sampleArray.length) {
+                int tmpIndx = 0;
+
+                for (int i = startIndex; i < endIndex; i++) {
+                    medianArray[tmpIndx] = sampleArray[i].getValue();
+                    tmpIndx++;
+                }
+                Arrays.sort(medianArray);
+                for (int i = startIndex; i < endIndex; i++) {
+                    sampleArray[i].setValue(medianArray[1]);
+                }
+                startIndex += 3;
+                endIndex += 3;
             }
-            Arrays.sort(medianArray);
-            double median;
-            if (medianArray.length % 2 == 0) {
-                median = ((double) medianArray[medianArray.length / 2] + (double) medianArray[medianArray.length / 2 - 1]) / 2;
-            } else {
-                median = (double) medianArray[medianArray.length / 2];
-            }
             for (int i = 0; i < sampleArray.length; i++) {
-                currentSound.setSampleValueAt(i, (int) median);
+                System.out.println(sampleArray[i].getValue());
             }
         }
 
