@@ -1797,6 +1797,40 @@ To detect red eyes in an image, simply press the "Automatic Detection of Red Eye
 
 ## 26- Background Subtraction:
 
+![image](https://user-images.githubusercontent.com/98660298/218269542-353925d8-4583-46f9-b3ac-37ac9ef022e4.png)
+
+
+This method enables users to subtract the foreground from the background. The user must press the button "Background subtraction" and he will be asked to insert the foreground picture first, followed by the background picture. After that, they will be asked to enter a thresholding value and the program will then subtract the background from the foreground picture.
+
+######   background Subtraction code:
+    private void jButton51ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Pixel currPixel = null;
+        Pixel oldPixel = null;
+        Pixel newPixel = null;
+        JOptionPane.showMessageDialog(null, "Enter the forground");
+        Picture first = new Picture(FileChooser.pickAFile());
+        JOptionPane.showMessageDialog(null, "Enter the background");
+
+        Picture secend = new Picture(FileChooser.pickAFile());
+        String size = JOptionPane.showInputDialog(null, "Please Enter the threshold value: ");
+        for (int x = 0; x < first.getWidth(); x++) {
+            for (int y = 0; y < first.getHeight(); y++) {
+
+                currPixel = first.getPixel(x, y);
+                oldPixel = secend.getPixel(x, y);
+
+                if (currPixel.colorDistance(oldPixel.getColor()) < Integer.valueOf(size)) {
+                    newPixel = picObj.getPixel(x, y);
+                    currPixel.setColor(newPixel.getColor());
+                }
+            }
+        }
+        picObj = first;
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }
+
 ## 28- Edge Detection methods:
 
 https://user-images.githubusercontent.com/98660298/218252463-b7281ce2-3065-4f4f-9707-03d2055aed44.mp4
