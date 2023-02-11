@@ -2516,7 +2516,38 @@ By pressing the "Tricker Tape" button, the user can enter the number of seconds 
 
 ## 41- Create a movie, cropping a part of given image that appears randomly on screen:
 
+https://user-images.githubusercontent.com/98660298/218274233-b95b628c-91cf-4710-b5a0-dd0043b28216.mp4
+
+In this method, the users must specify the duration of the video and the picture that they want to crop. Afterwards, the method will randomly select a portion of the image to be moved.
+
+######  Cropping and move in a video  code:
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            int duration = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+            String fName = FileChooser.pickAFile();
+            Picture pic = new Picture(fName);
+            // declare other variables
+            Picture target = null;   // targeted piece of pic
+            FrameSequencer frameSequencer
+                    = new FrameSequencer("Movie");
+            int framesPerSec = 30;
+            // loop creating the frames
+            for (int i = 0; i < framesPerSec * duration; i++) {
+                target = new Picture(640, 480);
+                target.copy(pic, 250, 170, 390, 300, i * 10, i * 5);
+                frameSequencer.addFrame(target);
+            }
+            // play the movie
+            frameSequencer.play(framesPerSec);
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } 
+
 ## 42- Create Sunset movie:
+
 
 ## 43- Back Ground Subtraction Movie:
 
