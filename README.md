@@ -2718,18 +2718,160 @@ In this method, the user will insert two pictures which will then be compared to
 
 https://user-images.githubusercontent.com/98660298/218275426-069b3bf7-b2aa-488c-82ee-e3b81784f0c2.mp4
 
+In this method, the user can input a video and view a chart that shows the differences between the frames of that video. If the video has significant differences between the frames, the chart will show a high value, whereas if there are not many differences, the chart will remain low.
+
+
+######  Shot boundary detection code:
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        String path = FileChooser.pickAFile();
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        VideoCapture capture = new VideoCapture(path);
+        Mat frameg = new Mat();
+
+        int u = 0;
+        while (capture.read(frameg)) {
+            Imgcodecs.imwrite("outputVidtoP\\photo" + u + ".jpg", frameg);
+            u++;
+        }
+
+        capture.release();
+        ArrayList<Double> distanceAvgArray = new ArrayList<Double>();
+        try {
+
+            int indexP1 = 0;
+            int indexP2 = 1;
+            while (true) {
+
+                Picture p1 = new Picture("outputVidtoP\\photo" + indexP1 + ".jpg");
+                Picture p2 = new Picture("outputVidtoP\\photo" + indexP2 + ".jpg");
+
+                double distanceAvg = 0;
+                Pixel p1Pixel = null;
+                Pixel p2Pixel = null;
+
+                for (int x = 0; x < p1.getWidth(); x++) {
+                    for (int y = 0; y < p2.getHeight(); y++) {
+                        p1Pixel = p1.getPixel(x, y);
+                        p2Pixel = p2.getPixel(x, y);
+
+                        double distance = p1Pixel.colorDistance(p2Pixel.getColor());
+                        distanceAvg += distance;
+                    }
+                }
+                distanceAvgArray.add(((distanceAvg / p1.getPixels().length)));
+                indexP1++;
+                indexP2++;
+            }
+        } catch (Exception e) {
+
+        }
+
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (int i = 0; i < distanceAvgArray.size(); i++) {
+            dataset.setValue(distanceAvgArray.get(i), "", String.valueOf(i));
+        }
+        JFreeChart chart = ChartFactory.createLineChart("s", "1", "2", dataset);
+
+        CategoryPlot catPlot = chart.getCategoryPlot();
+        catPlot.setRangeGridlinePaint(Color.BLACK);
+        ChartFrame frame = new ChartFrame("b", chart);
+        frame.setSize(1900, 500);
+        frame.setVisible(true);
+
+        double maxHeight = 0.0;
+        for (int i = 0;
+                i < distanceAvgArray.size();
+                i++) {
+            System.out.println(distanceAvgArray.get(i));
+            if (distanceAvgArray.get(i) > maxHeight) {
+                maxHeight = distanceAvgArray.get(i);
+            }
+        }
+        Picture histogram = new Picture(distanceAvgArray.size(), distanceAvgArray.size(), Color.white);
+        Color c = Color.RED;
+        for (int i = 0;
+                i < distanceAvgArray.size();
+                i++) {
+            double max = (distanceAvgArray.get(i) * distanceAvgArray.size() / maxHeight);
+            for (int j = distanceAvgArray.size() - 1; j >= (distanceAvgArray.size() - max); j--) {
+                histogram.getPixel(i, j).setColor(c);
+            }
+        }
+
+        histogram.show();
+    }
 
 ## 47- Detecting a violation of traffic rule:
 
 https://user-images.githubusercontent.com/98660298/218275638-1ba38785-5267-4eca-97fc-98641397608d.mp4
 
+This method allows users to upload two photos to check for any traffic rule violations. If a violation is detected, such as a vehicle passing or touching the yellow line, the user will be notified of the violation. If no violation is found, the user will be informed that there is no violation.
 
-
+######  Detecting a violation of traffic rule code:
+     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Picture p1 = new Picture(FileChooser.pickAFile());
+        Picture p2 = new Picture(FileChooser.pickAFile());
+        double sum = 0;
+        for (int i = 521; i < 707; i++) {
+            for (int j = 1288; j < 1305; j++) {
+                Pixel p1Pixel = p1.getPixel(j, i);
+                Pixel p2Pixel = p2.getPixel(j, i);
+                double colorDist = p1Pixel.colorDistance(p2Pixel.getColor());
+                sum += colorDist;
+            }
+        }
+        double difference = (sum / ((707.00 - 521.00) * (1305.00 - 1288.00)));
+        if (difference > 15) {
+            JOptionPane.showMessageDialog(null, "there are traffic violation");
+        } else {
+            JOptionPane.showMessageDialog(null, "there are no traffic violation");
+        }
+        System.out.println(difference);
+        p1.show();
+        p2.show();
+    } 
 
 ## 48- Object Detection:
 
+
 ![image](https://user-images.githubusercontent.com/98660298/218275731-de21bebd-a70d-4254-bd62-8cd8bed80f46.png)
 
+
+
+######  Object detection code:
+    private void jButton56ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // loading the OpenCV core library
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+        // loading the image
+        String imagePath = pathName;;
+        Mat newImage = Imgcodecs.imread(imagePath);
+
+        // loading the classifier
+        String classifierPath = "opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml";
+        CascadeClassifier classifier = new CascadeClassifier(classifierPath);
+
+        // detect the objects
+        MatOfRect objects = new MatOfRect();
+        classifier.detectMultiScale(newImage, objects);
+
+        // draw the rectangle
+        Rect[] objectsArray = objects.toArray();
+        for (int i = 0; i < objectsArray.length; i++) {
+            Imgproc.rectangle(newImage, new Point(objectsArray[i].x, objectsArray[i].y),
+                    new Point(objectsArray[i].x + objectsArray[i].width, objectsArray[i].y + objectsArray[i].height),
+                    new Scalar(0, 255, 0));
+        }
+
+        // save the image
+        String outputPath = "Tmp\\ODF.jpg";
+        Imgcodecs.imwrite(outputPath, newImage);
+        Picture first = new Picture("Tmp\\ODF.jpg");
+        Image img = (first.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+
+    } 
 
 
 
