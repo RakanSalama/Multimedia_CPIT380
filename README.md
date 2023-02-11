@@ -1983,5 +1983,43 @@ Users can reverse the sound they have selected by pressing the "Reversing" butto
         }
     }
     
+    
+ ## 34- Blending Two or more sounds:
+    
+https://user-images.githubusercontent.com/98660298/218256646-be7b8eeb-f1a6-4663-a91b-5f008ead4383.mp4
+
+Users can blend two or more sounds into one sound by pressing the "Blending" button. Then, they will select the desired sound and blend it to the already selected sound. The program will then ask if they want to add more sounds or not. If yes, they will select another sound. Finally, they must press the "Play" button to hear the blended sound.
+
+######   Blend code:
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        while (true) {
+            Sound sound1 = new Sound(FileChooser.pickAFile());
+            if ((currentSound.getLength() - 1) > (sound1.getLength() - 1)) {
+                for (int i = 0; i < currentSound.getLength() - 1; i++) {
+                    if (i >= sound1.getLengthInFrames()) {
+                        currentSound.setSampleValueAt(i, currentSound.getSampleValueAt(i));
+                    } else {
+                        currentSound.setSampleValueAt(i, currentSound.getSampleValueAt(i) + sound1.getSampleValueAt(i));
+                    }
+                }
+            } else {
+                for (int i = 0; i < sound1.getLength() - 1; i++) {
+                    if (i >= currentSound.getLengthInFrames()) {
+                        sound1.setSampleValueAt(i, sound1.getSampleValueAt(i));
+                    } else {
+                        sound1.setSampleValueAt(i, sound1.getSampleValueAt(i) + currentSound.getSampleValueAt(i));
+                    }
+                }
+                currentSound = sound1;
+            }
+            int reply = JOptionPane.showConfirmDialog(null, "To blend another sound Press yes", null, JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                continue;
+            } else {
+                break;
+            }
+        }
+    }  
 
 
