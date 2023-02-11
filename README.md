@@ -2548,6 +2548,9 @@ In this method, the users must specify the duration of the video and the picture
 
 ## 42- Create Sunset movie:
 
+https://user-images.githubusercontent.com/98660298/218274582-73c4ce99-410e-4571-b11c-bbb9102e60ac.mp4
+
+
 
 ## 43- Back Ground Subtraction Movie:
 
@@ -2560,11 +2563,6 @@ In this method, the users must specify the duration of the video and the picture
 ## 47- Detecting a violation of traffic rule:
 
 ## 48- Object Detection:
-
-## 49- Tracking Method:
-
-## 50- Counting Number of Vehicles:
-
 
 
 
