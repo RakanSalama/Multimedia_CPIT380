@@ -2673,9 +2673,51 @@ In this method, the user needs to specify the duration of the video and upload a
 
 https://user-images.githubusercontent.com/98660298/218275253-2ec847f1-70ed-4999-a7ae-9677722596d8.mp4
 
+In this method, the user will insert two pictures which will then be compared to determine how much difference there is between them. If the difference is less than 50, it indicates a small difference between the two images. If the difference is greater than 50, it indicates a significant difference.
+
+######  Compare two Images code:
+    private void jButton55ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        try {
+            Picture p1 = picObj;
+            Picture p2 = new Picture(FileChooser.pickAFile());
+            Image img = (p2.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+            BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D bGr = bimage.createGraphics();
+            bGr.drawImage(img, 0, 0, null);
+            bGr.dispose();
+            File outputfile = new File("Tmp\\p2.png");
+            ImageIO.write(bimage, "png", outputfile);
+            String pathNameP2 = "Tmp\\p2.png";
+            p2 = new Picture(pathNameP2);
+            img = (p2.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+            icon = new ImageIcon(img);
+            jLabel2.setIcon(icon);
+
+            double distanceAvg = 0;
+            Pixel p1Pixel = null;
+            Pixel p2Pixel = null;
+
+            for (int x = 0; x < p1.getWidth(); x++) {
+                for (int y = 0; y < p2.getHeight(); y++) {
+                    p1Pixel = p1.getPixel(x, y);
+                    p2Pixel = p2.getPixel(x, y);
+
+                    double distance = p1Pixel.colorDistance(p2Pixel.getColor());
+                    distanceAvg += distance;
+                }
+            }
+            JOptionPane.showMessageDialog(null, "the difference between is" + (distanceAvg / p2.getPixels().length), "File", JOptionPane.OK_OPTION);
+        } catch (IOException ex) {
+            Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 ## 46- Shot boundary detection:
 
 https://user-images.githubusercontent.com/98660298/218275426-069b3bf7-b2aa-488c-82ee-e3b81784f0c2.mp4
+
 
 ## 47- Detecting a violation of traffic rule:
 
