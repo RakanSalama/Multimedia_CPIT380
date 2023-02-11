@@ -1298,3 +1298,55 @@ By pressing the "Computing contrast" button, users can see what the contrast lev
         double contrast = ((max_val - min_val) / (max_val + min_val));
         JOptionPane.showMessageDialog(null, "The level of Contrast is = " + contrast);
     } 
+
+## 18- Automatic adjustment of contrast using slider:
+
+![giphy (1)](https://user-images.githubusercontent.com/98660298/218251046-e47354a8-1b9b-4173-b4b7-11ae0b27ecb3.gif)
+
+Users can adjust the contrast of the chosen picture by using a slider. Moving the slider to the right increases the contrast, while moving it to the left decreases it. To ensure the changes take effect, users must press the "Automatic adjustment of contrast" button.
+
+######   Adjustment of contrast using a slider code:
+
+    private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        int x = jSlider4.getValue();
+        int y = (int) ((x / 100.00) * 255);
+        int aLowR = 257, aHighR = -1, aLowG = 257, aHighG = -1, aLowB = 257, aHighB = -1;
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int tempR = picObj.getPixel(i, j).getRed();
+                if (tempR < aLowR) {
+                    aLowR = tempR;
+                }
+                if (tempR > aHighR) {
+                    aHighR = tempR;
+                }
+                int tempG = picObj.getPixel(i, j).getGreen();
+                if (tempG < aLowG) {
+                    aLowG = tempG;
+                }
+                if (tempG > aHighG) {
+                    aHighG = tempG;
+                }
+                int tempB = picObj.getPixel(i, j).getBlue();
+                if (tempB < aLowB) {
+                    aLowB = tempB;
+                }
+                if (tempB > aHighB) {
+                    aHighB = tempB;
+                }
+
+            }
+        }
+        int aMin = 0;
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int equatR = aMin + (int) ((picObj.getPixel(i, j).getRed() - aLowR) * ((double) (y - aMin) / (aHighR - aLowR)));
+                int equatG = aMin + (int) ((picObj.getPixel(i, j).getGreen() - aLowG) * ((double) (y - aMin) / (aHighG - aLowG)));
+                int equatB = aMin + (int) ((picObj.getPixel(i, j).getBlue() - aLowB) * ((double) (y - aMin) / (aHighB - aLowB)));
+                picObj.getPixel(i, j).setColor(new Color(equatR, equatG, equatB));
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    }
