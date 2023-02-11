@@ -2550,7 +2550,31 @@ In this method, the users must specify the duration of the video and the picture
 
 https://user-images.githubusercontent.com/98660298/218274582-73c4ce99-410e-4571-b11c-bbb9102e60ac.mp4
 
+By pressing the "Sunset" button, the user can enter the number of seconds they wish for the video to run and the the image thay whant to make sunset effect. 
+This will cause sunset effect to the photo  by time the user selected according to the number of seconds specified.
 
+######  Create Sunset movie code:
+
+private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
+        int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+        String fName = FileChooser.pickAFile();
+        Picture beachP = new Picture(fName);
+
+        FrameSequencer frameSequencer = new FrameSequencer("C:\intro-prog-java\movies\edge");
+        int framesPerSec = 30;
+
+        frameSequencer.setShown(true);
+
+        // loop creating the frames
+        for (int i = framesPerSec * time; i >= 0; i--) {
+            beachP.makeSunset(i);
+            frameSequencer.addFrame(beachP);
+
+        }
+
+        // play the movie
+        frameSequencer.play(framesPerSec);
+    }
 
 ## 43- Back Ground Subtraction Movie:
 
