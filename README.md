@@ -1858,3 +1858,82 @@ Users can adjust the volume of their chosen sound using a slider. Moving the sli
         }
         sound1.play();
     }
+## 30- Cliping a given sound:
+
+https://user-images.githubusercontent.com/98660298/218254499-be05eb59-12f3-4808-b99c-ee1201ac2106.mp4
+
+
+Users can clip the sound of their selection by pressing the "Clip" button and then specifying the start and end index. To hear the result, press the "Play" button.
+
+
+######   Clip code:
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+        String first = JOptionPane.showInputDialog(null, "Enter the start Index the lowest index is 0: ");
+        String last = JOptionPane.showInputDialog(null, "Enter the end Index the max value is " + (currentSound.getLengthInFrames() - 1) + ": ");
+        int start = Integer.parseInt(first);
+        int end = Integer.parseInt(last);
+        if (start < 0 || end >= currentSound.getLengthInFrames()) {
+            JOptionPane.showMessageDialog(null, "wrong input the start must equal 0 or above and the end must be lower than " + currentSound.getLengthInFrames());
+            first = JOptionPane.showInputDialog(null, "Enter the start Index the lowest index is 0: ");
+            last = JOptionPane.showInputDialog(null, "Enter the end Index the max value is " + (currentSound.getLengthInFrames() - 1) + ": ");
+        }
+
+        // calculate the number of samples in the clip
+        int lengthInSamples = end - start + 1; //s1
+        int lengthTarget = lengthInSamples;
+        start = Integer.parseInt(first);
+        end = Integer.parseInt(last);
+        Sound target = new Sound(lengthTarget);
+        int value = 0;
+        int targetIndex = 0;
+        for (int i = start; i <= end; i++, targetIndex++) {
+            value = currentSound.getSampleValueAt(i);
+            target.setSampleValueAt(targetIndex, value);
+        }
+        currentSound = target;
+
+
+    } 
+    
+## Splicing at least two sounds together keeping the silent zone:
+
+https://user-images.githubusercontent.com/98660298/218255225-7c28a046-e76f-43a1-8a09-327244fff019.mp4
+
+To splice two or more sounds together with a silent zone between them, users must first press the "Splicing" button. They will be asked to enter the number of seconds of silence they'd like between the sounds. After inserting the second sound, they will be asked if they'd like to splice another sound. To hear the result, users must press the "Play" button.
+
+######   Splice code:
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        String first = JOptionPane.showInputDialog(null, "Enter silence sec:");
+        while (true) {
+            int zone = Integer.parseInt(first);
+            Sound sound1 = new Sound(currentSound);
+            Sound sound2 = new Sound(FileChooser.pickAFile());
+            int targetIndex = 0;
+            Sound s = new Sound((currentSound.getLength() + sound2.getLength()) + (int) (currentSound.getSamplingRate() * (Math.ceil(zone))));
+            for (int i = 0; i < sound1.getLength(); i++, targetIndex++) {
+                s.setSampleValueAt(targetIndex, currentSound.getSampleValueAt(i));
+            }
+            for (int i = 0; i < (int) (currentSound.getSamplingRate() * zone); i++, targetIndex++) {
+                s.setSampleValueAt(targetIndex, 0);
+            }
+            for (int i = 0; i < sound2.getLength(); i++, targetIndex++) {
+                s.setSampleValueAt(targetIndex, sound2.getSampleValueAt(i));
+            }
+            currentSound = s;
+            int reply = JOptionPane.showConfirmDialog(null, "To splice another sound Press yes", null, JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                continue;
+            } else {
+                break;
+            }
+        }
+
+
+    } 
+
+    
+
+
