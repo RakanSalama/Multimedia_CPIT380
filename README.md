@@ -2159,7 +2159,7 @@ Users can modify the selected sound by applying different filters. To apply the 
 
     }
     
-## 37- CreateRecatangleMovie method, Show it is moving from top right corner to bottom left, curved trajectory.
+## 37- CreateRecatangleMovie method, Show it is moving from top right corner to bottom left, curved trajectory:
 
 https://user-images.githubusercontent.com/98660298/218258134-6193641e-f972-4d4d-a23f-1742c4211c50.mp4
 
@@ -2229,5 +2229,34 @@ Press the "Top Right To Bottom Left" button to watch the RecatangleMovie move fr
 
         }
     }
+## 38- CreateRecatangleMovie method, Show the trajectory of motion followed by a Sine function:
+
+## 39- CreateRecatangleMovie method Show the trajectory of motion, when a ball is dropped on the floor:
+
+## 40- CreateTickerTapeMovie – A string of text moves back and forth and does not disappear from screen. 
+
+## 41- Create a movie, cropping a part of given image that appears randomly on screen:
+
+## 42- Create Sunset movie:
+
+## 43- Back Ground Subtraction Movie:
+
+## 44- Edge Detection Movie:
+
+## 45- Compare two Images:
+
+## 46- Shot boundary detection:
+
+## 47- Detecting a violation of traffic rule:
+
+## 48- Object Detection:
+
+## 49- Tracking Method:
+
+## 50- Counting Number of Vehicles:
+
+
+
+
 
 
