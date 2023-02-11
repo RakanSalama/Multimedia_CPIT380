@@ -2880,6 +2880,12 @@ This method can be used to detect objects, such as heads, and draw a rectangle a
 
     } 
 
+
+
+## Challenges we faced while doing this project:
+
+One of the most difficult challenges we faced during this project was dealing with the size of pictures that the user would insert. Many methods did not accept differences in size, resulting in an array out of bounds error. Additionally, uploading and pushing the project onto GitHub was a significant problem because of its file size restrictions. We also encountered difficulties with OpenCV, both in terms of implementation and usage, as it did not support our Netbeans version. Additionally, a large amount of effort was put into making the detailed documentation for this project. Lastly, we faced a lack of codes and information, such as shot boundary, which was necessary for the project’s completion.
+
 ## References:
 
 [1] B. Ericson, "Picture class," in IntroCS, Princeton University, https://introcs.cs.princeton.edu/java/stdlib/javadoc/Picture.html, Accessed: Month Day, Year. 
@@ -2895,5 +2901,4 @@ This method can be used to detect objects, such as heads, and draw a rectangle a
 [6] B. Ericson, "MovieMaker class," in Georgia Institute of Technology, Accessed: Month Day, Year. 
 
 [7] B. Ericson, "FrameSequencer class," in UIC, University of Illinois at Chicago, https://www2.cs.uic.edu/~i101/doc/FrameSequencer.html, Accessed: Month Day, Year.
-
 
