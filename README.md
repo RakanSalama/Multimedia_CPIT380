@@ -723,7 +723,7 @@ https://user-images.githubusercontent.com/98660298/218228742-9074006f-e410-448f-
 
 Users can create a collage by placing four different pictures into the corners, with the previously selected image in the center.
 
-######  Scalling Up/Down Code:
+######  Collage Code:
     private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {                                          
 
         Picture sourcePicture = picObj;
