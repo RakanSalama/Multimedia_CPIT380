@@ -1072,9 +1072,9 @@ Export Histogram TXT that contain saved location information of a pixel and the 
         }
     }
     
-}
+    }
 
-class PixelLinkedList_node {
+    class PixelLinkedList_node {
     
     private int x;
     private int y;
@@ -1158,7 +1158,7 @@ class PixelLinkedList_node {
         }
 
         return Histograms;
-    }
+        }
 
 ###### Export Histogram:
 
