@@ -376,3 +376,81 @@ Users can blend 2 or more picture into one picture by pressing the button "Blend
         icon = new ImageIcon(img1);
         jLabel2.setIcon(icon);
     } 
+## 7 + 8- Left,right,180 rotations:
+
+![giphy (4)](https://user-images.githubusercontent.com/98660298/218223667-f0c9f452-e6ed-45c2-8891-8a08f8fd9ad8.gif)
+
+Pressing "Left Rotations" allows users to rotate the selected picture to the left, while "Right Rotations" rotates it to the right. For a 180-degree rotation, press the button "Rotation by 180".
+
+######   Left Rotation code:
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        //Left Rotation
+        Picture sourcePicture = picObj;
+        Picture TargetPicture = new Picture(sourcePicture.getHeight(), sourcePicture.getWidth());
+        Pixel sourcePixel;
+        Pixel targetPixel;
+        int targetX, targetY = 0;
+        for (int sourceX = 0; sourceX < sourcePicture.getWidth(); sourceX++) {
+            for (int sourceY = 0; sourceY < sourcePicture.getHeight(); sourceY++) {
+                sourcePixel = sourcePicture.getPixel(sourceX, sourceY);
+                targetX = sourceY;
+                targetY = sourcePicture.getWidth() - 1 - sourceX;
+                targetPixel = TargetPicture.getPixel(targetX, targetY);
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        Image img = (TargetPicture.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+        picObj = TargetPicture;
+    } 
+    
+######   Right Rotation code:
+
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        //Right Rotation
+        Picture sourcePicture = picObj;
+        Picture TargetPicture = new Picture(sourcePicture.getHeight(), sourcePicture.getWidth());
+        Pixel sourcePixel;
+        Pixel targetPixel;
+        int targetX, targetY = 0;
+        for (int sourceX = 0; sourceX < sourcePicture.getWidth(); sourceX++) {
+            for (int sourceY = 0; sourceY < sourcePicture.getHeight(); sourceY++) {
+                sourcePixel = sourcePicture.getPixel(sourceX, sourceY);
+                targetX = sourcePicture.getHeight() - 1 - sourceY;
+                targetY = sourceX;
+                targetPixel = TargetPicture.getPixel(targetX, targetY);
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        Image img = (TargetPicture.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+        picObj = TargetPicture;
+    }
+    
+ ######   180 degree Rotation code:
+     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // Rotation 180
+        Picture sourcePicture = picObj;
+        Picture TargetPicture = new Picture(sourcePicture.getWidth(), sourcePicture.getHeight());
+        Pixel sourcePixel;
+        Pixel targetPixel;
+        int targetX, targetY = 0;
+        for (int sourceX = 0; sourceX < sourcePicture.getWidth(); sourceX++) {
+            for (int sourceY = 0; sourceY < sourcePicture.getHeight(); sourceY++) {
+                sourcePixel = sourcePicture.getPixel(sourceX, sourceY);
+                targetX = sourcePicture.getWidth() - 1 - sourceX;
+                targetY = sourcePicture.getHeight() - 1 - sourceY;
+                targetPixel = TargetPicture.getPixel(targetX, targetY);
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        Image img = (TargetPicture.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+        picObj = TargetPicture;
+    } 
+ 
+
+
