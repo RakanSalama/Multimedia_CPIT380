@@ -4,7 +4,7 @@ The aim of this project is to create an application that enables users to edit p
 ## Group Members
 - Omar Saeed Al-Zahrani    / 2040569
 - Fahad Hamad Alsifri      / 1743998
-- Abdulaziz AdnanAl-Sharif / 2036023
+- Abdulaziz Adnan Al-Sharif / 2036023
 - Rakan Adnan Salama       / 2037276
 - Majed Abdullah Alghmdi   / 1942874 
 
