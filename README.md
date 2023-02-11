@@ -1693,3 +1693,150 @@ To apply Box, min and max filters, users must enter an odd number, such as 3, 5,
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
     }
+
+## 24- Red Eye Reduction using thresholding technique:
+
+## 25- Automatic detection of red eyes:
+
+## 26- Background Subtraction:
+
+## 28- Edge Detection methods:
+
+https://user-images.githubusercontent.com/98660298/218252463-b7281ce2-3065-4f4f-9707-03d2055aed44.mp4
+
+Users can select an image and then choose from one of the three options in the combo box to apply edge detection - top-bottom detection, left-right detection, or merge (which combines the two detections in one picture). Once they have made their selection, they must press the "Edge Detection" button to view the result.
+
+######   Edge detection code:
+
+    private void jButton52ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // edge detection
+        String size = JOptionPane.showInputDialog(null, "Please Enter the threshold value: ");
+        try {
+            // Top to bottom
+            if (jComboBox2.getSelectedIndex() == 0) {
+                Pixel topPixel = null;
+                Pixel bottomPixel = null;
+                double topAverage = 0.0;
+                double bottomAverage = 0.0;
+                for (int y = 0; y < picObj.getHeight() - 1; y++) {
+                    for (int x = 0; x < picObj.getWidth(); x++) {
+                        topPixel = picObj.getPixel(x, y);
+                        bottomPixel = picObj.getPixel(x, y + 1);
+                        topAverage = topPixel.getAverage();
+                        bottomAverage = bottomPixel.getAverage();
+                        if (Math.abs(topAverage - bottomAverage) < Integer.valueOf(size)) {
+                            topPixel.setColor(Color.WHITE);
+                        } else {
+                            topPixel.setColor(Color.BLACK);
+                        }
+                    }
+                }
+            } // left to right
+            else if (jComboBox2.getSelectedIndex() == 1) {
+                Pixel LeftPixel = null;
+                Pixel RightPixel = null;
+                double LeftAverage = 0.0;
+                double RightAverage = 0.0;
+                for (int y = 0; y < picObj.getHeight(); y++) {
+                    for (int x = 0; x < picObj.getWidth() - 1; x++) {
+                        LeftPixel = picObj.getPixel(x, y);
+                        RightPixel = picObj.getPixel(x + 1, y);
+                        LeftAverage = LeftPixel.getAverage();
+                        RightAverage = RightPixel.getAverage();
+                        if (Math.abs(LeftAverage - RightAverage) < Integer.valueOf(size)) {
+                            LeftPixel.setColor(Color.WHITE);
+                        } else {
+                            LeftPixel.setColor(Color.BLACK);
+                        }
+                    }
+                }
+            } // Merge
+            else if (jComboBox2.getSelectedIndex() == 2) {
+                Pixel topPixel = null;
+                Pixel bottomPixel = null;
+                double topAverage = 0.0;
+                double bottomAverage = 0.0;
+                for (int y = 0; y < picObj.getHeight() - 1; y++) {
+                    for (int x = 0; x < picObj.getWidth(); x++) {
+                        topPixel = picObj.getPixel(x, y);
+                        bottomPixel = picObj.getPixel(x, y + 1);
+                        topAverage = topPixel.getAverage();
+                        bottomAverage = bottomPixel.getAverage();
+                        if (Math.abs(topAverage - bottomAverage) < Integer.valueOf(size)) {
+                            topPixel.setColor(Color.WHITE);
+                        } else {
+                            topPixel.setColor(Color.BLACK);
+                        }
+                    }
+                }
+                Image img = (picObj.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+                BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D bGr = bimage.createGraphics();
+                bGr.drawImage(img, 0, 0, null);
+                bGr.dispose();
+                File outputfile = new File("Tmp\\TBedg.png");
+                ImageIO.write(bimage, "png", outputfile);
+                picObj = new Picture(pathName);
+
+                //////
+                Pixel LeftPixel = null;
+                Pixel RightPixel = null;
+                double LeftAverage = 0.0;
+                double RightAverage = 0.0;
+                for (int y = 0; y < picObj.getHeight(); y++) {
+                    for (int x = 0; x < picObj.getWidth() - 1; x++) {
+                        LeftPixel = picObj.getPixel(x, y);
+                        RightPixel = picObj.getPixel(x + 1, y);
+                        LeftAverage = LeftPixel.getAverage();
+                        RightAverage = RightPixel.getAverage();
+                        if (Math.abs(LeftAverage - RightAverage) < Integer.valueOf(size)) {
+                            LeftPixel.setColor(Color.WHITE);
+                        } else {
+                            LeftPixel.setColor(Color.BLACK);
+                        }
+                    }
+                }
+
+                Image img2 = (picObj.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+                BufferedImage bimage2 = new BufferedImage(img2.getWidth(null), img2.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D bGr2 = bimage2.createGraphics();
+                bGr2.drawImage(img2, 0, 0, null);
+                bGr2.dispose();
+                File outputfile2 = new File("Tmp\\LRedg.png");
+                ImageIO.write(bimage2, "png", outputfile2);
+                picObj = new Picture(pathName);
+
+                Picture f = new Picture("Tmp\\TBedg.png");
+                Picture s = new Picture("Tmp\\LRedg.png");
+
+                Pixel[] pixelsArrayf = f.getPixels();
+                Pixel pixelArrayf = null;
+
+                Pixel[] pixelsArrays = s.getPixels();
+                Pixel pixelArrays = null;
+
+                Pixel[] pixelsArray = picObj.getPixels();
+                Pixel pixelArray = null;
+
+                for (int i = 0; i < pixelsArray.length; i++) {
+                    pixelArrayf = pixelsArrayf[i];
+                    pixelArrays = pixelsArrays[i];
+                    pixelArray = pixelsArray[i];
+                    if (((pixelArrayf.getRed() == 0) && (pixelArrayf.getGreen() == 0) && (pixelArrayf.getGreen() == 0)) || ((pixelArrays.getRed() == 0) && (pixelArrays.getGreen() == 0) && (pixelArrays.getGreen() == 0))) {
+                        pixelArray.setColor(Color.BLACK);
+                    } else {
+                        pixelArray.setColor(Color.WHITE);
+                    }
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please put integer only", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+
+    }
