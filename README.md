@@ -1897,7 +1897,7 @@ Users can clip the sound of their selection by pressing the "Clip" button and th
 
     } 
     
-## Splicing at least two sounds together keeping the silent zone:
+## 31- Splicing at least two sounds together keeping the silent zone:
 
 https://user-images.githubusercontent.com/98660298/218255225-7c28a046-e76f-43a1-8a09-327244fff019.mp4
 
