@@ -452,5 +452,138 @@ Pressing "Left Rotations" allows users to rotate the selected picture to the lef
         picObj = TargetPicture;
     } 
  
+## 9 + 10 + 11- Reflections (Virtical, horizontal, Diagonal):
+
+https://user-images.githubusercontent.com/98660298/218225413-a7c2d0bd-1b00-4ea5-af74-77047cbc98a4.mp4
+
+Users can make four different types of reflections by pressing the corresponding button and selecting their desired option from the combo box. For Vertical Reflection, Horizontal Reflection, Diagonal Reflection D1, and Diagonal Reflection D2, users can choose which side to be reflected to the other side.
+
+ ######   Vertical reflection code:
+    private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {
+        //Vertical reflection
+        int width = picObj.getWidth();
+        int mirrorPoint = width / 2;
+        Pixel leftPixel = null;
+        Pixel rightPixel = null;
+        //left to right
+        if (jComboBox6.getSelectedIndex() == 0) {
+            for (int y = 0; y < picObj.getHeight(); y++) {
+                for (int x = 0; x < mirrorPoint; x++) {
+                    leftPixel = picObj.getPixel(x, y);
+                    rightPixel = picObj.getPixel(width - 1 - x, y);
+                    rightPixel.setColor(leftPixel.getColor());
+                }
+            }
+            // right to left
+        } else if (jComboBox6.getSelectedIndex() == 1) {
+            for (int y = 0; y < picObj.getHeight(); y++) {
+                for (int x = 0; x < mirrorPoint; x++) {
+                    leftPixel = picObj.getPixel(x, y);
+                    rightPixel = picObj.getPixel(width - 1 - x, y);
+                    leftPixel.setColor(rightPixel.getColor());
+                }
+            }
+        }
+
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+
+    }
+ ######   Horizontal reflection code:
+   
+        private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // Horizontal Reflection
+        int height = picObj.getHeight();
+        int mirrorPoint = height / 2;
+
+        Pixel topPixel = null;
+        Pixel bottomPixel = null;
+        //Up to down
+        if (jComboBox7.getSelectedIndex() == 0) {
+            for (int x = 0; x < picObj.getWidth(); x++) {
+                for (int y = 0; y < mirrorPoint; y++) { // becareful you must start with x loop then y
+                    topPixel = picObj.getPixel(x, y);
+                    bottomPixel = picObj.getPixel(x, height - 1 - y);
+                    bottomPixel.setColor(topPixel.getColor());
+
+                }
+            }
+            //Down to up
+        } else if (jComboBox7.getSelectedIndex() == 1) {
+            for (int x = 0; x < picObj.getWidth(); x++) {
+                for (int y = 0; y < mirrorPoint; y++) { // becareful you must start with x loop then y
+                    topPixel = picObj.getPixel(x, y);
+                    bottomPixel = picObj.getPixel(x, height - 1 - y);
+                    topPixel.setColor(bottomPixel.getColor());
+                }
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    } 
+  ######  D1 diagonal reflection code:
+  
+    private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        //diagonal d1 
+        if (jComboBox8.getSelectedIndex() == 0) {
+            Pixel leftPixel = null;
+            Pixel rightPixel = null;
+            for (int y = 1; y < jLabel2.getHeight(); y++) {
+                for (int x = 0; x < y; x++) {
+                    rightPixel = picObj.getPixel(x, y);
+                    leftPixel = picObj.getPixel(y, x);
+                    rightPixel.setColor(leftPixel.getColor());
+                }
+            }
+        } else if (jComboBox8.getSelectedIndex() == 1) {
+            Pixel leftPixel = null;
+            Pixel rightPixel = null;
+            for (int y = 1; y < jLabel2.getHeight(); y++) {
+                for (int x = 0; x < y; x++) {
+                    leftPixel = picObj.getPixel(x, y);
+                    rightPixel = picObj.getPixel(y, x);
+                    rightPixel.setColor(leftPixel.getColor());
+                }
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+
+    } 
+    
+  ######  D2 diagonal reflection code:
+
+    private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        //diagnoul d2 
+        if (jComboBox9.getSelectedIndex() == 0) {
+            Pixel leftPixel = null;
+            Pixel rightPixel = null;
+            int height = picObj.getHeight();
+            for (int y = height - 2; y >= 0; y--) {
+                for (int x = 0; x < height - 1 - y; x++) {
+                    leftPixel = picObj.getPixel(x, y);
+                    rightPixel = picObj.getPixel(height - 1 - y, height - 1 - x);
+                    rightPixel.setColor(leftPixel.getColor());
+                }
+            }
+        } else if (jComboBox9.getSelectedIndex() == 1) {
+            Pixel leftPixel = null;
+            Pixel rightPixel = null;
+            int height = picObj.getHeight();
+            for (int y = height - 2; y >= 0; y--) {
+                for (int x = 0; x < height - 1 - y; x++) {
+                    rightPixel = picObj.getPixel(x, y);
+                    leftPixel = picObj.getPixel(height - 1 - y, height - 1 - x);
+                    rightPixel.setColor(leftPixel.getColor());
+                }
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    } 
 
 
