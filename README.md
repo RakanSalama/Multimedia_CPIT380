@@ -653,3 +653,149 @@ Users can adjust the size of the picture by using the slider. Moving it to the l
         }
 
     } 
+## 14- Create Collage
+
+https://user-images.githubusercontent.com/98660298/218228742-9074006f-e410-448f-a309-029abec5e75c.mp4
+
+Users can create a collage by placing four different pictures into the corners, with the previously selected image in the center.
+
+######  Scalling Up/Down Code:
+    private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        Picture sourcePicture = picObj;
+        // ask for 4 picture
+        Picture second = null;
+        Picture third = null;
+        Picture forth = null;
+        Picture fifth = null;
+        JFileChooser FileChooser = new JFileChooser("");
+        int conf = JOptionPane.showConfirmDialog(null, "Choose the Left Top image", "Choose image", JOptionPane.OK_CANCEL_OPTION);
+        if (conf == 0) {
+            int val = FileChooser.showOpenDialog(null);
+            if (val == JFileChooser.APPROVE_OPTION) {
+                second = new Picture(FileChooser.getSelectedFile().getAbsolutePath());
+                Image img = (second.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+                BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D bGr = bimage.createGraphics();
+                bGr.drawImage(img, 0, 0, null);
+                bGr.dispose();
+                File outputfile = new File("Tmp\\2.png");
+
+                try {
+                    ImageIO.write(bimage, "png", outputfile);
+                } catch (IOException ex) {
+                    Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                second = new Picture("Tmp\\2.png");
+            }
+        }
+        conf = JOptionPane.showConfirmDialog(null, "Choose the Right Top image", "Choose image", JOptionPane.OK_CANCEL_OPTION);
+        if (conf == 0) {
+            int val = FileChooser.showOpenDialog(null);
+            if (val == JFileChooser.APPROVE_OPTION) {
+                third = new Picture(FileChooser.getSelectedFile().getAbsolutePath());
+                Image img = (third.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+                BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D bGr = bimage.createGraphics();
+                bGr.drawImage(img, 0, 0, null);
+                bGr.dispose();
+                File outputfile = new File("Tmp\\3.png");
+                try {
+                    ImageIO.write(bimage, "png", outputfile);
+                } catch (IOException ex) {
+                    Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                third = new Picture("Tmp\\3.png");
+            }
+        }
+        conf = JOptionPane.showConfirmDialog(null, "Choose the Left Down image", "Choose image", JOptionPane.OK_CANCEL_OPTION);
+        if (conf == 0) {
+            int val = FileChooser.showOpenDialog(null);
+            if (val == JFileChooser.APPROVE_OPTION) {
+                forth = new Picture(FileChooser.getSelectedFile().getAbsolutePath());
+                Image img = (forth.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+                BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D bGr = bimage.createGraphics();
+                bGr.drawImage(img, 0, 0, null);
+                bGr.dispose();
+                File outputfile = new File("Tmp\\4.png");
+                try {
+                    ImageIO.write(bimage, "png", outputfile);
+                } catch (IOException ex) {
+                    Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                forth = new Picture("Tmp\\4.png");
+            }
+        }
+        conf = JOptionPane.showConfirmDialog(null, "Choose the Right Down image", "Choose image", JOptionPane.OK_CANCEL_OPTION);
+        if (conf == 0) {
+            int val = FileChooser.showOpenDialog(null);
+            if (val == JFileChooser.APPROVE_OPTION) {
+                fifth = new Picture(FileChooser.getSelectedFile().getAbsolutePath());
+                Image img = (fifth.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+                BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D bGr = bimage.createGraphics();
+                bGr.drawImage(img, 0, 0, null);
+                bGr.dispose();
+                File outputfile = new File("Tmp\\5.png");
+                try {
+                    ImageIO.write(bimage, "png", outputfile);
+                } catch (IOException ex) {
+                    Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                fifth = new Picture("Tmp\\5.png");
+            }
+        }
+
+        int width = picObj.getWidth() + second.getWidth() + third.getWidth();
+        int height = picObj.getHeight() + second.getHeight() + forth.getHeight();
+        picObj = new Picture(width, height);
+
+        Pixel sourcePixel;
+        Pixel targetPixel;
+
+        // top left
+        for (int i = 0; i < second.getWidth(); i++) {
+            for (int j = 0; j < second.getHeight(); j++) {
+                sourcePixel = second.getPixel(i, j);
+                targetPixel = picObj.getPixel(i, j);
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        // top right
+        for (int j = 0; j < third.getWidth(); j++) {
+            for (int k = 0; k < third.getHeight(); k++) {
+                sourcePixel = third.getPixel(j, k);
+                targetPixel = picObj.getPixel((sourcePicture.getWidth() + j + second.getWidth()), (k));
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        // original picture in the middle
+        for (int j = 0; j < sourcePicture.getWidth(); j++) {
+            for (int k = 0; k < sourcePicture.getHeight(); k++) {
+                sourcePixel = sourcePicture.getPixel(j, k);
+                targetPixel = picObj.getPixel((j + second.getWidth()), (k + second.getHeight()));
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        // bottom left
+        for (int j = 0; j < forth.getWidth(); j++) {
+            for (int k = 0; k < forth.getHeight(); k++) {
+                sourcePixel = forth.getPixel(j, k);
+                targetPixel = picObj.getPixel((j), (k + second.getHeight() + sourcePicture.getHeight()));
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        // bottom right
+        for (int j = 0; j < fifth.getWidth(); j++) {
+            for (int k = 0; k < fifth.getHeight(); k++) {
+                sourcePixel = fifth.getPixel(j, k);
+                targetPixel = picObj.getPixel((j + second.getWidth() + sourcePicture.getWidth()), (k + third.getHeight() + sourcePicture.getHeight()));
+                targetPixel.setColor(sourcePixel.getColor());
+            }
+        }
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    } 
+
