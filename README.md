@@ -12,7 +12,7 @@ This YouTube video will guide you on how to download and implement our project. 
 
 ## Main Menu:
 <p align="center">
-  <img width="432" height="471" src="https://user-images.githubusercontent.com/98660298/218203921-270da3ad-8219-4c99-81b6-891e6606c4ad.PNG">
+  <img width="432" height="471" src="(https://user-images.githubusercontent.com/62527536/218244343-3d4a4696-5e5a-4772-8eac-9ff784f8539c.png">
 </p>
 In the main menu, users can choose which section they want to edit by pressing the corresponding button.
 
