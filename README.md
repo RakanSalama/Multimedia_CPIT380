@@ -2836,7 +2836,7 @@ This method allows users to upload two photos to check for any traffic rule viol
 
 ![image](https://user-images.githubusercontent.com/98660298/218275731-de21bebd-a70d-4254-bd62-8cd8bed80f46.png)
 
-
+This method can be used to detect objects, such as heads, and draw a rectangle around them. To increase accuracy, it needs to be trained further to recognize more objects.
 
 ######  Object detection code:
     private void jButton56ActionPerformed(java.awt.event.ActionEvent evt) {                                          
