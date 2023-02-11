@@ -1934,6 +1934,54 @@ To splice two or more sounds together with a silent zone between them, users mus
 
     } 
 
+## 32- Spread & squeeze a sound:
+
+## 33- Reversing and Mirroring:
+
+https://user-images.githubusercontent.com/98660298/218256025-745234d8-4d40-420e-858b-142a928b1ba3.mp4
+
+Users can reverse the sound they have selected by pressing the "Reversing" button. They can also mirror the sound by selecting the desired option from the combo box and pressing the "Mirror" button. Once they have made the desired changes, they can press the "Play" button to hear the altered sound.
+
+######   Reversing code:
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        Sound orig = new Sound(pathName);
+        int length = currentSound.getLength();
+        for (int targetIndex = 0, sourceIndex = length - 1;
+                targetIndex < length && sourceIndex > 0;
+                targetIndex++, sourceIndex--) {
+            currentSound.setSampleValueAt(targetIndex, orig.getSampleValueAt(sourceIndex));
+        }
+    } 
+
+######   Mirror code:
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+        if (jComboBox2.getSelectedIndex() == 0) {
+            //FtoB
+            int length = currentSound.getLength(); // save the length
+            int mirrorPoint = length / 2; // mirror around this
+            int value = 0; // hold the current value
+
+            // loop from 0 to mirrorPoint
+            for (int i = 0; i < mirrorPoint; i++) {
+                value = currentSound.getSampleValueAt(i);
+                currentSound.setSampleValueAt(length - 1 - i, value);
+            }
+        } else if (jComboBox2.getSelectedIndex() == 1) {
+            //BtoF
+            int length = currentSound.getLength(); // save the length
+            int mirrorPoint = length / 2; // mirror around this
+            int value = 0; // hold the current value
+
+            // loop from 0 to mirrorPoint
+            for (int i = 0; i < mirrorPoint; i++) {
+                value = currentSound.getSampleValueAt(length - 1 - i);
+                currentSound.setSampleValueAt(i, value);
+            }
+        }
+    }
     
 
 
