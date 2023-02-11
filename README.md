@@ -2030,7 +2030,7 @@ Users can modify the selected sound by applying different filters. To apply the 
 
 ######   SoundFilters code:
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {                                          
 
         SoundSample[] sampleArray = currentSound.getSamples();
         //simAvg
@@ -2083,7 +2083,7 @@ Users can modify the selected sound by applying different filters. To apply the 
             }
 
         } else if (jComboBox1.getSelectedIndex() == 2) {
-//max
+            //max
             int startIndex = 0;
             int endIndex = 3;
 
@@ -2108,7 +2108,7 @@ Users can modify the selected sound by applying different filters. To apply the 
             }
 
         } else if (jComboBox1.getSelectedIndex() == 3) {
-//min
+            //min
             int startIndex = 0;
             int endIndex = 3;
 
@@ -2133,7 +2133,7 @@ Users can modify the selected sound by applying different filters. To apply the 
             }
 
         } else if (jComboBox1.getSelectedIndex() == 4) {
-//midin
+            //midin
             int[] medianArray = new int[3];
             int startIndex = 0;
             int endIndex = 3;
