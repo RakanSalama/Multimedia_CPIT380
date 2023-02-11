@@ -2558,14 +2558,26 @@ https://user-images.githubusercontent.com/98660298/218274920-03e7c520-2c25-4ba5-
 
 ## 44- Edge Detection Movie:
 
+https://user-images.githubusercontent.com/98660298/218275055-8d95e0af-9ca2-44d6-8942-d6877bd1b776.mp4
+
 ## 45- Compare two Images:
+
+https://user-images.githubusercontent.com/98660298/218275253-2ec847f1-70ed-4999-a7ae-9677722596d8.mp4
 
 ## 46- Shot boundary detection:
 
+https://user-images.githubusercontent.com/98660298/218275426-069b3bf7-b2aa-488c-82ee-e3b81784f0c2.mp4
+
 ## 47- Detecting a violation of traffic rule:
+
+https://user-images.githubusercontent.com/98660298/218275638-1ba38785-5267-4eca-97fc-98641397608d.mp4
+
+
+
 
 ## 48- Object Detection:
 
+![image](https://user-images.githubusercontent.com/98660298/218275731-de21bebd-a70d-4254-bd62-8cd8bed80f46.png)
 
 
 
