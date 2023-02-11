@@ -2425,6 +2425,8 @@ By pressing the "Sine wave" button, the user can insert the desired number of se
   
 ## 39- CreateRecatangleMovie method Show the trajectory of motion, when a ball is dropped on the floor:
 
+
+
 ## 40- CreateTickerTapeMovie – A string of text moves back and forth and does not disappear from screen. 
 
 ## 41- Create a movie, cropping a part of given image that appears randomly on screen:
