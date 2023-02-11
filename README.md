@@ -16,6 +16,70 @@ This YouTube video will guide you on how to download and implement our project. 
 </p>
 In the main menu, users can choose which section they want to edit by pressing the corresponding button.
 
+## 0- Files Menu: 
+
+![0](https://user-images.githubusercontent.com/62527536/218246228-db54d192-bad4-4e6c-acc9-ddcba2529c05.gif)
+
+User can browse for image to activate the buttons, and they can reset the image to the original photo, at the end they can save the edited image 
+######  Browse:
+        private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        /*
+        Browse
+        this method make the user to browse for picture and enable all the buttons in the gui
+        the input will be the picture user chose 
+        the output picObj and pathName
+         */
+
+        try {
+            jLabel2.setIcon(null);
+            pathName = FileChooser.pickAFile();
+            picObj = new Picture(pathName);
+            Image img = (picObj.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+            BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D bGr = bimage.createGraphics();
+            bGr.drawImage(img, 0, 0, null);
+            bGr.dispose();
+            File outputfile = new File("Tmp\\saved.png");
+            ImageIO.write(bimage, "png", outputfile);
+            pathName = "Tmp\\saved.png";
+            picObj = new Picture(pathName);
+            icon = new ImageIcon(img);
+            jLabel1.setIcon(icon);
+            jButton2.setEnabled(true);
+            jButton3.setEnabled(true);
+            jButton4.setEnabled(true);
+            jButton5.setEnabled(true);
+            jButton6.setEnabled(true);
+            jButton7.setEnabled(true);
+            jButton8.setEnabled(true);
+            jButton9.setEnabled(true);
+            jButton10.setEnabled(true);
+            jButton13.setEnabled(true);
+            jButton14.setEnabled(true);
+        } catch (Exception e) {
+            System.out.println("er");
+        }
+    }
+######  Reset:
+     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        picObj = new Picture(pathName);
+        Image img = (picObj.getImage()).getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        jLabel2.setIcon(icon);
+    } 
+######  Save:
+        try {
+            Image img = (picObj.getImage()).getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+            BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            Graphics2D bGr = bimage.createGraphics();
+            bGr.drawImage(img, 0, 0, null);
+            bGr.dispose();
+            File outputfile = new File("saved.png");
+            ImageIO.write(bimage, "png", outputfile);
+        } catch (IOException ex) {
+            Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 ## 1- Color change: 
 ![ChangeColors](https://user-images.githubusercontent.com/98660298/218205120-033d527b-5fc8-44e5-8a01-8cc40e0727ca.gif)
 - Users can customize the RGB colors of their choice by clicking on the color box, adjusting the slider to the desired amount, and selecting whether to increase or decrease the color value. Once they've adjusted the colors to their liking, they can click the "Apply" button to apply the changes.
@@ -798,4 +862,412 @@ Users can create a collage by placing four different pictures into the corners, 
         icon = new ImageIcon(img);
         jLabel2.setIcon(icon);
     } 
+    
+## 15- Computing histograms:
 
+![15](https://user-images.githubusercontent.com/62527536/218244951-fe123776-4d86-4fbd-a3c6-3ddadceff76a.gif)
+
+Computing histograms For all RGB color and the Gray scale, every color in separate button GUI, and it will represent it  in GUI graph of the choosing histogram color.
+
+######   Computing histograms:
+        private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Pixel_LL[][] Histograms = new Pixel_LL[1][256];
+
+        int maxR = 0;
+
+        for (int i = 0; i < 256; i++) {
+            Histograms[0][i] = new Pixel_LL();
+
+        }
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int intensityR = picObj.getPixel(i, j).getRed();
+
+                Histograms[0][intensityR].addPixel(new PixelLinkedList_node(i, j));
+
+                if (Histograms[0][intensityR].getTotal() > maxR) {
+                    maxR = Histograms[0][intensityR].getTotal();
+
+                }
+
+            }
+        }
+
+        int maxHeight = 0;
+        for (int i = 0; i < Histograms[0].length; i++) {
+            if (Histograms[0][i].getTotal() > maxHeight) {
+                maxHeight = Histograms[0][i].getTotal();
+            }
+        }
+        Picture histogram = new Picture(256, 256, Color.white);
+        Color c = Color.RED;
+        for (int i = 0; i < 256; i++) {
+            int max = (int) (Histograms[0][i].getTotal() * 256 / maxHeight);
+            for (int j = 255; j >= (256 - max); j--) {
+                histogram.getPixel(i, j).setColor(c);
+            }
+        }
+        histogram.scaleUp(2).show();
+    }                                         
+
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Pixel_LL[][] Histograms = new Pixel_LL[1][256];
+
+        int maxB = 0;
+
+        for (int i = 0; i < 256; i++) { // Inisilazing all the arrays
+            Histograms[0][i] = new Pixel_LL();
+
+        }
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int intensityB = picObj.getPixel(i, j).getBlue();
+
+                Histograms[0][intensityB].addPixel(new PixelLinkedList_node(i, j));
+
+                if (Histograms[0][intensityB].getTotal() > maxB) {
+                    maxB = Histograms[0][intensityB].getTotal();
+
+                }
+
+            }
+        }
+
+        int maxHeight = 0;
+        for (int i = 0; i < Histograms[0].length; i++) {
+            if (Histograms[0][i].getTotal() > maxHeight) {
+                maxHeight = Histograms[0][i].getTotal();
+            }
+        }
+        Picture histogram = new Picture(256, 256, Color.white);
+        Color c = Color.BLUE;
+        for (int i = 0; i < 256; i++) {
+            int max = (int) (Histograms[0][i].getTotal() * 256 / maxHeight);
+            for (int j = 255; j >= (256 - max); j--) {
+                histogram.getPixel(i, j).setColor(c);
+            }
+        }
+        histogram.scaleUp(2).show();
+    }                                         
+
+    private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Picture tmp = picObj;
+        Pixel[] pixels = picObj.getPixels();
+        int avg;
+        for (Pixel pixel1 : pixels) {
+            avg = (int) ((pixel1.getRed() + pixel1.getGreen() + pixel1.getBlue()) / 3);
+            Color grayColor = new Color(avg, avg, avg);
+            pixel1.setColor(grayColor);
+        }
+
+        Pixel_LL[][] Histograms = new Pixel_LL[1][256];
+
+        int maxGS = 0;
+
+        for (int i = 0; i < 256; i++) {
+            Histograms[0][i] = new Pixel_LL();
+
+        }
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int intensityGS = picObj.getPixel(i, j).getBlue();
+
+                Histograms[0][intensityGS].addPixel(new PixelLinkedList_node(i, j));
+
+                if (Histograms[0][intensityGS].getTotal() > maxGS) {
+                    maxGS = Histograms[0][intensityGS].getTotal();
+
+                }
+
+            }
+        }
+
+        int maxHeight = 0;
+        for (int i = 0; i < Histograms[0].length; i++) {
+            if (Histograms[0][i].getTotal() > maxHeight) {
+                maxHeight = Histograms[0][i].getTotal();
+            }
+        }
+        Picture histogram = new Picture(256, 256, Color.white);
+        Color c = Color.GRAY;
+        for (int i = 0; i < 256; i++) {
+            int max = (int) (Histograms[0][i].getTotal() * 256 / maxHeight);
+            for (int j = 255; j >= (256 - max); j--) {
+                histogram.getPixel(i, j).setColor(c);
+            }
+        }
+        histogram.scaleUp(2).show();
+        picObj = new Picture(pathName);
+    }                                         
+
+    private void jButton45ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        jButton27ActionPerformed(evt);
+        jButton28ActionPerformed(evt);
+        jButton29ActionPerformed(evt);
+        jButton30ActionPerformed(evt);
+    }                                     
+
+## 16- Reconstruction of Image using Histogram(BONUS):
+
+![16](https://user-images.githubusercontent.com/62527536/218245427-823ece3f-5207-46e9-a9f2-b97249268cb7.gif)
+
+Export Histogram TXT that contain saved location information of a pixel and the intensity of the pixel using linked list, first the user browse for photo they want to save it than when they need it press import to reconstruct the photo.
+
+###### Linked list class:
+
+    package pkg380_project;
+
+
+    import java.io.PrintWriter;
+    import java.util.Scanner;
+
+    // This class will help us in Histograms, it will keep the location of all pixels location at each intensity level
+    public class Pixel_LL {
+    
+    private PixelLinkedList_node head;
+    private PixelLinkedList_node tail;
+    private int total;
+    
+    public Pixel_LL() {
+        head = null;
+        total = 0;
+    }
+    
+    public Pixel_LL(Scanner input,int total) {
+        importHistogram(input,total);
+    }
+    
+    public void addPixel(PixelLinkedList_node pixel) {
+        if (head == null) {//list is empty
+            head = pixel;
+            tail = head;
+        } else {
+            tail.setNext(pixel);
+            tail = pixel;
+        }
+        total++;
+    }
+    
+    public PixelLinkedList_node getHead() {
+        return head;
+    }
+    
+    public int getTotal() {
+        return total;
+    }
+ 
+    public void exportHistogram(PrintWriter pen) {
+        pen.println(total);
+        PixelLinkedList_node helpPtr = head;
+        while (helpPtr != null) {
+            pen.println(helpPtr);
+            helpPtr = helpPtr.getNext();
+        }
+        pen.flush();
+    }
+    
+    public void importHistogram(Scanner input,int total) {
+        for (int i = 0; i < total; i++) {
+            addPixel(new PixelLinkedList_node(input.nextInt(), input.nextInt()));
+        }
+    }
+    
+}
+
+class PixelLinkedList_node {
+    
+    private int x;
+    private int y;
+    
+    private PixelLinkedList_node next;
+    
+    public PixelLinkedList_node(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    public PixelLinkedList_node(PixelLinkedList_node node) {
+        this(node, null);
+    }
+    
+    public PixelLinkedList_node(PixelLinkedList_node node, PixelLinkedList_node next) {
+        this.next = next;
+    }
+    
+    public PixelLinkedList_node getNext() {
+        return next;
+    }
+    
+    public int getX() {
+        return x;
+    }
+    
+    public int getY() {
+        return y;
+    }
+    
+    public void setNext(PixelLinkedList_node next) {
+        this.next = next;
+    }
+    
+    public String toString() {
+        return x + " " + y;
+    }
+    
+    }
+###### ComputeHistograms Method:
+
+        private Pixel_LL[][] ComputeHistograms() {
+
+        Pixel_LL[][] Histograms = new Pixel_LL[3][256]; // [0] red, [1] green [2] blue
+
+        int maxR = 0;
+        int maxR_index = 0;
+        int maxG = 0;
+        int maxG_index = 0;
+        int maxB = 0;
+        int maxB_index = 0;
+
+        for (int i = 0; i < 256; i++) { // Inisilazing all the arrays
+            Histograms[0][i] = new Pixel_LL();
+            Histograms[1][i] = new Pixel_LL();
+            Histograms[2][i] = new Pixel_LL();
+        }
+        for (int i = 0; i < picObj.getWidth(); i++) {
+            for (int j = 0; j < picObj.getHeight(); j++) {
+                int intensityR = picObj.getPixel(i, j).getRed();
+                int intensityG = picObj.getPixel(i, j).getGreen();
+                int intensityB = picObj.getPixel(i, j).getBlue();
+                Histograms[0][intensityR].addPixel(new PixelLinkedList_node(i, j));
+                Histograms[1][intensityG].addPixel(new PixelLinkedList_node(i, j));
+                Histograms[2][intensityB].addPixel(new PixelLinkedList_node(i, j));
+
+                if (Histograms[0][intensityR].getTotal() > maxR) {
+                    maxR = Histograms[0][intensityR].getTotal();
+                    maxR_index = intensityR;
+                }
+                if (Histograms[1][intensityG].getTotal() > maxG) {
+                    maxG = Histograms[1][intensityG].getTotal();
+                    maxG_index = intensityG;
+                }
+                if (Histograms[2][intensityB].getTotal() > maxB) {
+                    maxB = Histograms[2][intensityB].getTotal();
+                    maxB_index = intensityB;
+                }
+            }
+        }
+
+        return Histograms;
+    }
+
+###### Export Histogram:
+
+        private void jButton50ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // exporting the histogram to files
+        Pixel_LL[][] Histograms = ComputeHistograms();
+        // ask the user where to save it
+        JFileChooser f = new JFileChooser();
+        f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        f.showSaveDialog(null);
+        File export = new File(f.getSelectedFile() + "\\histograms.txt");
+
+        PrintWriter pen = null;
+        try {
+            pen = new PrintWriter(export);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PictureEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pen.println(picObj.getWidth() + " " + picObj.getHeight());
+        pen.println("RED");
+        for (int i = 0; i < 256; i++) {
+            Histograms[0][i].exportHistogram(pen);
+        }
+        pen.println("GREEN");
+        for (int i = 0; i < 256; i++) {
+            Histograms[1][i].exportHistogram(pen);
+        }
+        pen.println("BLUE");
+        for (int i = 0; i < 256; i++) {
+            Histograms[2][i].exportHistogram(pen);
+        }
+        pen.close();
+        JOptionPane.showMessageDialog(null, "Finished\n Exported to " + export.getAbsolutePath(), "Done", JOptionPane.INFORMATION_MESSAGE);
+        }       
+
+###### Import Histogram:
+
+        private void jButton53ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        try {
+            // TODO add your handling code here:
+
+            JOptionPane.showMessageDialog(null, "Please choose the histogram txt", "File", JOptionPane.OK_OPTION);
+
+            JFileChooser f = new JFileChooser();
+            f.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+            f.showSaveDialog(null);
+            File export = f.getSelectedFile();
+
+            Scanner input = new Scanner(export);
+            Picture replot = new Picture(input.nextInt(), input.nextInt());
+
+            Pixel_LL[] HistogramsRed = new Pixel_LL[256];
+            Pixel_LL[] HistogramsGreen = new Pixel_LL[256];
+            Pixel_LL[] HistogramsBlue = new Pixel_LL[256];
+            int total;
+            String color = input.next();
+            System.out.println("Importing the color " + color);
+            for (int i = 0; i < 256; i++) { // Reading all level 0 pixels from red
+                total = input.nextInt();
+                //System.out.println("Importing level " + i + " of " + color + " it has: " + total + " pixels");
+                HistogramsRed[i] = new Pixel_LL(input, total);
+            }
+            color = input.next();
+            System.out.println("Importing the color " + color);
+            for (int i = 0; i < 256; i++) { // Reading all level 0 pixels from green
+                total = input.nextInt();
+                //System.out.println("Importing level " + i + " of " + color + " it has: " + total + " pixels");
+                HistogramsGreen[i] = new Pixel_LL(input, total);
+            }
+            color = input.next();
+            System.out.println("Importing the color " + color);
+            for (int i = 0; i < 256; i++) { // Reading all level 0 pixels from blue
+                total = input.nextInt();
+                //System.out.println("Importing level " + i + " of " + color + " it has: " + total + " pixels");
+                HistogramsBlue[i] = new Pixel_LL(input, total);
+            }
+            PixelLinkedList_node helpPtr = null;
+
+            for (int i = 0; i < 256; i++) { // 0 - 256
+                if (HistogramsRed[i].getHead() != null) {
+                    helpPtr = HistogramsRed[i].getHead();
+                    while (helpPtr != null) {
+                        replot.getPixel(helpPtr.getX(), helpPtr.getY()).setRed(i);
+                        helpPtr = helpPtr.getNext();
+                    }
+                }
+
+                if (HistogramsGreen[i].getHead() != null) {
+                    helpPtr = HistogramsGreen[i].getHead();
+                    while (helpPtr != null) {
+                        replot.getPixel(helpPtr.getX(), helpPtr.getY()).setGreen(i);
+                        helpPtr = helpPtr.getNext();
+                    }
+                }
+
+                if (HistogramsBlue[i].getHead() != null) {
+                    helpPtr = HistogramsBlue[i].getHead();
+                    while (helpPtr != null) {
+                        replot.getPixel(helpPtr.getX(), helpPtr.getY()).setBlue(i);
+                        helpPtr = helpPtr.getNext();
+                    }
+                }
+            }
+            System.out.println("DONE");
+            replot.show();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR FILE IS NOT FOUND", "File", JOptionPane.OK_OPTION);
+        } catch (Exception x) {
+            JOptionPane.showMessageDialog(null, "ERROR", "EROR", JOptionPane.OK_OPTION);
+        }
+    }
+      
