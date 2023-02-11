@@ -2067,11 +2067,36 @@ To splice two or more sounds together with a silent zone between them, users mus
 
 ## 32- Spread & squeeze a sound:
 
+https://user-images.githubusercontent.com/98660298/218270142-eae12f19-e35d-4438-b1fd-15dd6c2194a0.mp4
+
+By pressing the "Spread and Squeeze" button, the user can manipulate sound, selecting it first. The sound will be spread into a 4 second duration and then squeezed into 1 second. The outcome can be heard by pressing the "Play" button.
+
+######   Spread & squeeze code:
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Sound s = new Sound(pathName);
+        SoundSample[] sample = currentSound.getSamples();
+
+        for (double sourceIndex = 0, targetIndex = 0; targetIndex < currentSound.getLength(); sourceIndex = sourceIndex + 0.5, targetIndex++) {
+            currentSound.setSampleValueAt((int) targetIndex, s.getSampleValueAt((int) sourceIndex));
+        }
+
+        s = new Sound(pathName);
+        for (int sourceIndex = 0, targetIndex = 0; sourceIndex < currentSound.getLength(); sourceIndex = sourceIndex + 4, targetIndex++) {
+            currentSound.setSampleValueAt(targetIndex, s.getSampleValueAt(sourceIndex));
+        }
+        for (int i = currentSound.getLength() / 4; i < currentSound.getLength(); i++) {
+            currentSound.setSampleValueAt(i, 0);
+        }
+
+    }
+
 ## 33- Reversing and Mirroring:
 
 https://user-images.githubusercontent.com/98660298/218256025-745234d8-4d40-420e-858b-142a928b1ba3.mp4
 
 Users can reverse the sound they have selected by pressing the "Reversing" button. They can also mirror the sound by selecting the desired option from the combo box and pressing the "Mirror" button. Once they have made the desired changes, they can press the "Play" button to hear the altered sound.
+
 
 ######   Reversing code:
 
