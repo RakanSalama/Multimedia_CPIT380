@@ -1840,3 +1840,21 @@ Users can select an image and then choose from one of the three options in the c
         jLabel2.setIcon(icon);
 
     }
+
+## 29- ChangeVolume Using Slider:
+
+https://user-images.githubusercontent.com/98660298/218253970-a33d8051-c92a-4820-bf71-39e6a75d4915.mp4
+
+Users can adjust the volume of their chosen sound using a slider. Moving the slider to the right increases the volume, while dragging it left decreases the volume. To hear the adjusted sound, the user must press the "Play" button.
+
+######   ChangeVolume using a slider code:
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        Sound sound1 = new Sound(currentSound);
+        SoundSample[] sampleArray = sound1.getSamples();
+        int jv = jSlider1.getValue();
+        for (SoundSample sample : sampleArray) {
+            sample.setValue((int) (sample.getValue() * (jv / 100.00)));
+        }
+        sound1.play();
+    }
