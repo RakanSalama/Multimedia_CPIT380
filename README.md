@@ -2580,6 +2580,45 @@ private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
 
 https://user-images.githubusercontent.com/98660298/218274920-03e7c520-2c25-4ba5-b393-b825e6bff143.mp4
 
+This method allows the user to create a new video background by entering the duration of the video and three pictures. The first picture will be used as the new background, the second will be used as the foreground, and the third will be cut out and removed from the foreground. After these steps are completed, the first picture will be used as the new background of the video.
+
+######  Background subtraction code:
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+            // load the pictures
+            JFileChooser fc = new JFileChooser("");
+            fc.showOpenDialog(null);
+            String foreground = fc.getSelectedFile().getAbsolutePath();
+            Picture foregroundPic = null;
+
+            fc.showOpenDialog(null);
+            String oldBG = fc.getSelectedFile().getAbsolutePath();
+            Picture oldBGPic = new Picture(oldBG);
+
+            fc.showOpenDialog(null);
+            String newBG = fc.getSelectedFile().getAbsolutePath();
+            Picture newBGPic = new Picture(newBG);
+
+            // declare other variables
+            FrameSequencer frameSequencer = new FrameSequencer("Movie_Edit");
+            int framesPerSec = 30;
+            frameSequencer.setShown(true);
+            // loop creating the frames
+            for (int i = 0; i < framesPerSec * time; i++) {
+                foregroundPic = new Picture(foreground);
+                foregroundPic.swapBackground(oldBGPic, newBGPic, i);
+                frameSequencer.addFrame(foregroundPic);
+            }
+
+            // play the movie
+            frameSequencer.play(framesPerSec);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Time must be an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 ## 44- Edge Detection Movie:
 
 https://user-images.githubusercontent.com/98660298/218275055-8d95e0af-9ca2-44d6-8942-d6877bd1b776.mp4
