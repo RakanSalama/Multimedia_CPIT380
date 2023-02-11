@@ -1,11 +1,13 @@
 # CPIT380 Course Project
 The aim of this project is to create an application that enables users to edit pictures, audio and videos.
+
 ## Group Members
-- Rakan Adnan Salama  / 2037276
-- Fahad Hamad Alsifri / 1743998
-- 
--
--
+- Rakan Adnan Salama       / 2037276
+- Fahad Hamad Alsifri      / 1743998
+- Abdulaziz AdnanAl-Sharif / 2036023
+- Omar Saeed Al-Zahrani    / 2040569
+- Majed Abdullah Alghmdi   / 1942874 
+
 ## Using & Implementing Our Project :
 This YouTube video will guide you on how to download and implement our project. It provides step-by-step instructions to help you get set up and running quickly.
 
