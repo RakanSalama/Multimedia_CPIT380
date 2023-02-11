@@ -2158,3 +2158,76 @@ Users can modify the selected sound by applying different filters. To apply the 
 
 
     }
+    
+## 37- CreateRecatangleMovie method, Show it is moving from top right corner to bottom left, curved trajectory.
+
+https://user-images.githubusercontent.com/98660298/218258134-6193641e-f972-4d4d-a23f-1742c4211c50.mp4
+
+Press the "Top Right To Bottom Left" button to watch the RecatangleMovie move from the top right corner to the bottom left corner. If you'd like to watch the rectangle move from the top left corner to the bottom right corner, press the "Top Left To Bottom Right" button. After pressing these buttons it will ask the user  to enter the movie duration in seconds to show the seconds that he inserted.
+
+######   Top right to bottom left code:
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        int Sec = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+        int framesPerSec = 30;
+        Picture p = null;
+        Graphics g = null;
+        FrameSequencer frameSequencer = new FrameSequencer("re");
+        frameSequencer.setShown(true);
+        int x = 450;
+        int y = 0;
+        for (int i = 0; i < framesPerSec * Sec; i++) {
+            System.out.println(x + " " + y);
+            x = x - 10;
+            y = y + 10;
+
+            if (x == -10 && y == 460) {
+                break;
+            }
+            p = new Picture(500, 500);
+            g = p.getGraphics();
+            g.setColor(Color.RED);
+            g.drawLine(0, 250, 500, 250);
+            g.drawLine(250, 0, 250, 500);
+            // x y w h
+            g.fillRect(x, y, 50, 50);
+            g.setColor(Color.CYAN);
+            frameSequencer.addFrame(p);
+
+        }
+    } 
+
+######   Top Left to bottom Right code:
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        int Sec = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration in seconds"));
+        int framesPerSec = 30;
+        Picture p = null;
+        Graphics g = null;
+        FrameSequencer frameSequencer = new FrameSequencer("re");
+        frameSequencer.setShown(true);
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < framesPerSec * Sec; i++) {
+            System.out.println(x + " " + y);
+            x = x + 10;
+            y = y + 10;
+            if (x == 460 && y == 460) {
+                break;
+            }
+            // draw a filled rectangle
+            p = new Picture(500, 500);
+            g = p.getGraphics();
+            g.setColor(Color.RED);
+            g.drawLine(0, 250, 500, 250);
+            g.drawLine(250, 0, 250, 500);
+
+            // x y w h
+            g.fillRect(x, y, 50, 50);
+            g.setColor(Color.CYAN);
+            frameSequencer.addFrame(p);
+
+        }
+    }
+
+
