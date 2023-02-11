@@ -2,10 +2,10 @@
 The aim of this project is to create an application that enables users to edit pictures, audio and videos.
 
 ## Group Members
-- Rakan Adnan Salama       / 2037276
+- Omar Saeed Al-Zahrani    / 2040569
 - Fahad Hamad Alsifri      / 1743998
 - Abdulaziz AdnanAl-Sharif / 2036023
-- Omar Saeed Al-Zahrani    / 2040569
+- Rakan Adnan Salama       / 2037276
 - Majed Abdullah Alghmdi   / 1942874 
 
 ## Using & Implementing Our Project :
