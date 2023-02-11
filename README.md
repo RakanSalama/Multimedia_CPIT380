@@ -2387,6 +2387,42 @@ Press the "Top Right To Bottom Left" button to watch the RecatangleMovie move fr
     }
 ## 38- CreateRecatangleMovie method, Show the trajectory of motion followed by a Sine function:
 
+https://user-images.githubusercontent.com/98660298/218270626-9a503374-3cee-414f-a3b3-2a8143369cb0.mp4
+
+
+By pressing the "Sine wave" button, the user can insert the desired number of seconds for the video to continue. This will cause a rectangular shape to move in a sine wave formation.
+
+######   Sine wave  code:
+  
+      private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        int time = Integer.parseInt(JOptionPane.showInputDialog("please enter movie duration"));
+        int framesPerSec = 60;
+        Picture p = null;
+        Graphics g = null;
+        FrameSequencer frameSequencer = new FrameSequencer("C:\\intro-prog-java\\movies\\edge");
+        frameSequencer.setShown(true);
+        int x =0;
+        int y=0;
+        for (int i = 0; i < framesPerSec * time; i++) {
+              if (x >= 590) {
+                break;
+            }
+            p = new Picture(640, 480);
+            g = p.getGraphics();
+            g.setColor(Color.RED);
+            g.drawLine(0, 160, 640, 160);
+            g.fillRect(i * 10, (215 + (int) (150 * -Math.abs(Math.sin(i * ((4 * 10) / 180.000))))), 50, 50);
+            x = i * 10;
+            y = (215 + (int) (150 * -Math.abs(Math.sin(i * ((4 * 10) / 180.000)))));
+            System.out.println(i * 10 + " " + (215 + (int) (150 * -Math.abs(Math.sin(i * ((4 * 10) / 180.000))))) );
+            
+            frameSequencer.addFrame(p);
+            
+        }
+        frameSequencer.play(framesPerSec);
+
+    }
+  
 ## 39- CreateRecatangleMovie method Show the trajectory of motion, when a ball is dropped on the floor:
 
 ## 40- CreateTickerTapeMovie – A string of text moves back and forth and does not disappear from screen. 
